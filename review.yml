@@ -1,0 +1,80 @@
+aid: bendigo-and-adelaide-bank
+name: Bendigo and Adelaide Bank
+review:
+  question: Does Bendigo and Adelaide Bank expose a confirmed live public Consumer Data Right (CDR) Product Reference Data API?
+  answer: true
+  date: '2026-07-20'
+  reviewer: API Evangelist
+  cdrPrdConfirmed: true
+  specProvenance: dsb-cds-standard
+  specScopeNote: |
+    No bank-proprietary OpenAPI is published. The harvested contract at
+    openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml is the
+    shared Data Standards Body (DSB) Consumer Data Standards "CDR Banking API"
+    OpenAPI 3.0.3, version 1.36.0, downloaded verbatim from
+    https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_banking.json
+    and converted JSON to YAML without content changes. It defines the full CDS
+    banking surface; the unauthenticated Product Reference Data endpoints that
+    Bendigo actually serves are GET /banking/products and
+    GET /banking/products/{productId}. This is the industry-shared standard, NOT a
+    Bendigo-specific contract.
+findings:
+  summary: |
+    Bendigo and Adelaide Bank is an accredited Consumer Data Right data holder and
+    exposes a genuine public, unauthenticated Product Reference Data (PRD) API. The
+    Bendigo Bank brand endpoint was confirmed live on 2026-07-20: an HTTP 200 with
+    header x-v: 4 from
+    https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products, returning a
+    data.products array with meta.totalRecords of 50 published products. The Up
+    neobank (owned by the group) PRD endpoint at
+    https://api.up.com.au/cds-au/v1/banking/products also returned HTTP 200. The
+    Adelaide Bank host (api.cdr.adelaidebank.com.au) resolved but did not return a
+    200 for the standard products path/version during probing and is listed as
+    unverified rather than fabricated. The bank does not run a broad self-service
+    developer portal in the CommBank/NAB style; the only documented public API
+    surface is the CDR PRD, described on the corporate banking-products-api page.
+    The authenticated CDR consumer data-sharing surface uses the OAuth2 / OpenID
+    Connect FAPI profile mandated by the Consumer Data Standards, accessible only to
+    ACCC-accredited data recipients (ADRs), not via a public developer signup.
+  authModel:
+    productReferenceData: none (public, unauthenticated GET)
+    consumerDataSharing: OAuth2 / OIDC FAPI 1.0 profile under the CDR ADR accreditation model (ACCC/DSB governed)
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1
+      documented: true
+      note: CDR Product Reference Data, confirmed HTTP 200 at x-v 4.
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.up.com.au/cds-au/v1
+      documented: true
+      note: Up (group brand) CDR Product Reference Data, confirmed HTTP 200.
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.cdr.adelaidebank.com.au/cds-au/v1
+      documented: true
+      note: Adelaide Bank brand, standard CDS path, UNVERIFIED (no 200 during probe).
+  endpointsConfirmed:
+    - GET https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products (HTTP 200, x-v 4, totalRecords 50)
+    - GET https://api.up.com.au/cds-au/v1/banking/products (HTTP 200)
+  developerPortal:
+    exists: false
+    note: |
+      No dedicated developer.bendigobank.com.au style portal. Public API surface is
+      the CDR PRD only, documented at
+      https://www.bendigoadelaide.com.au/banking-products-api/. Up separately runs a
+      developer API for its own personal-banking customers.
+sources:
+  - url: https://www.bendigoadelaide.com.au/banking-products-api/
+    type: Documentation
+    note: Bank's own page documenting the public CDR PRD endpoint and noting the APIs require no authentication.
+  - url: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
+    type: APIReference
+    note: Live probe 2026-07-20 returned HTTP 200 with x-v 4 and 50 products; x-v 1/2 returned HTTP 406 Unsupported Version.
+  - url: https://consumerdatastandardsaustralia.github.io/standards/
+    type: APIStandards
+    note: Data Standards Body Consumer Data Standards defining the CDR Banking API contract and the PRD endpoints.
+  - url: https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_banking.json
+    type: OpenAPI
+    note: Source of the harvested standard spec (CDR Banking API 1.36.0), converted to YAML verbatim.
