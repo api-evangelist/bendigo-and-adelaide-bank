@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
+notes: >-
+  Entity-relationship graph derived from the CDR Banking Product schemas (BankingProductV6 +
+  BankingProductDetailV7). Scoped to the public Product Reference Data domain, which is the live
+  surface for this provider.
+entities:
+- name: BankingProduct
+  schema: BankingProductDetailV7
+  id: productId
+  key_fields: [productId, productCategory, brand, name, description, effectiveFrom, effectiveTo, lastUpdated, isTailored]
+  category_enum: BankingProductCategoryV2 [TRANS_AND_SAVINGS_ACCOUNTS, TERM_DEPOSITS, RESIDENTIAL_MORTGAGES, CRED_AND_CHRG_CARDS, PERS_LOANS, BUSINESS_LOANS, OVERDRAFTS, LEASES, MARGIN_LOANS, TRADE_FINANCE, TRAVEL_CARDS, REGULATED_TRUST_ACCOUNTS, BUY_NOW_PAY_LATER]
+- {name: BankingProductBundle, schema: BankingProductBundle}
+- {name: BankingProductFeature, schema: BankingProductFeatureV4}
+- {name: BankingProductConstraint, schema: BankingProductConstraintV3}
+- {name: BankingProductEligibility, schema: BankingProductEligibilityV2}
+- {name: BankingProductFee, schema: BankingProductFeeV2}
+- {name: BankingProductDepositRate, schema: BankingProductDepositRateV2}
+- {name: BankingProductLendingRate, schema: BankingProductLendingRateV3}
+- {name: BankingProductInstalments, schema: BankingProductInstalments}
+relationships:
+- {from: BankingProduct, to: BankingProductBundle, type: has_many, via: bundles}
+- {from: BankingProduct, to: BankingProductFeature, type: has_many, via: features}
+- {from: BankingProduct, to: BankingProductConstraint, type: has_many, via: constraints}
+- {from: BankingProduct, to: BankingProductEligibility, type: has_many, via: eligibility}
+- {from: BankingProduct, to: BankingProductFee, type: has_many, via: fees}
+- {from: BankingProduct, to: BankingProductDepositRate, type: has_many, via: depositRates}
+- {from: BankingProduct, to: BankingProductLendingRate, type: has_many, via: lendingRates}
+- {from: BankingProduct, to: BankingProductInstalments, type: has_one, via: instalments}
+- {from: BankingProductBundle, to: BankingProduct, type: references, via: productIds}

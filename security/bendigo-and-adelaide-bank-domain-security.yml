@@ -1,0 +1,43 @@
+generated: '2026-07-20'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.bendigobank.com.au
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jan  7 23:59:59 2027 GMT
+  hsts: true
+  hsts_max_age: 15768000
+- host: www.bendigoadelaide.com.au
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 14 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 15768000
+- host: api.cdr.bendigobank.com.au
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 14 23:59:59 2026 GMT
+  hsts: null
+domains:
+- domain: bendigobank.com.au
+  dnssec: false
+  caa:
+  - 0 issue "sectigo.com"
+  - 0 issue "entrust.net"
+  - 0 iodef "mailto:DomainAlerts@bendigobank.com.au"
+  - 0 issue "ssl.com"
+  - 0 issuewild "ssl.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: bendigoadelaide.com.au
+  dnssec: false
+  caa:
+  - 0 issue "sectigo.com"
+  - 0 issue "ssl.com"
+  - 0 iodef "mailto:DomainAlerts@bendigobank.com.au"
+  - 0 issue "entrust.net"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

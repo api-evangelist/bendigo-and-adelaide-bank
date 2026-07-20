@@ -1,0 +1,61 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+format: cdr-response-error-list-v2
+notes: >-
+  The CDR Banking API does NOT use RFC 9457 problem+json. Errors return HTTP status with an
+  application/json body shaped as ResponseErrorListV2 { errors: [ { code, title, detail, meta } ] },
+  where `code` is a Consumer Data Standards error-code URN. The problem types below are derived from
+  the 4xx responses declared in the products operations and mapped to the standard CDR error-code URNs
+  documented in the Consumer Data Standards error registry.
+envelope:
+  media_type: application/json
+  schema: ResponseErrorListV2
+  fields:
+    errors[]:
+      code: CDS error-code URN (or respondent application-specific string extending a URN)
+      title: short human-readable summary, stable per code
+      detail: occurrence-specific explanation
+      meta: optional; carries urn for application-specific errors
+problems:
+- status: 400
+  code: urn:au-cds:error:cds:field:invalid
+  title: Invalid Field
+  source_operation: openapi/...#listBankingProducts, getBankingProductDetail
+- status: 400
+  code: urn:au-cds:error:cds:field:missing
+  title: Missing Required Field
+  source_operation: openapi/...#listBankingProducts, getBankingProductDetail
+- status: 400
+  code: urn:au-cds:error:cds:header:missing
+  title: Missing Required Header
+  source_operation: openapi/...#listBankingProducts, getBankingProductDetail
+- status: 400
+  code: urn:au-cds:error:cds:header:invalid-version
+  title: Invalid Version
+  source_operation: openapi/...#listBankingProducts, getBankingProductDetail
+- status: 400
+  code: urn:au-cds:error:cds:field:invalid-date-time
+  title: Invalid Date
+  source_operation: openapi/...#listBankingProducts
+- status: 400
+  code: urn:au-cds:error:cds:field:invalid-page-size
+  title: Invalid Page Size
+  source_operation: openapi/...#listBankingProducts
+- status: 404
+  code: urn:au-cds:error:cds:resource:unavailable
+  title: Unavailable Resource
+  source_operation: openapi/...#getBankingProductDetail
+- status: 404
+  code: urn:au-cds:error:cds:resource:invalid
+  title: Invalid Resource
+  source_operation: openapi/...#getBankingProductDetail
+- status: 406
+  code: urn:au-cds:error:cds:header:unsupported-version
+  title: Unsupported Version
+  source_operation: openapi/...#listBankingProducts, getBankingProductDetail
+- status: 422
+  code: urn:au-cds:error:cds:field:invalid-page
+  title: Invalid Page
+  source_operation: openapi/...#listBankingProducts

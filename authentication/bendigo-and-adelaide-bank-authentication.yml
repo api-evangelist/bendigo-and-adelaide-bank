@@ -1,0 +1,51 @@
+generated: '2026-07-20'
+method: searched
+source: https://api.up.com.au/.well-known/openid-configuration
+docs: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+notes: >-
+  Two distinct auth postures. (1) The PUBLIC Product Reference Data API
+  (GET /banking/products, GET /banking/products/{productId}) is UNAUTHENTICATED — the
+  OpenAPI declares no securitySchemes and the docs state "These are public APIs and do
+  not require authentication." (2) The AUTHENTICATED CDR consumer data-sharing surface is
+  governed by the Consumer Data Standards security profile (FAPI 1.0 Advanced). The profile
+  below is captured verbatim from the live Up (api.up.com.au) CDR OIDC discovery document —
+  Up is a Bendigo and Adelaide Bank brand and its infosec endpoints are the readable example
+  of the group's CDR data-holder auth model.
+summary:
+  types: [none, openIdConnect, oauth2, mutualTLS]
+  public_prd: unauthenticated
+  oauth2_flows: [authorizationCode, clientCredentials]
+  fapi_profile: FAPI 1.0 Advanced (CDR)
+schemes:
+- name: PublicProductReferenceData
+  type: none
+  applies_to: [listBankingProducts, getBankingProductDetail]
+  note: Public CDR Product Reference Data endpoints require no credentials.
+- name: OpenIDConnect
+  type: openIdConnect
+  source: well-known/bendigo-and-adelaide-bank-up-openid-configuration.json
+  issuer: https://api.up.com.au
+  openIdConnectUrl: https://api.up.com.au/.well-known/openid-configuration
+  applies_to: authenticated CDR data-sharing surface (accredited data recipients)
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.up.com.au/oidc/authorize
+    tokenUrl: https://secure.api.up.com.au/oidc/token
+    pushed_authorization_request_endpoint: https://secure.api.up.com.au/oidc/authorize/push
+    require_pushed_authorization_requests: true
+    registration_endpoint: https://secure.api.up.com.au/oidc/register
+  - flow: clientCredentials
+    tokenUrl: https://secure.api.up.com.au/oidc/token
+  token_endpoint_auth_methods_supported: [private_key_jwt]
+  token_endpoint_auth_signing_alg_values_supported: [PS256, ES256]
+  id_token_signing_alg_values_supported: [PS256, ES256]
+  request_object_signing_alg_values_supported: [PS256, ES256]
+  code_challenge_methods_supported: [S256]
+  subject_types_supported: [pairwise]
+  acr_values_supported: [urn:cds.au:cdr:2, urn:cds.au:cdr:3]
+- name: MutualTLS
+  type: mutualTLS
+  note: >-
+    tls_client_certificate_bound_access_tokens = true. Access tokens are bound to the
+    data recipient's client certificate (RFC 8705); the CDR data-sharing calls run over
+    MTLS as required by the Consumer Data Standards security profile.

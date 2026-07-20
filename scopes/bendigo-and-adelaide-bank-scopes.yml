@@ -1,0 +1,55 @@
+generated: '2026-07-20'
+method: searched
+source: https://api.up.com.au/.well-known/openid-configuration
+docs: https://consumerdatastandardsaustralia.github.io/standards/#end-points
+notes: >-
+  Scopes captured verbatim from the live CDR OIDC discovery document of the Up brand
+  (owned by Bendigo and Adelaide Bank). These are the standardised Australian Consumer
+  Data Right (CDR) banking + common data-cluster scopes governed by the Consumer Data
+  Standards. They apply to the AUTHENTICATED CDR data-sharing surface (accredited data
+  recipients only, via FAPI 1.0 Advanced / MTLS). The public Product Reference Data API
+  (GET /banking/products) is unauthenticated and requires no scope.
+schemes:
+- name: OpenIDConnect
+  type: openIdConnect
+  source: well-known/bendigo-and-adelaide-bank-up-openid-configuration.json
+  issuer: https://api.up.com.au
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.up.com.au/oidc/authorize
+    tokenUrl: https://secure.api.up.com.au/oidc/token
+    pushed_authorization_request_endpoint: https://secure.api.up.com.au/oidc/authorize/push
+    require_pushed_authorization_requests: true
+  - flow: clientCredentials
+    tokenUrl: https://secure.api.up.com.au/oidc/token
+scopes:
+- scope: openid
+  description: OIDC authentication; issue an ID token identifying the consumer.
+  flows: [authorizationCode]
+- scope: profile
+  description: Access to the consumer's basic OIDC profile claims.
+  flows: [authorizationCode]
+- scope: bank:accounts.basic:read
+  description: Read basic banking account data (account list and basic attributes).
+  flows: [authorizationCode]
+- scope: bank:accounts.detail:read
+  description: Read detailed banking account data (balances, account detail).
+  flows: [authorizationCode]
+- scope: bank:transactions:read
+  description: Read banking account transactions.
+  flows: [authorizationCode]
+- scope: bank:payees:read
+  description: Read saved payees.
+  flows: [authorizationCode]
+- scope: bank:regular_payments:read
+  description: Read direct debits and scheduled/regular payments.
+  flows: [authorizationCode]
+- scope: common:customer.basic:read
+  description: Read basic customer data (name, type).
+  flows: [authorizationCode]
+- scope: common:customer.detail:read
+  description: Read detailed customer data (contact details).
+  flows: [authorizationCode]
+- scope: cdr:registration
+  description: Dynamic client registration for accredited CDR data recipient software products.
+  flows: [clientCredentials]

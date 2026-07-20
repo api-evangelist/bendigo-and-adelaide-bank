@@ -1,0 +1,38 @@
+# Bendigo and Adelaide Bank
+
+> Bendigo and Adelaide Bank Limited (ASX:BEN) is one of Australia's largest retail banks and an accredited Consumer Data Right (CDR) data holder. It exposes public, unauthenticated CDR Product Reference Data (PRD) APIs for the Bendigo Bank, Adelaide Bank and Up (neobank) brands, conforming to the Australian Consumer Data Standards, alongside an authenticated CDR consumer data-sharing surface governed by the FAPI 1.0 Advanced security profile.
+
+## APIs
+
+- [Bendigo Bank CDR Product Reference Data API](https://www.bendigoadelaide.com.au/banking-products-api/): Public GET /banking/products and /banking/products/{productId} at https://api.cdr.bendigobank.com.au/cds-au/v1 (live, HTTP 200).
+- [Up Banking CDR Product Reference Data API](https://up.com.au/): Public CDR PRD for the Up neobank at https://api.up.com.au/cds-au/v1.
+- [Adelaide Bank CDR Product Reference Data API](https://www.bendigoadelaide.com.au/banking-products-api/): CDR PRD for the Adelaide Bank brand (host per CDR standard; unverified during probing).
+
+## Specs
+
+- [OpenAPI (CDR Banking API)](openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml): DSB CDR Banking API v1.36.0; public PRD operations plus the full authenticated data-sharing surface.
+- [OpenAPI Overlay](overlays/bendigo-and-adelaide-bank-cds-banking-products-overlay.yaml): API Evangelist enhancements (public-surface markers, live host).
+
+## Standards & Security
+
+- [Authentication profile](authentication/bendigo-and-adelaide-bank-authentication.yml): public PRD is unauthenticated; data-sharing uses OIDC/OAuth2 (authorization_code, PAR, private_key_jwt PS256/ES256, MTLS-bound tokens).
+- [OAuth scopes](scopes/bendigo-and-adelaide-bank-scopes.yml): CDR banking + common data-cluster scopes (bank:accounts.basic:read, bank:transactions:read, ...).
+- [Conformance](conformance/bendigo-and-adelaide-bank-conformance.yml): CDR Banking, OIDC, OAuth2, FAPI 1.0 Advanced, PAR (RFC 9126), MTLS (RFC 8705), PKCE.
+- [Well-known discovery](well-known/bendigo-and-adelaide-bank-well-known.yml): Up CDR OIDC configuration.
+- [Domain security](security/bendigo-and-adelaide-bank-domain-security.yml): TLS 1.3, HSTS, SPF, DMARC (reject), CAA.
+- [Vulnerability disclosure](security/bendigo-and-adelaide-bank-vulnerability-disclosure.yml): responsible-disclosure program.
+
+## Semantics
+
+- [Conventions](conventions/bendigo-and-adelaide-bank-conventions.yml): x-v version negotiation, x-fapi-interaction-id tracing, page/page-size pagination, ResponseErrorListV2 errors.
+- [Error catalog](errors/bendigo-and-adelaide-bank-problem-types.yml): CDR URN error codes (400/404/406/422).
+- [Lifecycle](lifecycle/bendigo-and-adelaide-bank-lifecycle.yml): CDR versioning/obsolescence policy.
+- [Data model](data-model/bendigo-and-adelaide-bank-data-model.yml): BankingProduct entity graph.
+- [Agent skill](skills/bendigo-and-adelaide-bank-browse-products.md): browse and compare public banking products.
+- [MCP tools (candidate)](mcp/bendigo-and-adelaide-bank-mcp.yml): list_banking_products, get_banking_product_detail.
+
+## Docs
+
+- [Banking Products API](https://www.bendigoadelaide.com.au/banking-products-api/)
+- [Australian Consumer Data Standards](https://consumerdatastandardsaustralia.github.io/standards/)
+- [GitHub organization](https://github.com/bendigoadelaide)

@@ -1,0 +1,50 @@
+generated: '2026-07-20'
+method: searched
+source: live probes of /.well-known/* across Bendigo, Up and Adelaide CDR hosts
+notes: >-
+  Probed /.well-known/{security.txt,openid-configuration,oauth-authorization-server,api-catalog,ai-plugin.json}
+  on api.cdr.bendigobank.com.au, api.up.com.au, www.bendigobank.com.au and api.cdr.adelaidebank.com.au.
+  The Bendigo public Product Reference Data host (api.cdr.bendigobank.com.au) is an unauthenticated PRD
+  surface and returns 404 for every discovery path. www.bendigobank.com.au returns HTTP 200 for all paths
+  but the body is a soft-404 HTML "Page not found" page (text/html), so none of those are real documents.
+  The single genuine discovery document found is Up's CDR OIDC configuration at api.up.com.au — a full
+  FAPI 1.0 Advanced / CDR infosec profile (PAR required, private_key_jwt, MTLS-bound tokens).
+hosts:
+- host: https://api.up.com.au
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: bendigo-and-adelaide-bank-up-openid-configuration.json
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://api.cdr.bendigobank.com.au
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://www.bendigobank.com.au
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: soft-404 HTML (Page not found), not a real security.txt
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: soft-404 HTML, not a real OIDC document
+- host: https://api.cdr.adelaidebank.com.au
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 0
+    note: connection did not complete during probe

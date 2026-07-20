@@ -91,6 +91,10 @@ apis:
     on the standard path/version during probing on 2026-07-20; endpoint listed with
     the standard CDS path, not an invented host.
 common:
+- type: VulnerabilityDisclosure
+  url: security/bendigo-and-adelaide-bank-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/bendigo-and-adelaide-bank-domain-security.yml
 - type: Website
   url: https://www.bendigobank.com.au/
 - type: CorporateWebsite
@@ -111,6 +115,36 @@ common:
   url: https://www.bendigoadelaide.com.au/investor-centre/
 - type: Blog
   url: https://www.bendigoadelaide.com.au/media-centre/
+- type: GitHubOrganization
+  url: https://github.com/bendigoadelaide
+- type: Authentication
+  url: authentication/bendigo-and-adelaide-bank-authentication.yml
+- type: OAuthScopes
+  url: scopes/bendigo-and-adelaide-bank-scopes.yml
+- type: WellKnown
+  url: well-known/bendigo-and-adelaide-bank-well-known.yml
+- type: Conformance
+  url: conformance/bendigo-and-adelaide-bank-conformance.yml
+- type: ErrorCatalog
+  url: errors/bendigo-and-adelaide-bank-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/bendigo-and-adelaide-bank-lifecycle.yml
+- type: Deprecation
+  url: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+- type: Conventions
+  url: conventions/bendigo-and-adelaide-bank-conventions.yml
+- type: DataModel
+  url: data-model/bendigo-and-adelaide-bank-data-model.yml
+- type: Overlay
+  url: overlays/bendigo-and-adelaide-bank-cds-banking-products-overlay.yaml
+- type: LLMsTxt
+  url: llms/bendigo-and-adelaide-bank-llms.txt
+- type: MCPServer
+  url: mcp/bendigo-and-adelaide-bank-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Security
+  url: https://www.bendigobank.com.au/security/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

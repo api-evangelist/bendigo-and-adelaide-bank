@@ -1,0 +1,52 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml +
+  https://api.up.com.au/.well-known/openid-configuration +
+  https://consumerdatastandardsaustralia.github.io/standards/
+notes: >-
+  Standards conformance for the CDR Banking API surface. Evidence is drawn from the harvested
+  OpenAPI (CDR Banking API v1.36.0, authored by the Data Standards Body) and the live Up CDR
+  OIDC discovery document. The public PRD endpoints implement the CDR Product Reference Data
+  standard; the authenticated surface implements the CDR FAPI 1.0 Advanced security profile.
+standards:
+- id: cdr-banking
+  name: Australian Consumer Data Right — Banking (Consumer Data Standards)
+  conforms: true
+  evidence: OpenAPI is the DSB CDR Banking API v1.36.0; endpoints follow /cds-au/v1 paths and x-v version negotiation.
+- id: cdr-product-reference-data
+  name: CDR Product Reference Data (unauthenticated)
+  conforms: true
+  evidence: Public GET /banking/products and /banking/products/{productId} live at api.cdr.bendigobank.com.au (HTTP 200, x-v 4).
+- id: oidc
+  name: OpenID Connect Discovery 1.0
+  conforms: true
+  evidence: api.up.com.au/.well-known/openid-configuration serves a valid OIDC discovery document.
+- id: oauth2
+  name: OAuth 2.0
+  conforms: true
+  evidence: authorization_code + client_credentials grant types advertised in OIDC discovery.
+- id: fapi-1-adv
+  name: FAPI 1.0 Advanced (CDR security profile)
+  conforms: true
+  evidence: private_key_jwt (PS256/ES256), PAR required, PKCE S256, pairwise subjects, request object signing.
+- id: oauth2-par
+  name: OAuth 2.0 Pushed Authorization Requests (RFC 9126)
+  conforms: true
+  evidence: pushed_authorization_request_endpoint present and require_pushed_authorization_requests = true.
+- id: oauth2-mtls
+  name: OAuth 2.0 MTLS + Certificate-Bound Access Tokens (RFC 8705)
+  conforms: true
+  evidence: tls_client_certificate_bound_access_tokens = true.
+- id: oauth2-pkce
+  name: PKCE (RFC 7636)
+  conforms: true
+  evidence: code_challenge_methods_supported = [S256].
+- id: rfc9457-problem-details
+  name: RFC 9457 Problem Details
+  conforms: false
+  evidence: CDR uses its own ResponseErrorListV2 envelope (application/json, URN error codes), not application/problem+json.
+- id: pagination
+  name: Offset pagination (CDR standard)
+  conforms: true
+  evidence: page / page-size query params with meta.totalRecords/totalPages and links.first/last/prev/next.

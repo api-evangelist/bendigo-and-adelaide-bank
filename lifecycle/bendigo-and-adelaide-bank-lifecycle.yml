@@ -1,0 +1,30 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml +
+  https://consumerdatastandardsaustralia.github.io/standards/
+notes: >-
+  Lifecycle for the CDR Banking API. Versioning and version-obsolescence are governed by the
+  Australian Consumer Data Standards (DSB), which the provider implements. No provider-specific
+  public API status page was found for the CDR PRD surface during probing.
+versioning:
+  scheme: header-negotiated (x-v / x-min-v), plus endpoint-level x-version
+  current_products_version: '7'
+  detail: >-
+    Each endpoint carries a payload version (x-version). Clients negotiate via x-v/x-min-v and the
+    server returns the served version in the x-v response header. Products detail is at x-version 7.
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+deprecation:
+  policy: CDR version-obsolescence process (Data Standards Body)
+  mechanism: >-
+    Superseded endpoint versions are declared obsolete and retired per the DSB change-management
+    process. The spec links obsolete prior versions (e.g. get-accounts v1/v2) from operation
+    descriptions. There is no RFC 8594 Sunset/Deprecation HTTP header contract on the PRD surface.
+  policy_url: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+sla:
+  detail: >-
+    Availability / performance requirements are set by the CDR Non-Functional Requirements (DSB),
+    not by a per-holder published SLA.
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#non-functional-requirements
+status_page: null
+deprecated_operations: []
