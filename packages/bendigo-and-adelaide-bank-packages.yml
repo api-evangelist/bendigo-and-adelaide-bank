@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  Registry search (PyPI, npm, GitHub) for Bendigo/Adelaide/Up client libraries. Bendigo and
+  Adelaide Bank publishes NO official first-party SDK for either the CDR Banking API or the Up
+  Developer API. The CDR surface is a shared regulatory standard consumed via accredited-data-
+  recipient tooling, not a per-bank SDK. Up ships an OpenAPI spec (up-banking/api) but no
+  official client library; the packages below are COMMUNITY-maintained (official: false) and are
+  listed for discoverability only. No SDKs pointer is emitted because none are first-party.
+notes: >-
+  Do not treat these as vendor-supported. official is false for every entry.
+packages:
+  - language: python
+    registry: pypi
+    name: up-bank-api
+    url: https://pypi.org/project/up-bank-api/
+    install: pip install up-bank-api
+    repository: https://github.com/jcwillox/up-bank-api
+    official: false
+    covers: Up Developer API (fully typed sync/async client)
+  - language: typescript
+    registry: github
+    name: up-bank-api
+    url: https://github.com/ndench/up-bank-api
+    repository: https://github.com/ndench/up-bank-api
+    official: false
+    covers: Up Developer API (TypeScript wrapper)
+  - language: openapi
+    registry: github
+    name: up-banking/api
+    url: https://github.com/up-banking/api
+    repository: https://github.com/up-banking/api
+    official: true
+    covers: Up Developer API OpenAPI 3.0.3 specification (first-party spec, not a client library)

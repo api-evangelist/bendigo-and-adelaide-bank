@@ -1,0 +1,112 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/bendigo-and-adelaide-bank-up-developer-api-openapi.json
+spec_type: AsyncAPI
+notes: >-
+  Faithful AsyncAPI 3.0 derivation of the Up Developer API webhook surface. Up (the digital
+  neobank owned by Bendigo and Adelaide Bank) documents webhooks that POST signed event
+  callbacks to a subscriber-configured URL when transaction activity occurs. Event types,
+  the delivery signature (X-Up-Authenticity-Signature: SHA-256 HMAC of the raw body, keyed
+  by the webhook secretKey) and the JSON:API payload shape are all taken verbatim from Up's
+  published OpenAPI 3.0.3 spec (up-banking/api). No event data was invented; the subscription
+  management operations live in the OpenAPI (POST/GET/DELETE /webhooks, /webhooks/{id}/ping,
+  /webhooks/{webhookId}/logs).
+asyncapi: 3.0.0
+info:
+  title: Up Developer API Webhooks
+  version: v1
+  description: >-
+    Real-time webhook event callbacks delivered by Up to a subscriber-configured HTTPS URL
+    when transaction activity occurs on an Up account. Each delivery carries an
+    X-Up-Authenticity-Signature header (SHA-256 HMAC of the raw request body signed with the
+    webhook secretKey) for authenticity verification.
+  externalDocs:
+    description: Up API webhooks documentation
+    url: https://developer.up.com.au/#webhooks
+servers:
+  subscriber:
+    host: your-configured-webhook-url.example.com
+    protocol: https
+    description: >-
+      The subscriber's own HTTPS endpoint registered via POST /webhooks. Up POSTs event
+      callbacks to this URL. Must be a valid HTTP/HTTPS URL <= 300 characters.
+channels:
+  webhookEvents:
+    address: '{webhookUrl}'
+    title: Webhook event delivery
+    description: Up POSTs a WebhookEventCallback to the configured URL for each event.
+    parameters:
+      webhookUrl:
+        description: The subscriber URL registered on the webhook resource.
+    messages:
+      webhookEvent:
+        $ref: '#/components/messages/WebhookEventCallback'
+operations:
+  receiveWebhookEvent:
+    action: receive
+    channel:
+      $ref: '#/channels/webhookEvents'
+    summary: Receive a signed webhook event callback from Up.
+    description: >-
+      Verify the X-Up-Authenticity-Signature header (SHA-256 HMAC of the raw body keyed by the
+      webhook secretKey) before processing. Respond 200 to acknowledge; non-200 or timeout is
+      logged as BAD_RESPONSE_CODE / UNDELIVERABLE in the webhook delivery logs.
+    messages:
+      - $ref: '#/channels/webhookEvents/messages/webhookEvent'
+components:
+  messages:
+    WebhookEventCallback:
+      name: WebhookEventCallback
+      title: Webhook event callback
+      contentType: application/json
+      summary: Asynchronous callback request used for webhook event delivery.
+      headers:
+        type: object
+        properties:
+          X-Up-Authenticity-Signature:
+            type: string
+            description: SHA-256 HMAC of the entire raw request body, signed using the webhook secretKey.
+      payload:
+        $ref: '#/components/schemas/WebhookEventCallback'
+  schemas:
+    WebhookEventCallback:
+      type: object
+      required: [data]
+      properties:
+        data:
+          $ref: '#/components/schemas/WebhookEventResource'
+    WebhookEventResource:
+      type: object
+      description: Provides the event data used in asynchronous webhook event callbacks.
+      required: [type, id, attributes, relationships]
+      properties:
+        type:
+          type: string
+          description: 'The type of this resource: webhook-events'
+        id:
+          type: string
+          description: The unique identifier for this event. Present only for non-PING events.
+        attributes:
+          type: object
+          properties:
+            eventType:
+              $ref: '#/components/schemas/WebhookEventTypeEnum'
+            createdAt:
+              type: string
+              format: date-time
+              description: The date-time at which this event was generated.
+        relationships:
+          type: object
+          description: >-
+            Relationships to the webhook (always) and, for transaction events, the transaction
+            the event relates to (via a links.related URL).
+    WebhookEventTypeEnum:
+      type: string
+      description: >-
+        Specifies the type of a webhook event, used to determine what action to take and which
+        relationships to expect.
+      enum:
+        - TRANSACTION_CREATED
+        - TRANSACTION_SETTLED
+        - TRANSACTION_DELETED
+        - PING

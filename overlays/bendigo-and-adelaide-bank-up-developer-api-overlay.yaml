@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Up Developer API
+  version: 1.0.0
+extends: openapi/bendigo-and-adelaide-bank-up-developer-api-openapi.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: bendigo-and-adelaide-bank
+      x-apievangelist-brand: Up (neobank owned by Bendigo and Adelaide Bank)
+      x-apievangelist-auth: Personal Access Token (HTTP bearer)
+      x-apievangelist-style: 'JSON:API'
+      x-apievangelist-webhooks: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+      x-apievangelist-conventions: conventions/bendigo-and-adelaide-bank-conventions.yml
+      x-apievangelist-authentication: authentication/bendigo-and-adelaide-bank-authentication.yml
+      x-apievangelist-errors: errors/bendigo-and-adelaide-bank-problem-types.yml
+  - target: $.info
+    update:
+      x-apievangelist-webhook-signature: 'X-Up-Authenticity-Signature: SHA-256 HMAC of raw body keyed by webhook secretKey'
+      x-apievangelist-webhook-events: [TRANSACTION_CREATED, TRANSACTION_SETTLED, TRANSACTION_DELETED, PING]

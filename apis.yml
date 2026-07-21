@@ -162,8 +162,14 @@ apis:
     type: APIReference
   - url: https://github.com/up-banking/api
     type: SourceCode
+  - url: https://developer.up.com.au/#getting_started
+    type: GettingStarted
   - url: openapi/bendigo-and-adelaide-bank-up-developer-api-openapi.json
     type: OpenAPI
+  - url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+    type: AsyncAPI
+  - url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+    type: Webhooks
   description: First-party personal-banking developer API for Up, the digital neobank
     owned by Bendigo and Adelaide Bank. A genuine bank-proprietary REST API (JSON:API
     style) letting an Up customer read their own accounts, transactions, categories,
@@ -268,6 +274,10 @@ common:
   url: data-model/bendigo-and-adelaide-bank-data-model.yml
 - type: Overlay
   url: overlays/bendigo-and-adelaide-bank-cds-banking-products-overlay.yaml
+- type: Overlay
+  url: overlays/bendigo-and-adelaide-bank-up-developer-api-overlay.yaml
+- type: Packages
+  url: packages/bendigo-and-adelaide-bank-packages.yml
 - type: LLMsTxt
   url: llms/bendigo-and-adelaide-bank-llms.txt
 - type: MCPServer
