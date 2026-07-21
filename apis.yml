@@ -22,7 +22,7 @@ tags:
 - Australia
 - Product Reference Data
 created: '2026-07-20'
-modified: '2026-07-20'
+modified: '2026-07-21'
 specificationVersion: '0.19'
 apis:
 - aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-cds-banking-products-api
@@ -33,11 +33,13 @@ apis:
   - Product Reference Data
   - Banking
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.bendigoadelaide.com.au/banking-products-api/
-  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
   properties:
-  - url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - url: https://www.bendigobank.com.au/cdr/
     type: Documentation
+  - url: https://www.bendigoadelaide.com.au/banking-products-api/
+    type: SignupURL
   - url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
     type: APIReference
   - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
@@ -45,7 +47,130 @@ apis:
   description: Public, unauthenticated Consumer Data Right Product Reference Data API
     for the Bendigo Bank brand, exposing GET /banking/products and GET /banking/products/{productId}
     per the Australian Consumer Data Standards. Confirmed live returning HTTP 200 at
-    x-v 4 with 50 published retail and business banking products (verified 2026-07-20).
+    x-v 4 (verified 2026-07-21). This is the only CDR family that is callable without
+    accreditation or consumer consent; the OpenAPI pointer is the shared DSB CDS Banking
+    standard (v1.36.0), which the bank is legally required to implement, not a proprietary spec.
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-cds-banking-accounts-api
+  name: Bendigo and Adelaide Bank CDR Accounts & Balances API
+  tags:
+  - CDR
+  - Open Banking
+  - Accounts
+  - Balances
+  - Banking
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/accounts
+  properties:
+  - url: https://www.bendigobank.com.au/cdr/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+    type: APIReference
+  - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right banking surface covering Get
+    Accounts, Get Bulk Balances, Get Account Balance, and Get Account Detail (GET /banking/accounts,
+    /banking/accounts/balances, /banking/accounts/{accountId}/balance, /banking/accounts/{accountId}).
+    Not publicly callable - access requires ACCC-accredited data recipient (ADR) status,
+    mutual TLS, and explicit consumer consent under the CDR rules. Served on the confirmed
+    Bendigo CDR data holder host; the OpenAPI is the shared DSB CDS Banking standard v1.36.0.
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-cds-banking-transactions-api
+  name: Bendigo and Adelaide Bank CDR Transactions API
+  tags:
+  - CDR
+  - Open Banking
+  - Transactions
+  - Banking
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/accounts/{accountId}/transactions
+  properties:
+  - url: https://www.bendigobank.com.au/cdr/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+    type: APIReference
+  - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right transactions surface covering
+    Get Transactions For Account and Get Transaction Detail (GET /banking/accounts/{accountId}/transactions
+    and /banking/accounts/{accountId}/transactions/{transactionId}). Not publicly callable
+    - requires ACCC-accredited data recipient status, mutual TLS, and consumer consent
+    under the CDR rules. Served on the confirmed Bendigo CDR data holder host; the OpenAPI
+    is the shared DSB CDS Banking standard v1.36.0.
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-cds-banking-direct-debits-api
+  name: Bendigo and Adelaide Bank CDR Direct Debits & Scheduled Payments API
+  tags:
+  - CDR
+  - Open Banking
+  - Direct Debits
+  - Scheduled Payments
+  - Banking
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/accounts/direct-debits
+  properties:
+  - url: https://www.bendigobank.com.au/cdr/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+    type: APIReference
+  - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right surface covering Get Direct Debits
+    (per-account and bulk) and Get Scheduled Payments (per-account and bulk) - GET /banking/accounts/{accountId}/direct-debits,
+    /banking/accounts/direct-debits, /banking/accounts/{accountId}/payments/scheduled,
+    and /banking/payments/scheduled. Not publicly callable - requires ACCC-accredited
+    data recipient status, mutual TLS, and consumer consent. Served on the confirmed
+    Bendigo CDR host; the OpenAPI is the shared DSB CDS Banking standard v1.36.0.
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-cds-banking-payees-api
+  name: Bendigo and Adelaide Bank CDR Payees API
+  tags:
+  - CDR
+  - Open Banking
+  - Payees
+  - Banking
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/payees
+  properties:
+  - url: https://www.bendigobank.com.au/cdr/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+    type: APIReference
+  - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right payees surface covering Get Payees
+    and Get Payee Detail (GET /banking/payees and /banking/payees/{payeeId}), exposing
+    a customer's saved payees. Not publicly callable - requires ACCC-accredited data
+    recipient status, mutual TLS, and consumer consent under the CDR rules. Served on
+    the confirmed Bendigo CDR data holder host; the OpenAPI is the shared DSB CDS Banking
+    standard v1.36.0.
+- aid: bendigo-and-adelaide-bank:up-developer-api
+  name: Up Developer API (Personal Banking)
+  tags:
+  - Personal Banking
+  - Neobank
+  - Transactions
+  - Accounts
+  - Webhooks
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.up.com.au/
+  baseURL: https://api.up.com.au/api/v1
+  properties:
+  - url: https://developer.up.com.au/
+    type: Documentation
+  - url: https://developer.up.com.au/
+    type: APIReference
+  - url: https://github.com/up-banking/api
+    type: SourceCode
+  - url: openapi/bendigo-and-adelaide-bank-up-developer-api-openapi.json
+    type: OpenAPI
+  description: First-party personal-banking developer API for Up, the digital neobank
+    owned by Bendigo and Adelaide Bank. A genuine bank-proprietary REST API (JSON:API
+    style) letting an Up customer read their own accounts, transactions, categories,
+    tags, and attachments, and register webhooks, authenticated with a personal access
+    token. Confirmed live - api.up.com.au/api/v1 returns HTTP 401 (auth required) when
+    unauthenticated (verified 2026-07-21). OpenAPI 3.0.3 (17 paths) harvested verbatim
+    from Up's public up-banking/api GitHub repository.
 - aid: bendigo-and-adelaide-bank:up-cds-banking-products-api
   name: Up Banking CDR Product Reference Data API
   tags:
@@ -55,7 +180,7 @@ apis:
   - Neobank
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://up.com.au/
-  baseURL: https://api.up.com.au/cds-au/v1
+  baseURL: https://api.up.com.au/cds-au/v1/banking/products
   properties:
   - url: https://up.com.au/
     type: Documentation
@@ -76,20 +201,22 @@ apis:
   - Product Reference Data
   - Banking
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.bendigoadelaide.com.au/banking-products-api/
-  baseURL: https://api.cdr.adelaidebank.com.au/cds-au/v1
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
   properties:
-  - url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - url: https://www.bendigobank.com.au/cdr/
     type: Documentation
   - url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
     type: APIReference
   - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
     type: OpenAPI
-  description: Consumer Data Right Product Reference Data API for the Adelaide Bank
-    brand, following the standard Consumer Data Standards path at the documented CDR
-    host. UNVERIFIED - the host resolved but did not return HTTP 200 for GET /banking/products
-    on the standard path/version during probing on 2026-07-20; endpoint listed with
-    the standard CDS path, not an invented host.
+  description: Consumer Data Right Product Reference Data for the Adelaide Bank brand.
+    Adelaide Bank is a division of Bendigo and Adelaide Bank Limited, which is a single
+    accredited CDR data holder; the standalone host api.cdr.adelaidebank.com.au does
+    NOT resolve (DNS NXDOMAIN, verified 2026-07-21), so the Adelaide brand's product
+    data is served through the group's confirmed Bendigo CDR data holder host. Listed
+    with the confirmed working host, not an invented one; the OpenAPI is the shared
+    DSB CDS Banking standard v1.36.0.
 common:
 - type: VulnerabilityDisclosure
   url: security/bendigo-and-adelaide-bank-vulnerability-disclosure.yml
@@ -101,6 +228,10 @@ common:
   url: https://www.bendigoadelaide.com.au/
 - type: DeveloperPortal
   url: https://www.bendigoadelaide.com.au/banking-products-api/
+- type: Portal
+  url: https://developer.up.com.au/
+- type: ConsumerDataRight
+  url: https://www.bendigobank.com.au/cdr/
 - type: Documentation
   url: https://www.bendigoadelaide.com.au/banking-products-api/
 - type: APIStandards
