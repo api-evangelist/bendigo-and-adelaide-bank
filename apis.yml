@@ -11,7 +11,19 @@ description: Bendigo and Adelaide Bank Limited (ASX:BEN) is one of Australia's l
   Right (CDR) data holder, the bank exposes public, unauthenticated Product Reference
   Data (PRD) APIs conforming to the Australian Consumer Data Standards, alongside the
   authenticated CDR consumer data-sharing surface governed by the ACCC/DSB rules.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bendigo-and-adelaide-bank.png
 tags:
 - Financial
 - Banks
@@ -25,204 +37,609 @@ created: '2026-07-20'
 modified: '2026-07-21'
 specificationVersion: '0.19'
 apis:
-- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-cds-banking-products-api
-  name: Bendigo and Adelaide Bank CDR Product Reference Data API
-  tags:
-  - CDR
-  - Open Banking
-  - Product Reference Data
-  - Banking
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-accounts-api
+  name: Bendigo and Adelaide Bank Accounts API
+  description: >-
+    Accounts represent the underlying store used to track balances
+
+    and the transactions that have occurred to modify those balances
+
+    over time. Up currently has three types of account: `SAVER`—used to
+
+    earn interest and to hit savings goals, `TRANSACTIONAL`—used
+
+    for everyday spending, and `HOME_LOAN`-for those with an Up Home loan.
   humanURL: https://www.bendigobank.com.au/cdr/
   baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
-  properties:
-  - url: https://www.bendigobank.com.au/cdr/
-    type: Documentation
-  - url: https://www.bendigoadelaide.com.au/banking-products-api/
-    type: SignupURL
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
-    type: APIReference
-  - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Public, unauthenticated Consumer Data Right Product Reference Data API
-    for the Bendigo Bank brand, exposing GET /banking/products and GET /banking/products/{productId}
-    per the Australian Consumer Data Standards. Confirmed live returning HTTP 200 at
-    x-v 4 (verified 2026-07-21). This is the only CDR family that is callable without
-    accreditation or consumer consent; the OpenAPI pointer is the shared DSB CDS Banking
-    standard (v1.36.0), which the bank is legally required to implement, not a proprietary spec.
-- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-cds-banking-accounts-api
-  name: Bendigo and Adelaide Bank CDR Accounts & Balances API
   tags:
-  - CDR
-  - Open Banking
   - Accounts
-  - Balances
-  - Banking
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.bendigobank.com.au/cdr/
-  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/accounts
   properties:
-  - url: https://www.bendigobank.com.au/cdr/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
-    type: APIReference
-  - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer-authorized Consumer Data Right banking surface covering Get
-    Accounts, Get Bulk Balances, Get Account Balance, and Get Account Detail (GET /banking/accounts,
-    /banking/accounts/balances, /banking/accounts/{accountId}/balance, /banking/accounts/{accountId}).
-    Not publicly callable - access requires ACCC-accredited data recipient (ADR) status,
-    mutual TLS, and explicit consumer consent under the CDR rules. Served on the confirmed
-    Bendigo CDR data holder host; the OpenAPI is the shared DSB CDS Banking standard v1.36.0.
-- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-cds-banking-transactions-api
-  name: Bendigo and Adelaide Bank CDR Transactions API
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-attachments-api
+  name: Bendigo and Adelaide Bank Attachments API
+  description: >-
+    Attachments represent uploaded files that are attached to transactions, these are commonly receipts.
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
   tags:
-  - CDR
-  - Open Banking
+  - Attachments
+  properties:
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-attachments-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-banking-account-balances-api
+  name: Bendigo and Adelaide Bank Banking Account Balances API
+  description: Banking Account Balance endpoints
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
+  tags:
+  - Banking Account Balances
+  properties:
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-banking-account-balances-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-banking-account-direct-debits-api
+  name: Bendigo and Adelaide Bank Banking Account Direct Debits API
+  description: Banking Account Direct Debit endpoints
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
+  tags:
+  - Banking Account Direct Debits
+  properties:
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-banking-account-direct-debits-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: >-
+    bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-banking-account-scheduled-payments-api
+  name: Bendigo and Adelaide Bank Banking Account Scheduled Payments API
+  description: Banking Account Scheduled Payment endpoints
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
+  tags:
+  - Banking Account Scheduled Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-banking-account-scheduled-payments-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-banking-account-transactions-api
+  name: Bendigo and Adelaide Bank Banking Account Transactions API
+  description: Banking Account Transaction endpoints
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
+  tags:
+  - Banking Account Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-banking-account-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-banking-accounts-api
+  name: Bendigo and Adelaide Bank Banking Accounts API
+  description: Banking Account endpoints
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
+  tags:
+  - Banking Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-banking-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-banking-payees-api
+  name: Bendigo and Adelaide Bank Banking Payees API
+  description: Banking Payee endpoints
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
+  tags:
+  - Banking Payees
+  properties:
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-banking-payees-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-banking-products-api
+  name: Bendigo and Adelaide Bank Banking Products API
+  description: Banking Product endpoints
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
+  tags:
+  - Banking Products
+  properties:
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-banking-products-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-categories-api
+  name: Bendigo and Adelaide Bank Categories API
+  description: >-
+    Categories enable understanding where your money goes by driving
+
+    powerful insights in Up. All categories in Up are pre-defined
+
+    and are automatically assigned to new purchases in most cases. A
+
+    parent-child relationship is used to represent categories,
+
+    however parent categories cannot be directly assigned to
+
+    transactions.
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
+  tags:
+  - Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-categories-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-tags-api
+  name: Bendigo and Adelaide Bank Tags API
+  description: >-
+    Tags are custom labels that can be associated with transactions
+
+    on Up. Within the Up application, tags provide additional insight
+
+    into spending. For example, you could have a "Take Away" tag that
+
+    you apply to purchases from food delivery services. The Up API
+
+    allows you to manage the tags associated with transactions. Each
+
+    transaction may have up to 6 tags.
+
+
+    Tags are identified by their labels, which are unique strings,
+
+    so the tag "Holiday" has also the `id` `"Holiday"`.
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-tags-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-transactions-api
+  name: Bendigo and Adelaide Bank Transactions API
+  description: >-
+    Transactions represent the movement of money into and out of an
+
+    account. They have many characteristics that vary depending on
+
+    the kind of transaction. Transactions may be temporarily `HELD`
+
+    (pending) or `SETTLED`, typically depending on which payment
+
+    method was used at the point of sale.
+  humanURL: https://www.bendigobank.com.au/cdr/
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
+  tags:
   - Transactions
-  - Banking
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.bendigobank.com.au/cdr/
-  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/accounts/{accountId}/transactions
   properties:
-  - url: https://www.bendigobank.com.au/cdr/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
-    type: APIReference
-  - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer-authorized Consumer Data Right transactions surface covering
-    Get Transactions For Account and Get Transaction Detail (GET /banking/accounts/{accountId}/transactions
-    and /banking/accounts/{accountId}/transactions/{transactionId}). Not publicly callable
-    - requires ACCC-accredited data recipient status, mutual TLS, and consumer consent
-    under the CDR rules. Served on the confirmed Bendigo CDR data holder host; the OpenAPI
-    is the shared DSB CDS Banking standard v1.36.0.
-- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-cds-banking-direct-debits-api
-  name: Bendigo and Adelaide Bank CDR Direct Debits & Scheduled Payments API
-  tags:
-  - CDR
-  - Open Banking
-  - Direct Debits
-  - Scheduled Payments
-  - Banking
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-utility-endpoints-api
+  name: Bendigo and Adelaide Bank Utility endpoints API
+  description: >-
+    Some endpoints exist not to expose data, but to test the API
+
+    itself. Currently there is only one endpoint in this group: ping!
   humanURL: https://www.bendigobank.com.au/cdr/
-  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/accounts/direct-debits
-  properties:
-  - url: https://www.bendigobank.com.au/cdr/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
-    type: APIReference
-  - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer-authorized Consumer Data Right surface covering Get Direct Debits
-    (per-account and bulk) and Get Scheduled Payments (per-account and bulk) - GET /banking/accounts/{accountId}/direct-debits,
-    /banking/accounts/direct-debits, /banking/accounts/{accountId}/payments/scheduled,
-    and /banking/payments/scheduled. Not publicly callable - requires ACCC-accredited
-    data recipient status, mutual TLS, and consumer consent. Served on the confirmed
-    Bendigo CDR host; the OpenAPI is the shared DSB CDS Banking standard v1.36.0.
-- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-cds-banking-payees-api
-  name: Bendigo and Adelaide Bank CDR Payees API
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
   tags:
-  - CDR
-  - Open Banking
-  - Payees
-  - Banking
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - Utility endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-utility-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
+- aid: bendigo-and-adelaide-bank:bendigo-and-adelaide-bank-webhooks-api
+  name: Bendigo and Adelaide Bank Webhooks API
+  description: >-
+    Webhooks provide a mechanism for a configured URL to receive
+
+    events when transaction activity occurs on Up. You can think of
+
+    webhooks as being like push notifications for your server-side
+
+    application.
   humanURL: https://www.bendigobank.com.au/cdr/
-  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/payees
-  properties:
-  - url: https://www.bendigobank.com.au/cdr/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
-    type: APIReference
-  - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer-authorized Consumer Data Right payees surface covering Get Payees
-    and Get Payee Detail (GET /banking/payees and /banking/payees/{payeeId}), exposing
-    a customer's saved payees. Not publicly callable - requires ACCC-accredited data
-    recipient status, mutual TLS, and consumer consent under the CDR rules. Served on
-    the confirmed Bendigo CDR data holder host; the OpenAPI is the shared DSB CDS Banking
-    standard v1.36.0.
-- aid: bendigo-and-adelaide-bank:up-developer-api
-  name: Up Developer API (Personal Banking)
+  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
   tags:
-  - Personal Banking
-  - Neobank
-  - Transactions
-  - Accounts
   - Webhooks
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.up.com.au/
-  baseURL: https://api.up.com.au/api/v1
   properties:
-  - url: https://developer.up.com.au/
-    type: Documentation
-  - url: https://developer.up.com.au/
-    type: APIReference
-  - url: https://github.com/up-banking/api
-    type: SourceCode
-  - url: https://developer.up.com.au/#getting_started
-    type: GettingStarted
-  - url: openapi/bendigo-and-adelaide-bank-up-developer-api-openapi.json
-    type: OpenAPI
-  - url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
-    type: AsyncAPI
-  - url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
-    type: Webhooks
-  description: First-party personal-banking developer API for Up, the digital neobank
-    owned by Bendigo and Adelaide Bank. A genuine bank-proprietary REST API (JSON:API
-    style) letting an Up customer read their own accounts, transactions, categories,
-    tags, and attachments, and register webhooks, authenticated with a personal access
-    token. Confirmed live - api.up.com.au/api/v1 returns HTTP 401 (auth required) when
-    unauthenticated (verified 2026-07-21). OpenAPI 3.0.3 (17 paths) harvested verbatim
-    from Up's public up-banking/api GitHub repository.
-- aid: bendigo-and-adelaide-bank:up-cds-banking-products-api
-  name: Up Banking CDR Product Reference Data API
-  tags:
-  - CDR
-  - Open Banking
-  - Product Reference Data
-  - Neobank
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://up.com.au/
-  baseURL: https://api.up.com.au/cds-au/v1/banking/products
-  properties:
-  - url: https://up.com.au/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
-    type: APIReference
-  - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Public CDR Product Reference Data API for Up, the digital neobank owned
-    by Bendigo and Adelaide Bank, conforming to the shared Australian Consumer Data
-    Standards. Confirmed live returning HTTP 200 for GET /banking/products (verified
-    2026-07-20). Up separately publishes its own authenticated personal-banking developer
-    API at api.up.com.au/api/v1.
-- aid: bendigo-and-adelaide-bank:adelaide-bank-cds-banking-products-api
-  name: Adelaide Bank CDR Product Reference Data API
-  tags:
-  - CDR
-  - Open Banking
-  - Product Reference Data
-  - Banking
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.bendigobank.com.au/cdr/
-  baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
-  properties:
-  - url: https://www.bendigobank.com.au/cdr/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
-    type: APIReference
-  - url: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer Data Right Product Reference Data for the Adelaide Bank brand.
-    Adelaide Bank is a division of Bendigo and Adelaide Bank Limited, which is a single
-    accredited CDR data holder; the standalone host api.cdr.adelaidebank.com.au does
-    NOT resolve (DNS NXDOMAIN, verified 2026-07-21), so the Adelaide brand's product
-    data is served through the group's confirmed Bendigo CDR data holder host. Listed
-    with the confirmed working host, not an invented one; the OpenAPI is the shared
-    DSB CDS Banking standard v1.36.0.
+  - type: OpenAPI
+    url: openapi/bendigo-and-adelaide-bank-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://www.bendigobank.com.au/cdr/
+  - type: SignupURL
+    url: https://www.bendigoadelaide.com.au/banking-products-api/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+  - type: Documentation
+    url: https://developer.up.com.au/
+  - type: APIReference
+    url: https://developer.up.com.au/
+  - type: SourceCode
+    url: https://github.com/up-banking/api
+  - type: GettingStarted
+    url: https://developer.up.com.au/#getting_started
+  - type: AsyncAPI
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/bendigo-and-adelaide-bank-up-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://up.com.au/
 common:
 - type: VulnerabilityDisclosure
   url: security/bendigo-and-adelaide-bank-vulnerability-disclosure.yml
