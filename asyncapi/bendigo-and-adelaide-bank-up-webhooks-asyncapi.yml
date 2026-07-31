@@ -110,3 +110,13 @@ components:
         - TRANSACTION_SETTLED
         - TRANSACTION_DELETED
         - PING
+
+# --- API Evangelist provenance -------------------------------------------
+x-superseded-by:
+  reason: >-
+    Provider publishes this event surface themselves in as-published OpenAPI; this document was authored by API Evangelist before that source was harvested.
+  published_spec: all/bendigo-and-adelaide-bank/openapi/_original/bendigo-and-adelaide-bank-up-developer-api-openapi.json
+  published_event_object: callbacks
+  published_events: 1
+  status: superseded
+  reviewed: '2026-07-31'
