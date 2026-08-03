@@ -1,0 +1,40 @@
+{
+  "provider": "bendigo-and-adelaide-bank",
+  "sources": [
+    "bendigo-and-adelaide-bank-accounts-api-openapi.yml",
+    "bendigo-and-adelaide-bank-attachments-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-account-balances-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-account-direct-debits-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-account-scheduled-payments-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-account-transactions-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-accounts-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-payees-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-products-api-openapi.yml",
+    "bendigo-and-adelaide-bank-categories-api-openapi.yml",
+    "bendigo-and-adelaide-bank-tags-api-openapi.yml",
+    "bendigo-and-adelaide-bank-transactions-api-openapi.yml",
+    "bendigo-and-adelaide-bank-utility-endpoints-api-openapi.yml",
+    "bendigo-and-adelaide-bank-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "bendigo-and-adelaide-bank-accounts-api-openapi.yml",
+    "bendigo-and-adelaide-bank-attachments-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-account-balances-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-account-direct-debits-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-account-scheduled-payments-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-account-transactions-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-accounts-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-payees-api-openapi.yml",
+    "bendigo-and-adelaide-bank-banking-products-api-openapi.yml",
+    "bendigo-and-adelaide-bank-categories-api-openapi.yml",
+    "bendigo-and-adelaide-bank-tags-api-openapi.yml",
+    "bendigo-and-adelaide-bank-transactions-api-openapi.yml",
+    "bendigo-and-adelaide-bank-utility-endpoints-api-openapi.yml",
+    "bendigo-and-adelaide-bank-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
