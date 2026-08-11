@@ -641,6 +641,11 @@ apis:
   - type: Documentation
     url: https://up.com.au/
 common:
+- type: IssueTracker
+  url: https://github.com/up-banking/api/issues
+- type: License
+  name: MIT
+  url: https://github.com/up-banking/api/blob/master/LICENSE
 - type: VulnerabilityDisclosure
   url: security/bendigo-and-adelaide-bank-vulnerability-disclosure.yml
 - type: DomainSecurity
