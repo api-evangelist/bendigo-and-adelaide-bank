@@ -1,0 +1,190 @@
+{
+  "item": [
+    {
+      "id": "a111c184-17d0-400c-aad5-36b288b40bad",
+      "name": "Attachments",
+      "description": {
+        "content": "Attachments represent uploaded files that are attached to transactions, these are commonly receipts.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "759a6f17-6e3a-4880-8f57-7a5e382d8e98",
+          "name": "List attachments",
+          "request": {
+            "name": "List attachments",
+            "description": {
+              "content": "Retrieve a list of all attachments. The returned list is [paginated](#pagination) and can\nbe scrolled by following the `next` and `prev` links where present.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "attachments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa9d3323-b30f-4dce-905c-4e4749523c30",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"string\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"createdAt\": \"1995-02-21T16:55:13.620Z\",\n        \"fileURL\": \"string\",\n        \"fileURLExpiresAt\": \"1954-02-19T16:29:13.783Z\",\n        \"fileExtension\": \"string\",\n        \"fileContentType\": \"string\"\n      },\n      \"relationships\": {\n        \"transaction\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        }\n      },\n      \"links\": {\n        \"self\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"createdAt\": \"2017-07-06T10:40:47.022Z\",\n        \"fileURL\": \"string\",\n        \"fileURLExpiresAt\": \"2004-04-11T21:37:52.500Z\",\n        \"fileExtension\": \"string\",\n        \"fileContentType\": \"string\"\n      },\n      \"relationships\": {\n        \"transaction\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        }\n      },\n      \"links\": {\n        \"self\": \"string\"\n      }\n    }\n  ],\n  \"links\": {\n    \"prev\": \"string\",\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2adaa310-b0ec-46fe-b8fc-0997479064c6",
+          "name": "Retrieve attachment",
+          "request": {
+            "name": "Retrieve attachment",
+            "description": {
+              "content": "Retrieve a specific attachment by providing its unique identifier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "attachments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier for the attachment.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f7100c1-4eca-4cc8-b0a5-a9c1e9ff1e26",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attachments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier for the attachment.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"createdAt\": \"2007-10-05T11:23:22.995Z\",\n      \"fileURL\": \"string\",\n      \"fileURLExpiresAt\": \"2022-03-12T19:59:35.308Z\",\n      \"fileExtension\": \"string\",\n      \"fileContentType\": \"string\"\n    },\n    \"relationships\": {\n      \"transaction\": {\n        \"data\": {\n          \"type\": \"string\",\n          \"id\": \"string\"\n        },\n        \"links\": {\n          \"related\": \"string\"\n        }\n      }\n    },\n    \"links\": {\n      \"self\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://mtls.dh.example.com/cds-au/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "17b54b7b-e9f1-4a5e-b212-b5328bf6d185",
+    "name": "CDR Banking Accounts Attachments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specifications for resource endpoints applicable to data holders in the Banking sector.\n\nContact Support:\n Name: Data Standards Body\n Email: contact@dsb.gov.au",
+      "type": "text/plain"
+    }
+  }
+}

@@ -2,19 +2,27 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
-notes: >-
-  No official hosted/remote MCP server was found for Bendigo/Adelaide/Up. This is a CANDIDATE
-  tool list derived from the two PUBLIC, unauthenticated CDR Product Reference Data operations —
-  the surface an agent can safely call without CDR accreditation. Authenticated CDR data-sharing
-  operations are intentionally excluded (they require FAPI/MTLS + accredited-data-recipient status).
+notes: No official hosted/remote MCP server was found for Bendigo/Adelaide/Up. This is a CANDIDATE tool
+  list derived from the two PUBLIC, unauthenticated CDR Product Reference Data operations — the surface
+  an agent can safely call without CDR accreditation. Authenticated CDR data-sharing operations are intentionally
+  excluded (they require FAPI/MTLS + accredited-data-recipient status).
 server:
   name: bendigo-and-adelaide-bank-products
   transport: http
   base_url: https://api.cdr.bendigobank.com.au/cds-au/v1
 tools:
 - name: list_banking_products
-  description: List published retail and business banking products (CDR Product Reference Data). Supports effective/updated-since/brand/product-category filters and page/page-size pagination. Requires x-v header.
+  description: List published retail and business banking products (CDR Product Reference Data). Supports
+    effective/updated-since/brand/product-category filters and page/page-size pagination. Requires x-v
+    header.
   source_operation: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml#listBankingProducts
 - name: get_banking_product_detail
-  description: Get full detail for a single product by productId, including fees, rates, features, eligibility and constraints. Requires x-v header.
+  description: Get full detail for a single product by productId, including fees, rates, features, eligibility
+    and constraints. Requires x-v header.
   source_operation: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml#getBankingProductDetail
+deployment:
+  mode: none
+  verified: derived
+  tools: 2
+  checked: '2026-08-12'
+  source: catalog MCP census

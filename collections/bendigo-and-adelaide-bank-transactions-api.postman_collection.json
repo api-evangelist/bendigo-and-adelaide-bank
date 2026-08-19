@@ -1,0 +1,404 @@
+{
+  "item": [
+    {
+      "id": "67c9218d-5eba-48b7-bb2a-d92adc9191c9",
+      "name": "Transactions",
+      "description": {
+        "content": "Transactions represent the movement of money into and out of an\naccount. They have many characteristics that vary depending on\nthe kind of transaction. Transactions may be temporarily `HELD`\n(pending) or `SETTLED`, typically depending on which payment\nmethod was used at the point of sale.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5316fc8f-3727-4652-8253-28c799569733",
+          "name": "List transactions",
+          "request": {
+            "name": "List transactions",
+            "description": {
+              "content": "Retrieve a list of all transactions across all accounts for the currently\nauthenticated user. The returned list is [paginated](#pagination) and can\nbe scrolled by following the `next` and `prev` links where present. To\nnarrow the results to a specific date range pass one or both of\n`filter[since]` and `filter[until]` in the query string. These filter\nparameters **should not** be used for pagination. Results are ordered\nnewest first to oldest last.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>",
+                  "description": "The number of records to return in each page.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[status]",
+                  "value": "<string>",
+                  "description": "The transaction status for which to return records. This\ncan be used to filter `HELD` transactions from those\nthat are `SETTLED`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[since]",
+                  "value": "<dateTime>",
+                  "description": "The start date-time from which to return records,\nformatted according to rfc-3339. Not to be used for\npagination purposes.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[until]",
+                  "value": "<dateTime>",
+                  "description": "The end date-time up to which to return records,\nformatted according to rfc-3339. Not to be used for\npagination purposes.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[category]",
+                  "value": "<string>",
+                  "description": "The category identifier for which to filter transactions.\nBoth parent and child categories can be filtered through\nthis parameter. Providing an invalid category identifier\nresults in a `404` response.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[tag]",
+                  "value": "<string>",
+                  "description": "A transaction tag to filter for which to return records.\nIf the tag does not exist, zero records are returned and\na success response is given.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1e2d908-38ca-4f1c-9ec3-54819f2fded3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "30"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "HELD"
+                    },
+                    {
+                      "key": "filter[since]",
+                      "value": "2020-01-01T01:02:03+10:00"
+                    },
+                    {
+                      "key": "filter[until]",
+                      "value": "2020-02-01T01:02:03+10:00"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "good-life"
+                    },
+                    {
+                      "key": "filter[tag]",
+                      "value": "Holiday"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"string\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"status\": \"HELD\",\n        \"rawText\": \"string\",\n        \"description\": \"string\",\n        \"message\": \"string\",\n        \"isCategorizable\": false,\n        \"holdInfo\": {\n          \"amount\": {\n            \"description\": \"The amount of this transaction while in the `HELD` status, in\\nAustralian dollars.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"foreignAmount\": {\n            \"nullable\": true,\n            \"description\": \"The foreign currency amount of this transaction while in the `HELD`\\nstatus. This field will be `null` for domestic transactions. The amount\\nwas converted to the AUD amount reflected in the `amount` field.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"roundUp\": {\n          \"amount\": {\n            \"description\": \"The total amount of this Round Up, including any boosts, represented as\\na negative value.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"boostPortion\": {\n            \"nullable\": true,\n            \"description\": \"The portion of the Round Up `amount` owing to boosted Round Ups,\\nrepresented as a negative value. If no boost was added to the Round Up\\nthis field will be `null`.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"cashback\": {\n          \"description\": \"string\",\n          \"amount\": {\n            \"description\": \"The total amount of cashback paid, represented as a positive value.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"amount\": {\n          \"currencyCode\": \"string\",\n          \"value\": \"string\",\n          \"valueInBaseUnits\": 4095\n        },\n        \"foreignAmount\": {\n          \"currencyCode\": \"string\",\n          \"value\": \"string\",\n          \"valueInBaseUnits\": 1892\n        },\n        \"cardPurchaseMethod\": {\n          \"method\": {\n            \"description\": \"The type of card purchase.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"cardNumberSuffix\": \"string\"\n        },\n        \"settledAt\": \"1965-06-25T03:17:18.904Z\",\n        \"createdAt\": \"1987-01-09T07:39:42.840Z\",\n        \"transactionType\": \"string\",\n        \"note\": {\n          \"text\": \"string\"\n        },\n        \"performingCustomer\": {\n          \"displayName\": \"string\"\n        }\n      },\n      \"relationships\": {\n        \"account\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        },\n        \"transferAccount\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        },\n        \"category\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"self\": \"string\",\n            \"related\": \"string\"\n          }\n        },\n        \"parentCategory\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        },\n        \"tags\": {\n          \"data\": [\n            {\n              \"type\": \"string\",\n              \"id\": \"string\"\n            },\n            {\n              \"type\": \"string\",\n              \"id\": \"string\"\n            }\n          ],\n          \"links\": {\n            \"self\": \"string\"\n          }\n        },\n        \"attachment\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        }\n      },\n      \"links\": {\n        \"self\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"status\": \"HELD\",\n        \"rawText\": \"string\",\n        \"description\": \"string\",\n        \"message\": \"string\",\n        \"isCategorizable\": true,\n        \"holdInfo\": {\n          \"amount\": {\n            \"description\": \"The amount of this transaction while in the `HELD` status, in\\nAustralian dollars.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"foreignAmount\": {\n            \"nullable\": true,\n            \"description\": \"The foreign currency amount of this transaction while in the `HELD`\\nstatus. This field will be `null` for domestic transactions. The amount\\nwas converted to the AUD amount reflected in the `amount` field.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"roundUp\": {\n          \"amount\": {\n            \"description\": \"The total amount of this Round Up, including any boosts, represented as\\na negative value.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"boostPortion\": {\n            \"nullable\": true,\n            \"description\": \"The portion of the Round Up `amount` owing to boosted Round Ups,\\nrepresented as a negative value. If no boost was added to the Round Up\\nthis field will be `null`.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"cashback\": {\n          \"description\": \"string\",\n          \"amount\": {\n            \"description\": \"The total amount of cashback paid, represented as a positive value.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"amount\": {\n          \"currencyCode\": \"string\",\n          \"value\": \"string\",\n          \"valueInBaseUnits\": 6249\n        },\n        \"foreignAmount\": {\n          \"currencyCode\": \"string\",\n          \"value\": \"string\",\n          \"valueInBaseUnits\": 1180\n        },\n        \"cardPurchaseMethod\": {\n          \"method\": {\n            \"description\": \"The type of card purchase.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"cardNumberSuffix\": \"string\"\n        },\n        \"settledAt\": \"1975-09-06T22:23:12.247Z\",\n        \"createdAt\": \"2012-05-22T22:21:28.359Z\",\n        \"transactionType\": \"string\",\n        \"note\": {\n          \"text\": \"string\"\n        },\n        \"performingCustomer\": {\n          \"displayName\": \"string\"\n        }\n      },\n      \"relationships\": {\n        \"account\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        },\n        \"transferAccount\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        },\n        \"category\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"self\": \"string\",\n            \"related\": \"string\"\n          }\n        },\n        \"parentCategory\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        },\n        \"tags\": {\n          \"data\": [\n            {\n              \"type\": \"string\",\n              \"id\": \"string\"\n            },\n            {\n              \"type\": \"string\",\n              \"id\": \"string\"\n            }\n          ],\n          \"links\": {\n            \"self\": \"string\"\n          }\n        },\n        \"attachment\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        }\n      },\n      \"links\": {\n        \"self\": \"string\"\n      }\n    }\n  ],\n  \"links\": {\n    \"prev\": \"string\",\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f38f2fa-0d13-44fc-a19e-78d3f93774b5",
+          "name": "Retrieve transaction",
+          "request": {
+            "name": "Retrieve transaction",
+            "description": {
+              "content": "Retrieve a specific transaction by providing its unique identifier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier for the transaction.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5080cb4-9346-4aa8-9557-2e841abe30fe",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier for the transaction.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"status\": \"HELD\",\n      \"rawText\": \"string\",\n      \"description\": \"string\",\n      \"message\": \"string\",\n      \"isCategorizable\": true,\n      \"holdInfo\": {\n        \"amount\": {\n          \"description\": \"The amount of this transaction while in the `HELD` status, in\\nAustralian dollars.\\n\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"foreignAmount\": {\n          \"nullable\": true,\n          \"description\": \"The foreign currency amount of this transaction while in the `HELD`\\nstatus. This field will be `null` for domestic transactions. The amount\\nwas converted to the AUD amount reflected in the `amount` field.\\n\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"roundUp\": {\n        \"amount\": {\n          \"description\": \"The total amount of this Round Up, including any boosts, represented as\\na negative value.\\n\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"boostPortion\": {\n          \"nullable\": true,\n          \"description\": \"The portion of the Round Up `amount` owing to boosted Round Ups,\\nrepresented as a negative value. If no boost was added to the Round Up\\nthis field will be `null`.\\n\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"cashback\": {\n        \"description\": \"string\",\n        \"amount\": {\n          \"description\": \"The total amount of cashback paid, represented as a positive value.\\n\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"amount\": {\n        \"currencyCode\": \"string\",\n        \"value\": \"string\",\n        \"valueInBaseUnits\": 8006\n      },\n      \"foreignAmount\": {\n        \"currencyCode\": \"string\",\n        \"value\": \"string\",\n        \"valueInBaseUnits\": 9200\n      },\n      \"cardPurchaseMethod\": {\n        \"method\": {\n          \"description\": \"The type of card purchase.\\n\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"cardNumberSuffix\": \"string\"\n      },\n      \"settledAt\": \"1982-12-23T15:46:40.955Z\",\n      \"createdAt\": \"1984-04-28T10:39:23.312Z\",\n      \"transactionType\": \"string\",\n      \"note\": {\n        \"text\": \"string\"\n      },\n      \"performingCustomer\": {\n        \"displayName\": \"string\"\n      }\n    },\n    \"relationships\": {\n      \"account\": {\n        \"data\": {\n          \"type\": \"string\",\n          \"id\": \"string\"\n        },\n        \"links\": {\n          \"related\": \"string\"\n        }\n      },\n      \"transferAccount\": {\n        \"data\": {\n          \"type\": \"string\",\n          \"id\": \"string\"\n        },\n        \"links\": {\n          \"related\": \"string\"\n        }\n      },\n      \"category\": {\n        \"data\": {\n          \"type\": \"string\",\n          \"id\": \"string\"\n        },\n        \"links\": {\n          \"self\": \"string\",\n          \"related\": \"string\"\n        }\n      },\n      \"parentCategory\": {\n        \"data\": {\n          \"type\": \"string\",\n          \"id\": \"string\"\n        },\n        \"links\": {\n          \"related\": \"string\"\n        }\n      },\n      \"tags\": {\n        \"data\": [\n          {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          }\n        ],\n        \"links\": {\n          \"self\": \"string\"\n        }\n      },\n      \"attachment\": {\n        \"data\": {\n          \"type\": \"string\",\n          \"id\": \"string\"\n        },\n        \"links\": {\n          \"related\": \"string\"\n        }\n      }\n    },\n    \"links\": {\n      \"self\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a32dc176-a202-474a-b938-62ab68f06ada",
+          "name": "List transactions by account",
+          "request": {
+            "name": "List transactions by account",
+            "description": {
+              "content": "Retrieve a list of all transactions for a specific account. The returned\nlist is [paginated](#pagination) and can be scrolled by following the\n`next` and `prev` links where present. To narrow the results to a\nspecific date range pass one or both of `filter[since]` and\n`filter[until]` in the query string. These filter parameters\n**should not** be used for pagination. Results are ordered newest first\nto oldest last.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":accountId",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>",
+                  "description": "The number of records to return in each page.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[status]",
+                  "value": "<string>",
+                  "description": "The transaction status for which to return records. This\ncan be used to filter `HELD` transactions from those\nthat are `SETTLED`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[since]",
+                  "value": "<dateTime>",
+                  "description": "The start date-time from which to return records,\nformatted according to rfc-3339. Not to be used for\npagination purposes.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[until]",
+                  "value": "<dateTime>",
+                  "description": "The end date-time up to which to return records,\nformatted according to rfc-3339. Not to be used for\npagination purposes.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[category]",
+                  "value": "<string>",
+                  "description": "The category identifier for which to filter transactions.\nBoth parent and child categories can be filtered through\nthis parameter. Providing an invalid category identifier\nresults in a `404` response.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[tag]",
+                  "value": "<string>",
+                  "description": "A transaction tag to filter for which to return records.\nIf the tag does not exist, zero records are returned and\na success response is given.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The unique identifier for the account.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4c84905-49c8-4b70-b321-30b707d2f78a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "30"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "HELD"
+                    },
+                    {
+                      "key": "filter[since]",
+                      "value": "2020-01-01T01:02:03+10:00"
+                    },
+                    {
+                      "key": "filter[until]",
+                      "value": "2020-02-01T01:02:03+10:00"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "good-life"
+                    },
+                    {
+                      "key": "filter[tag]",
+                      "value": "Holiday"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier for the account.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"string\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"status\": \"HELD\",\n        \"rawText\": \"string\",\n        \"description\": \"string\",\n        \"message\": \"string\",\n        \"isCategorizable\": false,\n        \"holdInfo\": {\n          \"amount\": {\n            \"description\": \"The amount of this transaction while in the `HELD` status, in\\nAustralian dollars.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"foreignAmount\": {\n            \"nullable\": true,\n            \"description\": \"The foreign currency amount of this transaction while in the `HELD`\\nstatus. This field will be `null` for domestic transactions. The amount\\nwas converted to the AUD amount reflected in the `amount` field.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"roundUp\": {\n          \"amount\": {\n            \"description\": \"The total amount of this Round Up, including any boosts, represented as\\na negative value.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"boostPortion\": {\n            \"nullable\": true,\n            \"description\": \"The portion of the Round Up `amount` owing to boosted Round Ups,\\nrepresented as a negative value. If no boost was added to the Round Up\\nthis field will be `null`.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"cashback\": {\n          \"description\": \"string\",\n          \"amount\": {\n            \"description\": \"The total amount of cashback paid, represented as a positive value.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"amount\": {\n          \"currencyCode\": \"string\",\n          \"value\": \"string\",\n          \"valueInBaseUnits\": 2064\n        },\n        \"foreignAmount\": {\n          \"currencyCode\": \"string\",\n          \"value\": \"string\",\n          \"valueInBaseUnits\": 1551\n        },\n        \"cardPurchaseMethod\": {\n          \"method\": {\n            \"description\": \"The type of card purchase.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"cardNumberSuffix\": \"string\"\n        },\n        \"settledAt\": \"2020-11-10T18:09:51.924Z\",\n        \"createdAt\": \"1951-08-28T04:03:45.738Z\",\n        \"transactionType\": \"string\",\n        \"note\": {\n          \"text\": \"string\"\n        },\n        \"performingCustomer\": {\n          \"displayName\": \"string\"\n        }\n      },\n      \"relationships\": {\n        \"account\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        },\n        \"transferAccount\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        },\n        \"category\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"self\": \"string\",\n            \"related\": \"string\"\n          }\n        },\n        \"parentCategory\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        },\n        \"tags\": {\n          \"data\": [\n            {\n              \"type\": \"string\",\n              \"id\": \"string\"\n            },\n            {\n              \"type\": \"string\",\n              \"id\": \"string\"\n            }\n          ],\n          \"links\": {\n            \"self\": \"string\"\n          }\n        },\n        \"attachment\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        }\n      },\n      \"links\": {\n        \"self\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"status\": \"HELD\",\n        \"rawText\": \"string\",\n        \"description\": \"string\",\n        \"message\": \"string\",\n        \"isCategorizable\": true,\n        \"holdInfo\": {\n          \"amount\": {\n            \"description\": \"The amount of this transaction while in the `HELD` status, in\\nAustralian dollars.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"foreignAmount\": {\n            \"nullable\": true,\n            \"description\": \"The foreign currency amount of this transaction while in the `HELD`\\nstatus. This field will be `null` for domestic transactions. The amount\\nwas converted to the AUD amount reflected in the `amount` field.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"roundUp\": {\n          \"amount\": {\n            \"description\": \"The total amount of this Round Up, including any boosts, represented as\\na negative value.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"boostPortion\": {\n            \"nullable\": true,\n            \"description\": \"The portion of the Round Up `amount` owing to boosted Round Ups,\\nrepresented as a negative value. If no boost was added to the Round Up\\nthis field will be `null`.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"cashback\": {\n          \"description\": \"string\",\n          \"amount\": {\n            \"description\": \"The total amount of cashback paid, represented as a positive value.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"amount\": {\n          \"currencyCode\": \"string\",\n          \"value\": \"string\",\n          \"valueInBaseUnits\": 590\n        },\n        \"foreignAmount\": {\n          \"currencyCode\": \"string\",\n          \"value\": \"string\",\n          \"valueInBaseUnits\": 3479\n        },\n        \"cardPurchaseMethod\": {\n          \"method\": {\n            \"description\": \"The type of card purchase.\\n\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"cardNumberSuffix\": \"string\"\n        },\n        \"settledAt\": \"2007-11-05T07:18:25.279Z\",\n        \"createdAt\": \"2018-07-08T12:53:16.815Z\",\n        \"transactionType\": \"string\",\n        \"note\": {\n          \"text\": \"string\"\n        },\n        \"performingCustomer\": {\n          \"displayName\": \"string\"\n        }\n      },\n      \"relationships\": {\n        \"account\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        },\n        \"transferAccount\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        },\n        \"category\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"self\": \"string\",\n            \"related\": \"string\"\n          }\n        },\n        \"parentCategory\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        },\n        \"tags\": {\n          \"data\": [\n            {\n              \"type\": \"string\",\n              \"id\": \"string\"\n            },\n            {\n              \"type\": \"string\",\n              \"id\": \"string\"\n            }\n          ],\n          \"links\": {\n            \"self\": \"string\"\n          }\n        },\n        \"attachment\": {\n          \"data\": {\n            \"type\": \"string\",\n            \"id\": \"string\"\n          },\n          \"links\": {\n            \"related\": \"string\"\n          }\n        }\n      },\n      \"links\": {\n        \"self\": \"string\"\n      }\n    }\n  ],\n  \"links\": {\n    \"prev\": \"string\",\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://mtls.dh.example.com/cds-au/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "89cef9ae-e3ae-427c-886e-1b96922da30c",
+    "name": "CDR Banking Accounts Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specifications for resource endpoints applicable to data holders in the Banking sector.\n\nContact Support:\n Name: Data Standards Body\n Email: contact@dsb.gov.au",
+      "type": "text/plain"
+    }
+  }
+}
