@@ -11,6 +11,20 @@ description: Bendigo and Adelaide Bank Limited (ASX:BEN) is one of Australia's l
   Right (CDR) data holder, the bank exposes public, unauthenticated Product Reference
   Data (PRD) APIs conforming to the Australian Consumer Data Standards, alongside the
   authenticated CDR consumer data-sharing surface governed by the ACCC/DSB rules.
+deliveryModel:
+  model: open-core
+  license: MIT
+  open_source: true
+  commercial: true
+  callable_host: false
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
