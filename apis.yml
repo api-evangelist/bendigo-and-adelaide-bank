@@ -661,6 +661,9 @@ apis:
   - type: Documentation
     url: https://up.com.au/
 common:
+- type: CapabilityMap
+  url: capabilities/bendigo-and-adelaide-bank-capability-edges.yml
+  name: Bendigo and Adelaide Bank Business Capability Map
 - type: IssueTracker
   url: https://github.com/up-banking/api/issues
 - type: License

@@ -1,0 +1,45 @@
+slug: bendigo-and-adelaide-bank
+provider: Bendigo and Adelaide Bank
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Banking Products
+  spec_file: bendigo-and-adelaide-bank-banking-products-api-openapi.yml
+  capability_id: BC-1310.10
+  capability_id_l1: BC-1310
+  capability_name: Product Catalogue Management
+  confidence: 0.85
+  evidence: GET /banking/products listBankingProducts Get Products; BankingProductDetailV7, BankingProductEligibilityV2,
+    BankingProductFeatureV4, BankingProductDepositRateV2, BankingFeeAmount
+  reason: Publishes the bank's product catalogue with features, fees, rates and eligibility — a banking
+    product master/catalogue surface.
+- tag: Banking Account Scheduled Payments
+  spec_file: bendigo-and-adelaide-bank-banking-account-scheduled-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.75
+  evidence: GET /banking/payments/scheduled listScheduledPaymentsBulk Get Scheduled Payments Bulk; BankingScheduledPaymentSetV2,
+    BankingScheduledPaymentRecurrence, BankingDomesticPayee
+  reason: Scheduled/recurring payment instructions with payee details and instalment plans — payment instruction
+    capture and authorisation data.
+- tag: Banking Payees
+  spec_file: bendigo-and-adelaide-bank-banking-payees-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: GET /banking/payees listBankingPayees Get Payees; BankingDomesticPayee, BankingInternationalPayee,
+    BankingBillerPayee, BankingDomesticPayeePayId
+  reason: Saved payee/beneficiary records (domestic, international, biller, digital wallet) are the reference
+    data for capturing and authorising payment instructions.
