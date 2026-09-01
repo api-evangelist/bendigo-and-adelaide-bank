@@ -579,6 +579,8 @@ apis:
   humanURL: https://www.bendigobank.com.au/cdr/
   baseURL: https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products
   tags:
+  - Utility Endpoints
+  tags_raw:
   - Utility endpoints
   properties:
   - type: OpenAPI
