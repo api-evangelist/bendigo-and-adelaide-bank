@@ -1,18 +1,21 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
+  title: Up Transactions API
+  version: v1
+  description: 'The Up API gives you programmatic access to your balances and
+
+    transaction data. You can request past transactions or set up
+
+    webhooks to receive real-time events when new transactions hit your
+
+    account. It’s new, it’s exciting and it’s just the beginning.'
   contact:
-    email: contact@dsb.gov.au
-    name: Data Standards Body
-    url: https://dsb.gov.au/
-  description: Specifications for resource endpoints applicable to data holders in the Banking sector.
-  license:
-    name: MIT License
-    url: https://opensource.org/licenses/MIT
-  title: CDR Banking Accounts Transactions API
-  version: 1.36.0
+    name: API Specification and Support
+    url: https://github.com/up-banking/api
 servers:
-- description: MTLS
-  url: https://mtls.dh.example.com/cds-au/v1
+- url: https://api.up.com.au/api/v1
+security:
+- bearer_auth: []
 tags:
 - name: Transactions
   description: 'Transactions represent the movement of money into and out of an
@@ -23,9 +26,7 @@ tags:
 
     (pending) or `SETTLED`, typically depending on which payment
 
-    method was used at the point of sale.
-
-    '
+    method was used at the point of sale.'
 paths:
   /transactions:
     get:
@@ -34,7 +35,7 @@ paths:
       summary: List transactions
       description: 'Retrieve a list of all transactions across all accounts for the currently
 
-        authenticated user. The returned list is [paginated](#pagination) and can
+        authenticated user. The returned list is paginated and can
 
         be scrolled by following the `next` and `prev` links where present. To
 
@@ -44,9 +45,7 @@ paths:
 
         parameters **should not** be used for pagination. Results are ordered
 
-        newest first to oldest last.
-
-        '
+        newest first to oldest last.'
       parameters:
       - name: page[size]
         in: query
@@ -197,14 +196,14 @@ paths:
               links:
                 prev: null
                 next: null
+      operationId: getTransactions
+      x-operation-id-source: derived
   /transactions/{id}:
     get:
       tags:
       - Transactions
       summary: Retrieve transaction
-      description: 'Retrieve a specific transaction by providing its unique identifier.
-
-        '
+      description: Retrieve a specific transaction by providing its unique identifier.
       parameters:
       - name: id
         in: path
@@ -294,6 +293,8 @@ paths:
                     data: null
                 links:
                   self: https://api.up.com.au/api/v1/transactions/20f1a541-356b-4363-aeba-18e21661b8e5
+      operationId: getTransactionsById
+      x-operation-id-source: derived
   /accounts/{accountId}/transactions:
     get:
       tags:
@@ -301,7 +302,7 @@ paths:
       summary: List transactions by account
       description: 'Retrieve a list of all transactions for a specific account. The returned
 
-        list is [paginated](#pagination) and can be scrolled by following the
+        list is paginated and can be scrolled by following the
 
         `next` and `prev` links where present. To narrow the results to a
 
@@ -311,9 +312,7 @@ paths:
 
         **should not** be used for pagination. Results are ordered newest first
 
-        to oldest last.
-
-        '
+        to oldest last.'
       parameters:
       - name: accountId
         in: path
@@ -484,99 +483,23 @@ paths:
               links:
                 prev: null
                 next: null
+      operationId: getAccountsByAccountIdTransactions
+      x-operation-id-source: derived
 components:
   schemas:
-    TransactionStatusEnum:
+    CardPurchaseMethodEnum:
       enum:
-      - HELD
-      - SETTLED
-      description: 'Specifies which stage of processing a transaction is currently at.
-
-        Currently returned values are `HELD` and `SETTLED`. When a transaction is
-
-        held, its account’s `availableBalance` is affected. When a transaction is
-
-        settled, its account’s `currentBalance` is affected.
-
-        '
-    NoteObject:
-      type: object
-      description: 'Provides information about the note and attachement.
+      - BAR_CODE
+      - OCR
+      - CARD_PIN
+      - CARD_DETAILS
+      - CARD_ON_FILE
+      - ECOMMERCE
+      - MAGNETIC_STRIPE
+      - CONTACTLESS
+      description: 'Specifies the type of card charge.
 
         '
-      properties:
-        text:
-          type: string
-          description: 'A text note about the transaction.
-
-            '
-      required:
-      - text
-    GetTransactionResponse:
-      type: object
-      description: 'Successful response to get a single transaction.
-
-        '
-      properties:
-        data:
-          description: 'The transaction returned in this response.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/TransactionResource'
-      required:
-      - data
-    HoldInfoObject:
-      type: object
-      description: 'Provides information about the amount at which a transaction was in the
-
-        `HELD` status.
-
-        '
-      properties:
-        amount:
-          description: 'The amount of this transaction while in the `HELD` status, in
-
-            Australian dollars.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/MoneyObject'
-        foreignAmount:
-          nullable: true
-          description: 'The foreign currency amount of this transaction while in the `HELD`
-
-            status. This field will be `null` for domestic transactions. The amount
-
-            was converted to the AUD amount reflected in the `amount` field.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/MoneyObject'
-      required:
-      - amount
-      - foreignAmount
-    CardPurchaseMethodObject:
-      type: object
-      description: 'Provides information about the card used for a transaction.
-
-        '
-      properties:
-        method:
-          description: 'The type of card purchase.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/CardPurchaseMethodEnum'
-        cardNumberSuffix:
-          type: string
-          nullable: true
-          description: 'The last four digits of the card used for the purchase, if applicable.
-
-            '
-      required:
-      - method
-      - cardNumberSuffix
     RoundUpObject:
       type: object
       description: 'Provides information about how a Round Up was applied, such as whether or
@@ -594,7 +517,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/MoneyObject'
         boostPortion:
-          nullable: true
           description: 'The portion of the Round Up `amount` owing to boosted Round Ups,
 
             represented as a negative value. If no boost was added to the Round Up
@@ -607,6 +529,63 @@ components:
       required:
       - amount
       - boostPortion
+    TransactionStatusEnum:
+      enum:
+      - HELD
+      - SETTLED
+      description: 'Specifies which stage of processing a transaction is currently at.
+
+        Currently returned values are `HELD` and `SETTLED`. When a transaction is
+
+        held, its account’s `availableBalance` is affected. When a transaction is
+
+        settled, its account’s `currentBalance` is affected.
+
+        '
+    ListTransactionsResponse:
+      type: object
+      description: 'Successful response to get all transactions. This returns a paginated
+
+        list of transactions, which can be scrolled by following the `prev` and
+
+        `next` links if present.
+
+        '
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionResource'
+          description: 'The list of transactions returned in this response.
+
+            '
+        links:
+          type: object
+          properties:
+            prev:
+              type:
+              - string
+              - 'null'
+              description: 'The link to the previous page in the results. If this value is `null`
+
+                there is no previous page.
+
+                '
+            next:
+              type:
+              - string
+              - 'null'
+              description: 'The link to the next page in the results. If this value is `null`
+
+                there is no next page.
+
+                '
+          required:
+          - prev
+          - next
+      required:
+      - data
+      - links
     CashbackObject:
       type: object
       description: 'Provides information about an instant reimbursement in the form of
@@ -629,61 +608,117 @@ components:
       required:
       - description
       - amount
-    CustomerObject:
+    GetTransactionResponse:
       type: object
-      description: 'Provides information about the customer who initiated a transaction
-
-        '
-      properties:
-        displayName:
-          type: string
-          description: 'The Upname or preferred name of the customer
-
-            '
-      required:
-      - displayName
-    ListTransactionsResponse:
-      type: object
-      description: 'Successful response to get all transactions. This returns a paginated
-
-        list of transactions, which can be scrolled by following the `prev` and
-
-        `next` links if present.
+      description: 'Successful response to get a single transaction.
 
         '
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionResource'
-          description: 'The list of transactions returned in this response.
+          description: 'The transaction returned in this response.
 
             '
-        links:
-          type: object
-          properties:
-            prev:
-              type: string
-              nullable: true
-              description: 'The link to the previous page in the results. If this value is `null`
-
-                there is no previous page.
-
-                '
-            next:
-              type: string
-              nullable: true
-              description: 'The link to the next page in the results. If this value is `null`
-
-                there is no next page.
-
-                '
-          required:
-          - prev
-          - next
+          allOf:
+          - $ref: '#/components/schemas/TransactionResource'
       required:
       - data
-      - links
+    MoneyObject:
+      type: object
+      description: 'Provides information about a value of money.
+
+        '
+      properties:
+        currencyCode:
+          type: string
+          description: 'The ISO 4217 currency code.
+
+            '
+        value:
+          type: string
+          description: 'The amount of money, formatted as a string in the relevant currency.
+
+            For example, for an Australian dollar value of $10.56, this field will
+
+            be `"10.56"`. The currency symbol is not included in the string.
+
+            '
+        valueInBaseUnits:
+          type: integer
+          description: 'The amount of money in the smallest denomination for the currency, as a
+
+            64-bit integer.  For example, for an Australian dollar value of $10.56,
+
+            this field will be `1056`.
+
+            '
+      required:
+      - currencyCode
+      - value
+      - valueInBaseUnits
+    CardPurchaseMethodObject:
+      type: object
+      description: 'Provides information about the card used for a transaction.
+
+        '
+      properties:
+        method:
+          description: 'The type of card purchase.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/CardPurchaseMethodEnum'
+        cardNumberSuffix:
+          type:
+          - string
+          - 'null'
+          description: 'The last four digits of the card used for the purchase, if applicable.
+
+            '
+      required:
+      - method
+      - cardNumberSuffix
+    NoteObject:
+      type: object
+      description: 'Provides information about the note and attachement.
+
+        '
+      properties:
+        text:
+          type: string
+          description: 'A text note about the transaction.
+
+            '
+      required:
+      - text
+    HoldInfoObject:
+      type: object
+      description: 'Provides information about the amount at which a transaction was in the
+
+        `HELD` status.
+
+        '
+      properties:
+        amount:
+          description: 'The amount of this transaction while in the `HELD` status, in
+
+            Australian dollars.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/MoneyObject'
+        foreignAmount:
+          description: 'The foreign currency amount of this transaction while in the `HELD`
+
+            status. This field will be `null` for domestic transactions. The amount
+
+            was converted to the AUD amount reflected in the `amount` field.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/MoneyObject'
+      required:
+      - amount
+      - foreignAmount
     TransactionResource:
       type: object
       properties:
@@ -707,8 +742,9 @@ components:
               allOf:
               - $ref: '#/components/schemas/TransactionStatusEnum'
             rawText:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
               description: 'The original, unprocessed text of the transaction. This is often not
 
                 a perfect indicator of the actual merchant, but it is useful for
@@ -724,8 +760,9 @@ components:
 
                 '
             message:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
               description: 'Attached message for this transaction, such as a payment message, or a
 
                 transfer note.
@@ -739,7 +776,6 @@ components:
 
                 '
             holdInfo:
-              nullable: true
               description: 'If this transaction is currently in the `HELD` status, or was ever in
 
                 the `HELD` status, the `amount` and `foreignAmount` of the
@@ -750,7 +786,6 @@ components:
               allOf:
               - $ref: '#/components/schemas/HoldInfoObject'
             roundUp:
-              nullable: true
               description: 'Details of how this transaction was rounded-up. If no Round Up was
 
                 applied this field will be `null`.
@@ -759,7 +794,6 @@ components:
               allOf:
               - $ref: '#/components/schemas/RoundUpObject'
             cashback:
-              nullable: true
               description: 'If all or part of this transaction was instantly reimbursed in the
 
                 form of cashback, details of the reimbursement.
@@ -780,7 +814,6 @@ components:
               allOf:
               - $ref: '#/components/schemas/MoneyObject'
             foreignAmount:
-              nullable: true
               description: 'The foreign currency amount of this transaction. This field will be
 
                 `null` for domestic transactions. The amount was converted to the AUD
@@ -795,16 +828,16 @@ components:
               allOf:
               - $ref: '#/components/schemas/MoneyObject'
             cardPurchaseMethod:
-              nullable: true
               description: 'Information about the card used for this transaction, if applicable.
 
                 '
               allOf:
               - $ref: '#/components/schemas/CardPurchaseMethodObject'
             settledAt:
-              type: string
+              type:
+              - string
+              - 'null'
               format: date-time
-              nullable: true
               description: 'The date-time at which this transaction settled. This field will be
 
                 `null` for transactions that are currently in the `HELD` status.
@@ -817,20 +850,19 @@ components:
 
                 '
             transactionType:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
               description: 'A description of the transaction method used e.g. Purchase, BPAY Payment.
 
                 '
             note:
-              nullable: true
               description: 'A customer provided note about the transaction.  Can only be provided by Up High subscribers.
 
                 '
               allOf:
               - $ref: '#/components/schemas/NoteObject'
             performingCustomer:
-              nullable: true
               description: 'The customer who initated the transaction.  For 2Up accounts this could be the customer who''s card was used.
 
                 '
@@ -889,7 +921,9 @@ components:
               type: object
               properties:
                 data:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     type:
                       type: string
@@ -902,7 +936,6 @@ components:
                   required:
                   - type
                   - id
-                  nullable: true
                 links:
                   type: object
                   properties:
@@ -926,7 +959,9 @@ components:
               type: object
               properties:
                 data:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     type:
                       type: string
@@ -939,7 +974,6 @@ components:
                   required:
                   - type
                   - id
-                  nullable: true
                 links:
                   type: object
                   properties:
@@ -963,7 +997,9 @@ components:
               type: object
               properties:
                 data:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     type:
                       type: string
@@ -976,7 +1012,6 @@ components:
                   required:
                   - type
                   - id
-                  nullable: true
                 links:
                   type: object
                   properties:
@@ -1026,7 +1061,9 @@ components:
               type: object
               properties:
                 data:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   properties:
                     type:
                       type: string
@@ -1039,7 +1076,6 @@ components:
                   required:
                   - type
                   - id
-                  nullable: true
                 links:
                   type: object
                   properties:
@@ -1074,49 +1110,20 @@ components:
       - id
       - attributes
       - relationships
-    MoneyObject:
+    CustomerObject:
       type: object
-      description: 'Provides information about a value of money.
+      description: 'Provides information about the customer who initiated a transaction
 
         '
       properties:
-        currencyCode:
+        displayName:
           type: string
-          description: 'The ISO 4217 currency code.
-
-            '
-        value:
-          type: string
-          description: 'The amount of money, formatted as a string in the relevant currency.
-
-            For example, for an Australian dollar value of $10.56, this field will
-
-            be `"10.56"`. The currency symbol is not included in the string.
-
-            '
-        valueInBaseUnits:
-          type: integer
-          description: 'The amount of money in the smallest denomination for the currency, as a
-
-            64-bit integer.  For example, for an Australian dollar value of $10.56,
-
-            this field will be `1056`.
+          description: 'The Upname or preferred name of the customer
 
             '
       required:
-      - currencyCode
-      - value
-      - valueInBaseUnits
-    CardPurchaseMethodEnum:
-      enum:
-      - BAR_CODE
-      - OCR
-      - CARD_PIN
-      - CARD_DETAILS
-      - CARD_ON_FILE
-      - ECOMMERCE
-      - MAGNETIC_STRIPE
-      - CONTACTLESS
-      description: 'Specifies the type of card charge.
-
-        '
+      - displayName
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
