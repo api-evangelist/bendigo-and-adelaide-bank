@@ -213,37 +213,18 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    UpdateTransactionCategoryRequest:
+    GetCategoryResponse:
       type: object
-      description: 'Request to update the category associated with a transaction.
+      description: 'Successful response to get a single category and its ancestry.
 
         '
       properties:
         data:
-          description: 'The category to set on the transaction. Set this entire key to `null`
-
-            de-categorize a transaction.
+          description: 'The category returned in this response.
 
             '
           allOf:
-          - $ref: '#/components/schemas/CategoryInputResourceIdentifier'
-      required:
-      - data
-    ListCategoriesResponse:
-      type: object
-      description: 'Successful response to get all categories and their ancestry. The
-
-        returned list is not paginated.
-
-        '
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CategoryResource'
-          description: 'The list of categories returned in this response.
-
-            '
+          - $ref: '#/components/schemas/CategoryResource'
       required:
       - data
     CategoryInputResourceIdentifier:
@@ -265,6 +246,23 @@ components:
       required:
       - type
       - id
+    ListCategoriesResponse:
+      type: object
+      description: 'Successful response to get all categories and their ancestry. The
+
+        returned list is not paginated.
+
+        '
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryResource'
+          description: 'The list of categories returned in this response.
+
+            '
+      required:
+      - data
     CategoryResource:
       type: object
       description: 'Provides information about a category and its ancestry.
@@ -374,18 +372,20 @@ components:
       - id
       - attributes
       - relationships
-    GetCategoryResponse:
+    UpdateTransactionCategoryRequest:
       type: object
-      description: 'Successful response to get a single category and its ancestry.
+      description: 'Request to update the category associated with a transaction.
 
         '
       properties:
         data:
-          description: 'The category returned in this response.
+          description: 'The category to set on the transaction. Set this entire key to `null`
+
+            de-categorize a transaction.
 
             '
           allOf:
-          - $ref: '#/components/schemas/CategoryResource'
+          - $ref: '#/components/schemas/CategoryInputResourceIdentifier'
       required:
       - data
   securitySchemes:
