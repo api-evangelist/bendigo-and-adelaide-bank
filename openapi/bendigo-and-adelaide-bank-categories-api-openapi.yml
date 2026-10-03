@@ -213,56 +213,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    GetCategoryResponse:
-      type: object
-      description: 'Successful response to get a single category and its ancestry.
-
-        '
-      properties:
-        data:
-          description: 'The category returned in this response.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/CategoryResource'
-      required:
-      - data
-    CategoryInputResourceIdentifier:
-      type: object
-      description: 'Uniquely identifies a category in the API.
-
-        '
-      properties:
-        type:
-          type: string
-          description: 'The type of this resource: `categories`'
-        id:
-          type: string
-          description: 'The unique identifier of the category, as returned by the `/categories`
-
-            endpoint.
-
-            '
-      required:
-      - type
-      - id
-    ListCategoriesResponse:
-      type: object
-      description: 'Successful response to get all categories and their ancestry. The
-
-        returned list is not paginated.
-
-        '
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CategoryResource'
-          description: 'The list of categories returned in this response.
-
-            '
-      required:
-      - data
     CategoryResource:
       type: object
       description: 'Provides information about a category and its ancestry.
@@ -388,6 +338,56 @@ components:
           - $ref: '#/components/schemas/CategoryInputResourceIdentifier'
       required:
       - data
+    GetCategoryResponse:
+      type: object
+      description: 'Successful response to get a single category and its ancestry.
+
+        '
+      properties:
+        data:
+          description: 'The category returned in this response.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/CategoryResource'
+      required:
+      - data
+    ListCategoriesResponse:
+      type: object
+      description: 'Successful response to get all categories and their ancestry. The
+
+        returned list is not paginated.
+
+        '
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryResource'
+          description: 'The list of categories returned in this response.
+
+            '
+      required:
+      - data
+    CategoryInputResourceIdentifier:
+      type: object
+      description: 'Uniquely identifies a category in the API.
+
+        '
+      properties:
+        type:
+          type: string
+          description: 'The type of this resource: `categories`'
+        id:
+          type: string
+          description: 'The unique identifier of the category, as returned by the `/categories`
+
+            endpoint.
+
+            '
+      required:
+      - type
+      - id
   securitySchemes:
     bearer_auth:
       type: http

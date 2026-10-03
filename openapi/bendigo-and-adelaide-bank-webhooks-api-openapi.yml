@@ -422,22 +422,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    CreateWebhookRequest:
-      type: object
-      description: 'Request to create a new webhook. This currently only requires a `url`
-
-        attribute.
-
-        '
-      properties:
-        data:
-          description: 'The webhook resource to create.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/WebhookInputResource'
-      required:
-      - data
     ListWebhooksResponse:
       type: object
       description: 'Successful response to get all webhooks. This returns a paginated list of
@@ -482,28 +466,94 @@ components:
       required:
       - data
       - links
-    WebhookEventCallback:
+    WebhookInputResource:
       type: object
-      description: 'Asynchronous callback request used for webhook event delivery.
+      description: 'Represents a webhook specified as request input.
+
+        '
+      properties:
+        attributes:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              description: 'The URL that this webhook should post events to. This must be a valid
+
+                HTTP or HTTPS URL that does not exceed 300 characters in length.
+
+                '
+            description:
+              type:
+              - string
+              - 'null'
+              description: 'An optional description for this webhook, up to 64 characters in
+
+                length.
+
+                '
+          required:
+          - url
+      required:
+      - attributes
+    WebhookDeliveryStatusEnum:
+      enum:
+      - DELIVERED
+      - UNDELIVERABLE
+      - BAD_RESPONSE_CODE
+      description: "Specifies the nature of the success or failure of a webhook delivery\nattempt to the subscribed webhook URL. The currently returned values are\ndescribed below:\n\n- **`DELIVERED`**: The event was delivered to the webhook URL\n  successfully and a `200` response was received.\n- **`UNDELIVERABLE`**: The webhook URL was not reachable, or timed out.\n- **`BAD_RESPONSE_CODE`**: The event was delivered to the webhook URL\n  but a non-`200` response was received.\n"
+    ListWebhookDeliveryLogsResponse:
+      type: object
+      description: 'Successful response to get all delivery logs for a webhook. This returns
+
+        a paginated list of delivery logs, which can be scrolled by following the
+
+        `next` and `prev` links if present.
 
         '
       properties:
         data:
-          description: 'The webhook event data sent to the subscribed webhook.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookDeliveryLogResource'
+          description: 'The list of delivery logs returned in this response.
 
             '
-          allOf:
-          - $ref: '#/components/schemas/WebhookEventResource'
+        links:
+          type: object
+          properties:
+            prev:
+              type:
+              - string
+              - 'null'
+              description: 'The link to the previous page in the results. If this value is `null`
+
+                there is no previous page.
+
+                '
+            next:
+              type:
+              - string
+              - 'null'
+              description: 'The link to the next page in the results. If this value is `null`
+
+                there is no next page.
+
+                '
+          required:
+          - prev
+          - next
       required:
       - data
-    CreateWebhookResponse:
+      - links
+    GetWebhookResponse:
       type: object
-      description: 'Successful response after creating a webhook.
+      description: 'Successful response to get a single webhook.
 
         '
       properties:
         data:
-          description: 'The webhook that was created.
+          description: 'The webhook returned in this response.
 
             '
           allOf:
@@ -618,100 +668,119 @@ components:
       - id
       - attributes
       - relationships
-    WebhookInputResource:
+    CreateWebhookResponse:
       type: object
-      description: 'Represents a webhook specified as request input.
-
-        '
-      properties:
-        attributes:
-          type: object
-          properties:
-            url:
-              type: string
-              format: uri
-              description: 'The URL that this webhook should post events to. This must be a valid
-
-                HTTP or HTTPS URL that does not exceed 300 characters in length.
-
-                '
-            description:
-              type:
-              - string
-              - 'null'
-              description: 'An optional description for this webhook, up to 64 characters in
-
-                length.
-
-                '
-          required:
-          - url
-      required:
-      - attributes
-    WebhookDeliveryStatusEnum:
-      enum:
-      - DELIVERED
-      - UNDELIVERABLE
-      - BAD_RESPONSE_CODE
-      description: "Specifies the nature of the success or failure of a webhook delivery\nattempt to the subscribed webhook URL. The currently returned values are\ndescribed below:\n\n- **`DELIVERED`**: The event was delivered to the webhook URL\n  successfully and a `200` response was received.\n- **`UNDELIVERABLE`**: The webhook URL was not reachable, or timed out.\n- **`BAD_RESPONSE_CODE`**: The event was delivered to the webhook URL\n  but a non-`200` response was received.\n"
-    GetWebhookResponse:
-      type: object
-      description: 'Successful response to get a single webhook.
+      description: 'Successful response after creating a webhook.
 
         '
       properties:
         data:
-          description: 'The webhook returned in this response.
+          description: 'The webhook that was created.
 
             '
           allOf:
           - $ref: '#/components/schemas/WebhookResource'
       required:
       - data
-    ListWebhookDeliveryLogsResponse:
+    WebhookDeliveryLogResource:
       type: object
-      description: 'Successful response to get all delivery logs for a webhook. This returns
+      description: 'Provides historical webhook event delivery information for analysis and
 
-        a paginated list of delivery logs, which can be scrolled by following the
-
-        `next` and `prev` links if present.
+        debugging purposes.
 
         '
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookDeliveryLogResource'
-          description: 'The list of delivery logs returned in this response.
+        type:
+          type: string
+          description: 'The type of this resource: `webhook-delivery-logs`'
+        id:
+          type: string
+          description: 'The unique identifier for this log entry.
 
             '
-        links:
+        attributes:
           type: object
           properties:
-            prev:
-              type:
-              - string
-              - 'null'
-              description: 'The link to the previous page in the results. If this value is `null`
+            request:
+              type: object
+              properties:
+                body:
+                  type: string
+                  description: 'The payload that was sent in the request body.
 
-                there is no previous page.
+                    '
+              required:
+              - body
+              description: 'Information about the request that was sent to the webhook URL.
 
                 '
-            next:
+            response:
               type:
-              - string
+              - object
               - 'null'
-              description: 'The link to the next page in the results. If this value is `null`
+              properties:
+                statusCode:
+                  type: integer
+                  description: 'The HTTP status code received in the response.
 
-                there is no next page.
+                    '
+                body:
+                  type: string
+                  description: 'The payload that was received in the response body.
+
+                    '
+              required:
+              - statusCode
+              - body
+              description: 'Information about the response that was received from the webhook URL.
+
+                '
+            deliveryStatus:
+              description: 'The success or failure status of this delivery attempt.
+
+                '
+              allOf:
+              - $ref: '#/components/schemas/WebhookDeliveryStatusEnum'
+            createdAt:
+              type: string
+              format: date-time
+              description: 'The date-time at which this log entry was created.
 
                 '
           required:
-          - prev
-          - next
+          - request
+          - response
+          - deliveryStatus
+          - createdAt
+        relationships:
+          type: object
+          properties:
+            webhookEvent:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      description: 'The type of this resource: `webhook-events`'
+                    id:
+                      type: string
+                      description: 'The unique identifier of the resource within its type.
+
+                        '
+                  required:
+                  - type
+                  - id
+              required:
+              - data
+          required:
+          - webhookEvent
       required:
-      - data
-      - links
+      - type
+      - id
+      - attributes
+      - relationships
     WebhookResource:
       type: object
       description: 'Provides information about a webhook.
@@ -825,105 +894,36 @@ components:
         expect.
 
         '
-    WebhookDeliveryLogResource:
+    CreateWebhookRequest:
       type: object
-      description: 'Provides historical webhook event delivery information for analysis and
+      description: 'Request to create a new webhook. This currently only requires a `url`
 
-        debugging purposes.
+        attribute.
 
         '
       properties:
-        type:
-          type: string
-          description: 'The type of this resource: `webhook-delivery-logs`'
-        id:
-          type: string
-          description: 'The unique identifier for this log entry.
+        data:
+          description: 'The webhook resource to create.
 
             '
-        attributes:
-          type: object
-          properties:
-            request:
-              type: object
-              properties:
-                body:
-                  type: string
-                  description: 'The payload that was sent in the request body.
-
-                    '
-              required:
-              - body
-              description: 'Information about the request that was sent to the webhook URL.
-
-                '
-            response:
-              type:
-              - object
-              - 'null'
-              properties:
-                statusCode:
-                  type: integer
-                  description: 'The HTTP status code received in the response.
-
-                    '
-                body:
-                  type: string
-                  description: 'The payload that was received in the response body.
-
-                    '
-              required:
-              - statusCode
-              - body
-              description: 'Information about the response that was received from the webhook URL.
-
-                '
-            deliveryStatus:
-              description: 'The success or failure status of this delivery attempt.
-
-                '
-              allOf:
-              - $ref: '#/components/schemas/WebhookDeliveryStatusEnum'
-            createdAt:
-              type: string
-              format: date-time
-              description: 'The date-time at which this log entry was created.
-
-                '
-          required:
-          - request
-          - response
-          - deliveryStatus
-          - createdAt
-        relationships:
-          type: object
-          properties:
-            webhookEvent:
-              type: object
-              properties:
-                data:
-                  type: object
-                  properties:
-                    type:
-                      type: string
-                      description: 'The type of this resource: `webhook-events`'
-                    id:
-                      type: string
-                      description: 'The unique identifier of the resource within its type.
-
-                        '
-                  required:
-                  - type
-                  - id
-              required:
-              - data
-          required:
-          - webhookEvent
+          allOf:
+          - $ref: '#/components/schemas/WebhookInputResource'
       required:
-      - type
-      - id
-      - attributes
-      - relationships
+      - data
+    WebhookEventCallback:
+      type: object
+      description: 'Asynchronous callback request used for webhook event delivery.
+
+        '
+      properties:
+        data:
+          description: 'The webhook event data sent to the subscribed webhook.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/WebhookEventResource'
+      required:
+      - data
   securitySchemes:
     bearer_auth:
       type: http
