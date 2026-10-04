@@ -167,16 +167,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AccountTypeEnum:
-      enum:
-      - SAVER
-      - TRANSACTIONAL
-      - HOME_LOAN
-      description: 'Specifies the type of bank account. Currently returned values are
-
-        `SAVER`, `TRANSACTIONAL` and `HOME_LOAN`.
-
-        '
     ListAccountsResponse:
       type: object
       description: 'Successful response to get all accounts. This returns a paginated list of
@@ -221,6 +211,30 @@ components:
       required:
       - data
       - links
+    AccountTypeEnum:
+      enum:
+      - SAVER
+      - TRANSACTIONAL
+      - HOME_LOAN
+      description: 'Specifies the type of bank account. Currently returned values are
+
+        `SAVER`, `TRANSACTIONAL` and `HOME_LOAN`.
+
+        '
+    GetAccountResponse:
+      type: object
+      description: 'Successful response to get a single account.
+
+        '
+      properties:
+        data:
+          description: 'The account returned in this response.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/AccountResource'
+      required:
+      - data
     AccountResource:
       type: object
       description: 'Provides information about an Up bank account.
@@ -341,20 +355,6 @@ components:
       - currencyCode
       - value
       - valueInBaseUnits
-    GetAccountResponse:
-      type: object
-      description: 'Successful response to get a single account.
-
-        '
-      properties:
-        data:
-          description: 'The account returned in this response.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/AccountResource'
-      required:
-      - data
     OwnershipTypeEnum:
       enum:
       - INDIVIDUAL

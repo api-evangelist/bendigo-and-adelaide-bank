@@ -213,6 +213,36 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    GetCategoryResponse:
+      type: object
+      description: 'Successful response to get a single category and its ancestry.
+
+        '
+      properties:
+        data:
+          description: 'The category returned in this response.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/CategoryResource'
+      required:
+      - data
+    UpdateTransactionCategoryRequest:
+      type: object
+      description: 'Request to update the category associated with a transaction.
+
+        '
+      properties:
+        data:
+          description: 'The category to set on the transaction. Set this entire key to `null`
+
+            de-categorize a transaction.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/CategoryInputResourceIdentifier'
+      required:
+      - data
     CategoryResource:
       type: object
       description: 'Provides information about a category and its ancestry.
@@ -322,36 +352,6 @@ components:
       - id
       - attributes
       - relationships
-    UpdateTransactionCategoryRequest:
-      type: object
-      description: 'Request to update the category associated with a transaction.
-
-        '
-      properties:
-        data:
-          description: 'The category to set on the transaction. Set this entire key to `null`
-
-            de-categorize a transaction.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/CategoryInputResourceIdentifier'
-      required:
-      - data
-    GetCategoryResponse:
-      type: object
-      description: 'Successful response to get a single category and its ancestry.
-
-        '
-      properties:
-        data:
-          description: 'The category returned in this response.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/CategoryResource'
-      required:
-      - data
     ListCategoriesResponse:
       type: object
       description: 'Successful response to get all categories and their ancestry. The
