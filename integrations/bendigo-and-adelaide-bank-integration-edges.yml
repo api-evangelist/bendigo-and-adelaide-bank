@@ -30,7 +30,7 @@ edges:
     matched_domain: bendigobank.com.au
     api_families: null
     detected_by: sweep-standard-registers.py
-    detected: '2026-10-12'
+    detected: '2026-10-14'
 - partner_name: Consumer Data Right
   partner: null
   type: contract
@@ -47,7 +47,7 @@ edges:
     matched_domain: bendigobank.com.au
     api_families: null
     detected_by: sweep-standard-registers.py
-    detected: '2026-10-12'
+    detected: '2026-10-14'
 - partner_name: Consumer Data Right
   partner: null
   type: contract
@@ -64,7 +64,7 @@ edges:
     matched_domain: bendigobank.com.au
     api_families: null
     detected_by: sweep-standard-registers.py
-    detected: '2026-10-12'
+    detected: '2026-10-14'
 - partner_name: Consumer Data Right
   partner: null
   type: contract
@@ -81,7 +81,7 @@ edges:
     matched_domain: bendigobank.com.au
     api_families: null
     detected_by: sweep-standard-registers.py
-    detected: '2026-10-12'
+    detected: '2026-10-14'
 - partner_name: Consumer Data Right
   partner: null
   type: contract
@@ -98,7 +98,7 @@ edges:
     matched_domain: bendigobank.com.au
     api_families: null
     detected_by: sweep-standard-registers.py
-    detected: '2026-10-12'
+    detected: '2026-10-14'
 - partner_name: Consumer Data Right
   partner: null
   type: contract
@@ -115,7 +115,7 @@ edges:
     matched_domain: bendigobank.com.au
     api_families: null
     detected_by: sweep-standard-registers.py
-    detected: '2026-10-12'
+    detected: '2026-10-14'
 - partner_name: Consumer Data Right
   partner: null
   type: contract
@@ -132,5 +132,5 @@ edges:
     matched_domain: bendigobank.com.au
     api_families: null
     detected_by: sweep-standard-registers.py
-    detected: '2026-10-12'
+    detected: '2026-10-14'
 templates: []
