@@ -167,6 +167,30 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    AccountTypeEnum:
+      enum:
+      - SAVER
+      - TRANSACTIONAL
+      - HOME_LOAN
+      description: 'Specifies the type of bank account. Currently returned values are
+
+        `SAVER`, `TRANSACTIONAL` and `HOME_LOAN`.
+
+        '
+    GetAccountResponse:
+      type: object
+      description: 'Successful response to get a single account.
+
+        '
+      properties:
+        data:
+          description: 'The account returned in this response.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/AccountResource'
+      required:
+      - data
     ListAccountsResponse:
       type: object
       description: 'Successful response to get all accounts. This returns a paginated list of
@@ -211,30 +235,48 @@ components:
       required:
       - data
       - links
-    AccountTypeEnum:
-      enum:
-      - SAVER
-      - TRANSACTIONAL
-      - HOME_LOAN
-      description: 'Specifies the type of bank account. Currently returned values are
-
-        `SAVER`, `TRANSACTIONAL` and `HOME_LOAN`.
-
-        '
-    GetAccountResponse:
+    MoneyObject:
       type: object
-      description: 'Successful response to get a single account.
+      description: 'Provides information about a value of money.
 
         '
       properties:
-        data:
-          description: 'The account returned in this response.
+        currencyCode:
+          type: string
+          description: 'The ISO 4217 currency code.
 
             '
-          allOf:
-          - $ref: '#/components/schemas/AccountResource'
+        value:
+          type: string
+          description: 'The amount of money, formatted as a string in the relevant currency.
+
+            For example, for an Australian dollar value of $10.56, this field will
+
+            be `"10.56"`. The currency symbol is not included in the string.
+
+            '
+        valueInBaseUnits:
+          type: integer
+          description: 'The amount of money in the smallest denomination for the currency, as a
+
+            64-bit integer.  For example, for an Australian dollar value of $10.56,
+
+            this field will be `1056`.
+
+            '
       required:
-      - data
+      - currencyCode
+      - value
+      - valueInBaseUnits
+    OwnershipTypeEnum:
+      enum:
+      - INDIVIDUAL
+      - JOINT
+      description: 'Specifies the structure under which a bank account is owned. Currently
+
+        returned values are `INDIVIDUAL` and `JOINT`.
+
+        '
     AccountResource:
       type: object
       description: 'Provides information about an Up bank account.
@@ -322,48 +364,6 @@ components:
       - id
       - attributes
       - relationships
-    MoneyObject:
-      type: object
-      description: 'Provides information about a value of money.
-
-        '
-      properties:
-        currencyCode:
-          type: string
-          description: 'The ISO 4217 currency code.
-
-            '
-        value:
-          type: string
-          description: 'The amount of money, formatted as a string in the relevant currency.
-
-            For example, for an Australian dollar value of $10.56, this field will
-
-            be `"10.56"`. The currency symbol is not included in the string.
-
-            '
-        valueInBaseUnits:
-          type: integer
-          description: 'The amount of money in the smallest denomination for the currency, as a
-
-            64-bit integer.  For example, for an Australian dollar value of $10.56,
-
-            this field will be `1056`.
-
-            '
-      required:
-      - currencyCode
-      - value
-      - valueInBaseUnits
-    OwnershipTypeEnum:
-      enum:
-      - INDIVIDUAL
-      - JOINT
-      description: 'Specifies the structure under which a bank account is owned. Currently
-
-        returned values are `INDIVIDUAL` and `JOINT`.
-
-        '
   securitySchemes:
     bearer_auth:
       type: http

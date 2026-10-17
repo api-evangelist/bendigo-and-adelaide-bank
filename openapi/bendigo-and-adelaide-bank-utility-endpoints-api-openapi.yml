@@ -90,30 +90,6 @@ components:
             '
       required:
       - errors
-    PingResponse:
-      type: object
-      description: 'Basic ping response to verify authentication.
-
-        '
-      properties:
-        meta:
-          type: object
-          properties:
-            id:
-              type: string
-              description: 'The unique identifier of the authenticated customer.
-
-                '
-            statusEmoji:
-              type: string
-              description: 'A cute emoji that represents the response status.
-
-                '
-          required:
-          - id
-          - statusEmoji
-      required:
-      - meta
     ErrorObject:
       type: object
       description: 'Provides information about an error processing a request.
@@ -175,6 +151,30 @@ components:
       - status
       - title
       - detail
+    PingResponse:
+      type: object
+      description: 'Basic ping response to verify authentication.
+
+        '
+      properties:
+        meta:
+          type: object
+          properties:
+            id:
+              type: string
+              description: 'The unique identifier of the authenticated customer.
+
+                '
+            statusEmoji:
+              type: string
+              description: 'A cute emoji that represents the response status.
+
+                '
+          required:
+          - id
+          - statusEmoji
+      required:
+      - meta
   securitySchemes:
     bearer_auth:
       type: http

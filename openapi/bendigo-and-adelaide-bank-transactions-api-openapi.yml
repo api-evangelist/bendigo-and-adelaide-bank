@@ -487,17 +487,39 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    CardPurchaseMethodEnum:
+    CashbackObject:
+      type: object
+      description: 'Provides information about an instant reimbursement in the form of
+
+        cashback.
+
+        '
+      properties:
+        description:
+          type: string
+          description: 'A brief description of why this cashback was paid.
+
+            '
+        amount:
+          description: 'The total amount of cashback paid, represented as a positive value.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/MoneyObject'
+      required:
+      - description
+      - amount
+    TransactionStatusEnum:
       enum:
-      - BAR_CODE
-      - OCR
-      - CARD_PIN
-      - CARD_DETAILS
-      - CARD_ON_FILE
-      - ECOMMERCE
-      - MAGNETIC_STRIPE
-      - CONTACTLESS
-      description: 'Specifies the type of card charge.
+      - HELD
+      - SETTLED
+      description: 'Specifies which stage of processing a transaction is currently at.
+
+        Currently returned values are `HELD` and `SETTLED`. When a transaction is
+
+        held, its account’s `availableBalance` is affected. When a transaction is
+
+        settled, its account’s `currentBalance` is affected.
 
         '
     GetTransactionResponse:
@@ -514,35 +536,19 @@ components:
           - $ref: '#/components/schemas/TransactionResource'
       required:
       - data
-    HoldInfoObject:
+    NoteObject:
       type: object
-      description: 'Provides information about the amount at which a transaction was in the
-
-        `HELD` status.
+      description: 'Provides information about the note and attachement.
 
         '
       properties:
-        amount:
-          description: 'The amount of this transaction while in the `HELD` status, in
-
-            Australian dollars.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/MoneyObject'
-        foreignAmount:
-          description: 'The foreign currency amount of this transaction while in the `HELD`
-
-            status. This field will be `null` for domestic transactions. The amount
-
-            was converted to the AUD amount reflected in the `amount` field.
+        text:
+          type: string
+          description: 'A text note about the transaction.
 
             '
-          allOf:
-          - $ref: '#/components/schemas/MoneyObject'
       required:
-      - amount
-      - foreignAmount
+      - text
     ListTransactionsResponse:
       type: object
       description: 'Successful response to get all transactions. This returns a paginated
@@ -587,70 +593,28 @@ components:
       required:
       - data
       - links
-    RoundUpObject:
+    CardPurchaseMethodObject:
       type: object
-      description: 'Provides information about how a Round Up was applied, such as whether or
-
-        not a boost was included in the Round Up.
+      description: 'Provides information about the card used for a transaction.
 
         '
       properties:
-        amount:
-          description: 'The total amount of this Round Up, including any boosts, represented as
-
-            a negative value.
+        method:
+          description: 'The type of card purchase.
 
             '
           allOf:
-          - $ref: '#/components/schemas/MoneyObject'
-        boostPortion:
-          description: 'The portion of the Round Up `amount` owing to boosted Round Ups,
-
-            represented as a negative value. If no boost was added to the Round Up
-
-            this field will be `null`.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/MoneyObject'
-      required:
-      - amount
-      - boostPortion
-    CashbackObject:
-      type: object
-      description: 'Provides information about an instant reimbursement in the form of
-
-        cashback.
-
-        '
-      properties:
-        description:
-          type: string
-          description: 'A brief description of why this cashback was paid.
-
-            '
-        amount:
-          description: 'The total amount of cashback paid, represented as a positive value.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/MoneyObject'
-      required:
-      - description
-      - amount
-    NoteObject:
-      type: object
-      description: 'Provides information about the note and attachement.
-
-        '
-      properties:
-        text:
-          type: string
-          description: 'A text note about the transaction.
+          - $ref: '#/components/schemas/CardPurchaseMethodEnum'
+        cardNumberSuffix:
+          type:
+          - string
+          - 'null'
+          description: 'The last four digits of the card used for the purchase, if applicable.
 
             '
       required:
-      - text
+      - method
+      - cardNumberSuffix
     CustomerObject:
       type: object
       description: 'Provides information about the customer who initiated a transaction
@@ -664,6 +628,35 @@ components:
             '
       required:
       - displayName
+    HoldInfoObject:
+      type: object
+      description: 'Provides information about the amount at which a transaction was in the
+
+        `HELD` status.
+
+        '
+      properties:
+        amount:
+          description: 'The amount of this transaction while in the `HELD` status, in
+
+            Australian dollars.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/MoneyObject'
+        foreignAmount:
+          description: 'The foreign currency amount of this transaction while in the `HELD`
+
+            status. This field will be `null` for domestic transactions. The amount
+
+            was converted to the AUD amount reflected in the `amount` field.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/MoneyObject'
+      required:
+      - amount
+      - foreignAmount
     MoneyObject:
       type: object
       description: 'Provides information about a value of money.
@@ -1088,39 +1081,46 @@ components:
       - id
       - attributes
       - relationships
-    CardPurchaseMethodObject:
+    RoundUpObject:
       type: object
-      description: 'Provides information about the card used for a transaction.
+      description: 'Provides information about how a Round Up was applied, such as whether or
+
+        not a boost was included in the Round Up.
 
         '
       properties:
-        method:
-          description: 'The type of card purchase.
+        amount:
+          description: 'The total amount of this Round Up, including any boosts, represented as
+
+            a negative value.
 
             '
           allOf:
-          - $ref: '#/components/schemas/CardPurchaseMethodEnum'
-        cardNumberSuffix:
-          type:
-          - string
-          - 'null'
-          description: 'The last four digits of the card used for the purchase, if applicable.
+          - $ref: '#/components/schemas/MoneyObject'
+        boostPortion:
+          description: 'The portion of the Round Up `amount` owing to boosted Round Ups,
+
+            represented as a negative value. If no boost was added to the Round Up
+
+            this field will be `null`.
 
             '
+          allOf:
+          - $ref: '#/components/schemas/MoneyObject'
       required:
-      - method
-      - cardNumberSuffix
-    TransactionStatusEnum:
+      - amount
+      - boostPortion
+    CardPurchaseMethodEnum:
       enum:
-      - HELD
-      - SETTLED
-      description: 'Specifies which stage of processing a transaction is currently at.
-
-        Currently returned values are `HELD` and `SETTLED`. When a transaction is
-
-        held, its account’s `availableBalance` is affected. When a transaction is
-
-        settled, its account’s `currentBalance` is affected.
+      - BAR_CODE
+      - OCR
+      - CARD_PIN
+      - CARD_DETAILS
+      - CARD_ON_FILE
+      - ECOMMERCE
+      - MAGNETIC_STRIPE
+      - CONTACTLESS
+      description: 'Specifies the type of card charge.
 
         '
   securitySchemes:
