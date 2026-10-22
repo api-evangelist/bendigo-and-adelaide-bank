@@ -1,8 +1,8 @@
-generated: '2026-07-21'
-method: derived
-source: openapi/bendigo-and-adelaide-bank-up-developer-api-openapi.json
-spec_type: AsyncAPI
-notes: >-
+x-generated: '2026-07-21'
+x-method: derived
+x-source: openapi/bendigo-and-adelaide-bank-up-developer-api-openapi.json
+x-spec_type: AsyncAPI
+x-notes: >-
   Faithful AsyncAPI 3.0 derivation of the Up Developer API webhook surface. Up (the digital
   neobank owned by Bendigo and Adelaide Bank) documents webhooks that POST signed event
   callbacks to a subscriber-configured URL when transaction activity occurs. Event types,

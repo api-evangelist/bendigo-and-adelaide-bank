@@ -1,0 +1,93 @@
+generated: '2026-10-20'
+method: searched
+probe: true
+source: https://www.bendigobank.com.au/privacy-policy/full-privacy-policy/
+notes: >-
+  The legal URLs in the pre-flight dossier (/legal/terms-and-conditions/, /privacy/) return HTTP 200 but
+  are "Page not found | Bendigo Bank" soft-404 shells. The real privacy pages are linked from the site
+  footer at /privacy-policy/ and were read directly. No data-retention period, sub-processor list,
+  incident-notification commitment, GPC handling or transparency report was found on these pages.
+signals:
+  ai_transparency:
+    url: https://www.bendigobank.com.au/privacy-policy/full-privacy-policy/
+    section: Artificial Intelligence
+    evidence:
+    - source: https://www.bendigobank.com.au/privacy-policy/full-privacy-policy/
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: >-
+        We sometimes utilise Artificial Intelligence (AI) to provide and enhance the services we offer. This
+        technology is integral to improving the quality and efficiency of our services.
+    - source: https://www.bendigobank.com.au/privacy-policy/full-privacy-policy/
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: >-
+        Your information is processed only to provide our services and is not used for any other purpose.
+    note: >-
+      The privacy policy says the bank uses AI on customer data and lists the purposes: fraud and scam
+      protection, recording enquiries, and analysing customer-behaviour trends. It also limits processing
+      to providing services. It does not name models or vendors.
+  data_residency:
+    url: https://www.bendigobank.com.au/privacy-policy/full-privacy-policy/
+    section: Disclosure to overseas recipients
+    countries_named: [Austria, Belgium, Canada, Denmark, France, Germany, India, Indonesia, Ireland, Israel, Nauru, The Netherlands, New Zealand, Philippines, Singapore, Spain, Sweden, Switzerland, UK, US]
+    evidence:
+    - source: https://www.bendigobank.com.au/privacy-policy/full-privacy-policy/
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: >-
+        In some cases we may need to share some of your information with organisations outside Australia, or
+        Australian organisations that store data or operate outside of Australia. For example, when we use
+        service providers located in Australia or overseas to perform a function on our behalf.
+    - source: https://www.bendigobank.com.au/privacy-policy/notifiable-matters/
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: >-
+        When we share your information with organisations overseas we ensure appropriate data handling and
+        security measures are in place.
+    note: >-
+      This is a cross-border disclosure statement, not a residency guarantee. Data may leave Australia, and
+      the policy names the 20 recipient countries listed in countries_named. The credit-reporting
+      notifiable-matters statement repeats the same list.
+  data_subject_request:
+    url: https://www.bendigobank.com.au/privacy-policy/full-privacy-policy/
+    section: Access and correction
+    rights_named: [access, correction, opt-out of direct marketing, complaint]
+    escalation: Office of the Australian Information Commissioner (www.oaic.gov.au)
+    evidence:
+    - source: https://www.bendigobank.com.au/privacy-policy/full-privacy-policy/
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: >-
+        If we do not agree that your information is inaccurate, out of date or incomplete, we will give you a
+        written notice including the reasons why we do not agree with you and how you can make a complaint if
+        you wish to do so.
+    - source: https://www.bendigobank.com.au/privacy-policy/full-privacy-policy/
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: >-
+        You can opt out of receiving direct marketing material at any time by contacting us
+    - source: https://www.bendigobank.com.au/privacy-policy/full-privacy-policy/
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: >-
+        If you are in a country that is a member of the European Economic Area (EEA), you may be protected by
+        the European Union General Data Protection Regulation 2016/679 (‘GDPR’).
+    note: >-
+      The policy grants access and correction rights under the Australian Privacy Act. It commits to a
+      written notice with reasons when a correction is refused, and it names the OAIC for escalation. The
+      policy points EEA residents to a separate GDPR policy. No response time (SLA) is stated. The first
+      sentence of that section, "In most cases you can access your personal information held by us", is
+      also on the page.
+  accessibility_conformance:
+    url: https://www.bendigobank.com.au/about-us/accessibility-and-inclusion/
+    standard: WCAG 2.2
+    level: AA
+    evidence:
+    - source: https://www.bendigobank.com.au/about-us/accessibility-and-inclusion/
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: We commit to WCAG (Web Content Accessibility Guidelines) 2.2 AA level at minimum and AAA level where feasible.
+    note: >-
+      A published commitment to a named conformance target (WCAG 2.2 AA, with AAA where feasible). This is
+      a commitment, not a third-party conformance report.

@@ -1,0 +1,200 @@
+generated: '2026-10-20'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 16
+  own: 5
+  other_domain: 9
+  platform: 2
+  roles:
+  - api
+  - identity
+  - other
+  - portal
+  - source
+  - website
+hosts:
+- host: api.cdr.bendigobank.com.au
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types: []
+  serves:
+  - api
+  - api-gateway
+  vendor: kong
+  registrable_domain: bendigobank.com.au
+  role: api
+  relation: own
+- host: api.com.au
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: api.com.au
+  role: api
+  relation: other-domain
+- host: api.getdrio.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: getdrio.com
+  role: api
+  relation: other-domain
+- host: api.mcp.so
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: mcp.so
+  role: api
+  relation: other-domain
+- host: api.up.com.au
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: up.com.au
+  role: api
+  relation: other-domain
+- host: app.bendigobank.com.au
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  types:
+  - Login
+  serves: []
+  registrable_domain: bendigobank.com.au
+  role: identity
+  relation: own
+- host: banking.bendigobank.com.au
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: bendigobank.com.au
+  role: other
+  relation: own
+- host: careers.bendigobank.com.au
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: bendigobank.com.au
+  role: other
+  relation: own
+- host: consumerdatastandardsaustralia.github.io
+  found_by:
+  - pointer
+  types:
+  - APIStandards
+  - Deprecation
+  serves: []
+  registrable_domain: github.io
+  role: other
+  relation: platform
+- host: developer.up.com.au
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - well-known
+  types:
+  - Portal
+  serves:
+  - docs
+  registrable_domain: up.com.au
+  role: portal
+  relation: other-domain
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - IssueTracker
+  - License
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: glama.ai
+  found_by:
+  - probed
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: glama.ai
+  role: other
+  relation: other-domain
+- host: mcp.so
+  found_by:
+  - probed
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: mcp.so
+  role: other
+  relation: other-domain
+- host: www.bendigoadelaide.com.au
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - well-known
+  types:
+  - CorporateWebsite
+  - DeveloperPortal
+  - Documentation
+  serves:
+  - docs
+  registrable_domain: bendigoadelaide.com.au
+  role: portal
+  relation: other-domain
+- host: www.bendigobank.com.au
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  - vendor-detect
+  types:
+  - Leadership
+  - Website
+  - ConsumerDataRight
+  - TermsOfService
+  - PrivacyPolicy
+  - CDRPolicy
+  - Support
+  - HelpCenter
+  - InvestorRelations
+  - Blog
+  - Newsroom
+  - Security
+  serves:
+  - cdn
+  vendor: cloudflare
+  registrable_domain: bendigobank.com.au
+  role: website
+  relation: own
+- host: www.getdrio.com
+  found_by:
+  - probed
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: getdrio.com
+  role: other
+  relation: other-domain

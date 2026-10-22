@@ -1,0 +1,1280 @@
+{
+  "@context": {
+    "@vocab": "https://bendigobank.com.au/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "bendigo": "https://bendigobank.com.au/schema#",
+    "AccountTypeEnum": "bendigo:AccountTypeEnum",
+    "GetAccountResponse": "bendigo:GetAccountResponse",
+    "data": {
+      "@id": "bendigo:data"
+    },
+    "ListAccountsResponse": "bendigo:ListAccountsResponse",
+    "links": {
+      "@id": "bendigo:links"
+    },
+    "MoneyObject": "bendigo:MoneyObject",
+    "currencyCode": {
+      "@id": "bendigo:currencyCode",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "bendigo:value",
+      "@type": "xsd:string"
+    },
+    "valueInBaseUnits": {
+      "@id": "bendigo:valueInBaseUnits",
+      "@type": "xsd:integer"
+    },
+    "OwnershipTypeEnum": "bendigo:OwnershipTypeEnum",
+    "AccountResource": "bendigo:AccountResource",
+    "type": {
+      "@id": "bendigo:type",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "bendigo:id",
+      "@type": "xsd:string"
+    },
+    "attributes": {
+      "@id": "bendigo:attributes"
+    },
+    "relationships": {
+      "@id": "bendigo:relationships"
+    },
+    "AttachmentResource": "bendigo:AttachmentResource",
+    "ListAttachmentsResponse": "bendigo:ListAttachmentsResponse",
+    "GetAttachmentResponse": "bendigo:GetAttachmentResponse",
+    "ErrorV2_meta": "bendigo:ErrorV2_meta",
+    "urn": {
+      "@id": "bendigo:urn",
+      "@type": "xsd:string"
+    },
+    "ResponseBankingAccountsBalanceList": "bendigo:ResponseBankingAccountsBalanceList",
+    "meta": {
+      "@id": "bendigo:meta",
+      "@type": "@id"
+    },
+    "LinksPaginated": "bendigo:LinksPaginated",
+    "self": {
+      "@id": "bendigo:self",
+      "@type": "xsd:string"
+    },
+    "first": {
+      "@id": "bendigo:first",
+      "@type": "xsd:string"
+    },
+    "prev": {
+      "@id": "bendigo:prev",
+      "@type": "xsd:string"
+    },
+    "next": {
+      "@id": "bendigo:next",
+      "@type": "xsd:string"
+    },
+    "last": {
+      "@id": "bendigo:last",
+      "@type": "xsd:string"
+    },
+    "ResponseBankingAccountsBalanceById": "bendigo:ResponseBankingAccountsBalanceById",
+    "ResponseBankingAccountsBalanceList_data": "bendigo:ResponseBankingAccountsBalanceList_data",
+    "balances": {
+      "@id": "bendigo:balances",
+      "@container": "@list"
+    },
+    "RequestAccountIdListV1": "bendigo:RequestAccountIdListV1",
+    "BankingBalancePurse": "bendigo:BankingBalancePurse",
+    "amount": {
+      "@id": "bendigo:amount",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "bendigo:currency",
+      "@type": "xsd:string"
+    },
+    "Links": "bendigo:Links",
+    "ResponseErrorListV2": "bendigo:ResponseErrorListV2",
+    "errors": {
+      "@id": "bendigo:errors",
+      "@container": "@list"
+    },
+    "ErrorV2": "bendigo:ErrorV2",
+    "code": {
+      "@id": "bendigo:code",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "bendigo:title",
+      "@type": "xsd:string"
+    },
+    "detail": {
+      "@id": "bendigo:detail",
+      "@type": "xsd:string"
+    },
+    "RequestAccountIdListV1_data": "bendigo:RequestAccountIdListV1_data",
+    "accountIds": {
+      "@id": "bendigo:accountIds",
+      "@container": "@list"
+    },
+    "BankingBalance": "bendigo:BankingBalance",
+    "accountId": {
+      "@id": "bendigo:accountId"
+    },
+    "currentBalance": {
+      "@id": "bendigo:currentBalance",
+      "@type": "xsd:string"
+    },
+    "availableBalance": {
+      "@id": "bendigo:availableBalance",
+      "@type": "xsd:string"
+    },
+    "creditLimit": {
+      "@id": "bendigo:creditLimit",
+      "@type": "xsd:string"
+    },
+    "amortisedLimit": {
+      "@id": "bendigo:amortisedLimit",
+      "@type": "xsd:string"
+    },
+    "purses": {
+      "@id": "bendigo:purses",
+      "@container": "@list"
+    },
+    "MetaPaginated": "bendigo:MetaPaginated",
+    "totalRecords": {
+      "@id": "bendigo:totalRecords",
+      "@type": "xsd:integer"
+    },
+    "totalPages": {
+      "@id": "bendigo:totalPages",
+      "@type": "xsd:integer"
+    },
+    "BankingProductCategoryV2": "bendigo:BankingProductCategoryV2",
+    "BankingDirectDebit": "bendigo:BankingDirectDebit",
+    "authorisedEntity": {
+      "@id": "bendigo:authorisedEntity",
+      "@type": "@id"
+    },
+    "lastDebitDateTime": {
+      "@id": "bendigo:lastDebitDateTime",
+      "@type": "xsd:string"
+    },
+    "lastDebitAmount": {
+      "@id": "bendigo:lastDebitAmount",
+      "@type": "xsd:string"
+    },
+    "ResponseBankingDirectDebitAuthorisationList_data": "bendigo:ResponseBankingDirectDebitAuthorisationList_data",
+    "directDebitAuthorisations": {
+      "@id": "bendigo:directDebitAuthorisations",
+      "@container": "@list"
+    },
+    "BankingAuthorisedEntity": "bendigo:BankingAuthorisedEntity",
+    "description": {
+      "@id": "bendigo:description",
+      "@type": "xsd:string"
+    },
+    "financialInstitution": {
+      "@id": "bendigo:financialInstitution",
+      "@type": "xsd:string"
+    },
+    "abn": {
+      "@id": "bendigo:abn",
+      "@type": "xsd:string"
+    },
+    "acn": {
+      "@id": "bendigo:acn",
+      "@type": "xsd:string"
+    },
+    "arbn": {
+      "@id": "bendigo:arbn",
+      "@type": "xsd:string"
+    },
+    "ResponseBankingDirectDebitAuthorisationList": "bendigo:ResponseBankingDirectDebitAuthorisationList",
+    "BankingInternationalPayee_beneficiaryDetails": "bendigo:BankingInternationalPayee_beneficiaryDetails",
+    "name": {
+      "@id": "bendigo:name",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "bendigo:country",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "bendigo:message",
+      "@type": "xsd:string"
+    },
+    "BankingScheduledPaymentToV2": "bendigo:BankingScheduledPaymentToV2",
+    "toUType": {
+      "@id": "bendigo:toUType",
+      "@type": "xsd:string"
+    },
+    "payeeId": {
+      "@id": "bendigo:payeeId"
+    },
+    "nickname": {
+      "@id": "bendigo:nickname",
+      "@type": "xsd:string"
+    },
+    "payeeReference": {
+      "@id": "bendigo:payeeReference",
+      "@type": "xsd:string"
+    },
+    "digitalWallet": {
+      "@id": "bendigo:digitalWallet",
+      "@type": "@id"
+    },
+    "domestic": {
+      "@id": "bendigo:domestic",
+      "@type": "@id"
+    },
+    "biller": {
+      "@id": "bendigo:biller",
+      "@type": "@id"
+    },
+    "international": {
+      "@id": "bendigo:international",
+      "@type": "@id"
+    },
+    "BankingInternationalPayee": "bendigo:BankingInternationalPayee",
+    "beneficiaryDetails": {
+      "@id": "bendigo:beneficiaryDetails",
+      "@type": "@id"
+    },
+    "bankDetails": {
+      "@id": "bendigo:bankDetails",
+      "@type": "@id"
+    },
+    "BankingInternationalPayee_bankDetails": "bendigo:BankingInternationalPayee_bankDetails",
+    "accountNumber": {
+      "@id": "bendigo:accountNumber",
+      "@type": "xsd:string"
+    },
+    "bankAddress": {
+      "@id": "bendigo:bankAddress",
+      "@type": "@id"
+    },
+    "beneficiaryBankBIC": {
+      "@id": "bendigo:beneficiaryBankBIC",
+      "@type": "xsd:string"
+    },
+    "fedWireNumber": {
+      "@id": "bendigo:fedWireNumber",
+      "@type": "xsd:string"
+    },
+    "sortCode": {
+      "@id": "bendigo:sortCode",
+      "@type": "xsd:string"
+    },
+    "chipNumber": {
+      "@id": "bendigo:chipNumber",
+      "@type": "xsd:string"
+    },
+    "routingNumber": {
+      "@id": "bendigo:routingNumber",
+      "@type": "xsd:string"
+    },
+    "legalEntityIdentifier": {
+      "@id": "bendigo:legalEntityIdentifier",
+      "@type": "xsd:string"
+    },
+    "BankingInstalmentPlanSchedule": "bendigo:BankingInstalmentPlanSchedule",
+    "amountDue": {
+      "@id": "bendigo:amountDue",
+      "@type": "xsd:string"
+    },
+    "dueDate": {
+      "@id": "bendigo:dueDate",
+      "@type": "xsd:string"
+    },
+    "isPaid": {
+      "@id": "bendigo:isPaid",
+      "@type": "xsd:boolean"
+    },
+    "BankingScheduledPaymentRecurrenceLastWeekday": "bendigo:BankingScheduledPaymentRecurrenceLastWeekday",
+    "finalPaymentDate": {
+      "@id": "bendigo:finalPaymentDate",
+      "@type": "xsd:string"
+    },
+    "paymentsRemaining": {
+      "@id": "bendigo:paymentsRemaining",
+      "@type": "xsd:integer"
+    },
+    "interval": {
+      "@id": "bendigo:interval",
+      "@type": "xsd:string"
+    },
+    "lastWeekDay": {
+      "@id": "bendigo:lastWeekDay",
+      "@type": "xsd:string"
+    },
+    "nonBusinessDayTreatment": {
+      "@id": "bendigo:nonBusinessDayTreatment",
+      "@type": "xsd:string"
+    },
+    "BankingDomesticPayeeAccount": "bendigo:BankingDomesticPayeeAccount",
+    "accountName": {
+      "@id": "bendigo:accountName",
+      "@type": "xsd:string"
+    },
+    "bsb": {
+      "@id": "bendigo:bsb",
+      "@type": "xsd:string"
+    },
+    "ResponseBankingInstalmentPlanList_data": "bendigo:ResponseBankingInstalmentPlanList_data",
+    "plans": {
+      "@id": "bendigo:plans",
+      "@container": "@list"
+    },
+    "BankingBillerPayee": "bendigo:BankingBillerPayee",
+    "billerCode": {
+      "@id": "bendigo:billerCode",
+      "@type": "xsd:string"
+    },
+    "crn": {
+      "@id": "bendigo:crn",
+      "@type": "xsd:string"
+    },
+    "billerName": {
+      "@id": "bendigo:billerName",
+      "@type": "xsd:string"
+    },
+    "BankingScheduledPaymentInterval": "bendigo:BankingScheduledPaymentInterval",
+    "dayInInterval": {
+      "@id": "bendigo:dayInInterval",
+      "@type": "xsd:string"
+    },
+    "BankingScheduledPaymentRecurrenceEventBased": "bendigo:BankingScheduledPaymentRecurrenceEventBased",
+    "ResponseBankingScheduledPaymentsListV2": "bendigo:ResponseBankingScheduledPaymentsListV2",
+    "BankingScheduledPaymentRecurrenceIntervalSchedule": "bendigo:BankingScheduledPaymentRecurrenceIntervalSchedule",
+    "intervals": {
+      "@id": "bendigo:intervals",
+      "@container": "@list"
+    },
+    "BankingScheduledPaymentV2": "bendigo:BankingScheduledPaymentV2",
+    "scheduledPaymentId": {
+      "@id": "bendigo:scheduledPaymentId"
+    },
+    "payerReference": {
+      "@id": "bendigo:payerReference",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "bendigo:status",
+      "@type": "xsd:string"
+    },
+    "from": {
+      "@id": "bendigo:from",
+      "@type": "@id"
+    },
+    "paymentSet": {
+      "@id": "bendigo:paymentSet",
+      "@container": "@list"
+    },
+    "recurrence": {
+      "@id": "bendigo:recurrence",
+      "@type": "@id"
+    },
+    "BankingDomesticPayeePayId": "bendigo:BankingDomesticPayeePayId",
+    "identifier": {
+      "@id": "bendigo:identifier",
+      "@type": "xsd:string"
+    },
+    "BankingScheduledPaymentSetV2": "bendigo:BankingScheduledPaymentSetV2",
+    "to": {
+      "@id": "bendigo:to",
+      "@type": "@id"
+    },
+    "isAmountCalculated": {
+      "@id": "bendigo:isAmountCalculated",
+      "@type": "xsd:boolean"
+    },
+    "ResponseBankingInstalmentPlanList": "bendigo:ResponseBankingInstalmentPlanList",
+    "ResponseBankingScheduledPaymentsListV2_data": "bendigo:ResponseBankingScheduledPaymentsListV2_data",
+    "scheduledPayments": {
+      "@id": "bendigo:scheduledPayments",
+      "@container": "@list"
+    },
+    "BankingScheduledPaymentRecurrenceOnceOff": "bendigo:BankingScheduledPaymentRecurrenceOnceOff",
+    "paymentDate": {
+      "@id": "bendigo:paymentDate",
+      "@type": "xsd:string"
+    },
+    "BankingInternationalPayee_bankDetails_bankAddress": "bendigo:BankingInternationalPayee_bankDetails_bankAddress",
+    "address": {
+      "@id": "bendigo:address",
+      "@type": "xsd:string"
+    },
+    "BankingScheduledPaymentFrom": "bendigo:BankingScheduledPaymentFrom",
+    "BankingDomesticPayee": "bendigo:BankingDomesticPayee",
+    "payeeAccountUType": {
+      "@id": "bendigo:payeeAccountUType",
+      "@type": "xsd:string"
+    },
+    "account": {
+      "@id": "bendigo:account",
+      "@type": "@id"
+    },
+    "card": {
+      "@id": "bendigo:card",
+      "@type": "@id"
+    },
+    "payId": {
+      "@id": "bendigo:payId",
+      "@type": "@id"
+    },
+    "BankingInstalmentPlan": "bendigo:BankingInstalmentPlan",
+    "planId": {
+      "@id": "bendigo:planId"
+    },
+    "planReference": {
+      "@id": "bendigo:planReference",
+      "@type": "xsd:string"
+    },
+    "merchantName": {
+      "@id": "bendigo:merchantName",
+      "@type": "xsd:string"
+    },
+    "merchantCategoryCode": {
+      "@id": "bendigo:merchantCategoryCode",
+      "@type": "xsd:string"
+    },
+    "planNickname": {
+      "@id": "bendigo:planNickname",
+      "@type": "xsd:string"
+    },
+    "creationDate": {
+      "@id": "bendigo:creationDate",
+      "@type": "xsd:string"
+    },
+    "planCurrency": {
+      "@id": "bendigo:planCurrency",
+      "@type": "xsd:string"
+    },
+    "planCharge": {
+      "@id": "bendigo:planCharge",
+      "@type": "xsd:string"
+    },
+    "planRate": {
+      "@id": "bendigo:planRate",
+      "@type": "xsd:string"
+    },
+    "duration": {
+      "@id": "bendigo:duration",
+      "@type": "xsd:string"
+    },
+    "instalmentInterval": {
+      "@id": "bendigo:instalmentInterval",
+      "@type": "xsd:string"
+    },
+    "schedule": {
+      "@id": "bendigo:schedule",
+      "@container": "@list"
+    },
+    "BankingScheduledPaymentRecurrence": "bendigo:BankingScheduledPaymentRecurrence",
+    "nextPaymentDate": {
+      "@id": "bendigo:nextPaymentDate",
+      "@type": "xsd:string"
+    },
+    "recurrenceUType": {
+      "@id": "bendigo:recurrenceUType",
+      "@type": "xsd:string"
+    },
+    "onceOff": {
+      "@id": "bendigo:onceOff",
+      "@type": "@id"
+    },
+    "intervalSchedule": {
+      "@id": "bendigo:intervalSchedule",
+      "@type": "@id"
+    },
+    "eventBased": {
+      "@id": "bendigo:eventBased",
+      "@type": "@id"
+    },
+    "BankingDigitalWalletPayee": "bendigo:BankingDigitalWalletPayee",
+    "provider": {
+      "@id": "bendigo:provider",
+      "@type": "xsd:string"
+    },
+    "BankingDomesticPayeeCard": "bendigo:BankingDomesticPayeeCard",
+    "cardNumber": {
+      "@id": "bendigo:cardNumber",
+      "@type": "xsd:string"
+    },
+    "BankingTransactionDetailV3_allOf_extendedData_nppPayload": "bendigo:BankingTransactionDetailV3_allOf_extendedData_nppPayload",
+    "extendedDescription": {
+      "@id": "bendigo:extendedDescription",
+      "@type": "xsd:string"
+    },
+    "endToEndId": {
+      "@id": "bendigo:endToEndId",
+      "@type": "xsd:string"
+    },
+    "purposeCode": {
+      "@id": "bendigo:purposeCode",
+      "@type": "xsd:string"
+    },
+    "service": {
+      "@id": "bendigo:service",
+      "@type": "@id"
+    },
+    "serviceVersion": {
+      "@id": "bendigo:serviceVersion",
+      "@type": "xsd:string"
+    },
+    "BankingTransactionV2": "bendigo:BankingTransactionV2",
+    "transactionId": {
+      "@id": "bendigo:transactionId"
+    },
+    "isDetailAvailable": {
+      "@id": "bendigo:isDetailAvailable",
+      "@type": "xsd:boolean"
+    },
+    "postingDateTime": {
+      "@id": "bendigo:postingDateTime",
+      "@type": "xsd:string"
+    },
+    "valueDateTime": {
+      "@id": "bendigo:valueDateTime",
+      "@type": "xsd:string"
+    },
+    "executionDateTime": {
+      "@id": "bendigo:executionDateTime",
+      "@type": "xsd:string"
+    },
+    "reference": {
+      "@id": "bendigo:reference",
+      "@type": "xsd:string"
+    },
+    "instalmentPlanId": {
+      "@id": "bendigo:instalmentPlanId"
+    },
+    "apcaNumber": {
+      "@id": "bendigo:apcaNumber",
+      "@type": "xsd:string"
+    },
+    "MetaPaginatedTransaction_allOf": "bendigo:MetaPaginatedTransaction_allOf",
+    "isQueryParamUnsupported": {
+      "@id": "bendigo:isQueryParamUnsupported",
+      "@type": "xsd:boolean"
+    },
+    "ResponseBankingTransactionByIdV3": "bendigo:ResponseBankingTransactionByIdV3",
+    "ResponseBankingTransactionListV2": "bendigo:ResponseBankingTransactionListV2",
+    "NppPaymentService": "bendigo:NppPaymentService",
+    "ResponseBankingTransactionListV2_data": "bendigo:ResponseBankingTransactionListV2_data",
+    "transactions": {
+      "@id": "bendigo:transactions",
+      "@container": "@list"
+    },
+    "BankingTransactionDetailV3_allOf_extendedData": "bendigo:BankingTransactionDetailV3_allOf_extendedData",
+    "payer": {
+      "@id": "bendigo:payer",
+      "@type": "xsd:string"
+    },
+    "payee": {
+      "@id": "bendigo:payee",
+      "@type": "xsd:string"
+    },
+    "extensionUType": {
+      "@id": "bendigo:extensionUType",
+      "@type": "xsd:string"
+    },
+    "nppPayload": {
+      "@id": "bendigo:nppPayload",
+      "@type": "@id"
+    },
+    "BankingTransactionDetailV3_allOf": "bendigo:BankingTransactionDetailV3_allOf",
+    "extendedData": {
+      "@id": "bendigo:extendedData",
+      "@type": "@id"
+    },
+    "BankingAccountV3": "bendigo:BankingAccountV3",
+    "displayName": {
+      "@id": "bendigo:displayName",
+      "@type": "xsd:string"
+    },
+    "openStatus": {
+      "@id": "bendigo:openStatus",
+      "@type": "xsd:string"
+    },
+    "isOwned": {
+      "@id": "bendigo:isOwned",
+      "@type": "xsd:boolean"
+    },
+    "accountOwnership": {
+      "@id": "bendigo:accountOwnership",
+      "@type": "xsd:string"
+    },
+    "maskedNumber": {
+      "@id": "bendigo:maskedNumber",
+      "@type": "xsd:string"
+    },
+    "productCategory": {
+      "@id": "bendigo:productCategory",
+      "@type": "@id"
+    },
+    "productName": {
+      "@id": "bendigo:productName",
+      "@type": "xsd:string"
+    },
+    "isInstalmentDetailAvailable": {
+      "@id": "bendigo:isInstalmentDetailAvailable",
+      "@type": "xsd:boolean"
+    },
+    "BankingTermDepositAccount": "bendigo:BankingTermDepositAccount",
+    "lodgementDate": {
+      "@id": "bendigo:lodgementDate",
+      "@type": "xsd:string"
+    },
+    "maturityDate": {
+      "@id": "bendigo:maturityDate",
+      "@type": "xsd:string"
+    },
+    "maturityAmount": {
+      "@id": "bendigo:maturityAmount",
+      "@type": "xsd:string"
+    },
+    "maturityCurrency": {
+      "@id": "bendigo:maturityCurrency",
+      "@type": "xsd:string"
+    },
+    "maturityInstructions": {
+      "@id": "bendigo:maturityInstructions",
+      "@type": "xsd:string"
+    },
+    "ResponseBankingAccountByIdV5": "bendigo:ResponseBankingAccountByIdV5",
+    "BankingProductInstalments": "bendigo:BankingProductInstalments",
+    "maximumConcurrentPlans": {
+      "@id": "bendigo:maximumConcurrentPlans",
+      "@type": "xsd:integer"
+    },
+    "instalmentsLimit": {
+      "@id": "bendigo:instalmentsLimit",
+      "@type": "xsd:string"
+    },
+    "minimumPlanValue": {
+      "@id": "bendigo:minimumPlanValue",
+      "@type": "xsd:string"
+    },
+    "maximumPlanValue": {
+      "@id": "bendigo:maximumPlanValue",
+      "@type": "xsd:string"
+    },
+    "minimumSplit": {
+      "@id": "bendigo:minimumSplit",
+      "@type": "xsd:integer"
+    },
+    "maximumSplit": {
+      "@id": "bendigo:maximumSplit",
+      "@type": "xsd:integer"
+    },
+    "ResponseBankingAccountListV3": "bendigo:ResponseBankingAccountListV3",
+    "BankingFeeDiscountAmount": "bendigo:BankingFeeDiscountAmount",
+    "ResponseBankingAccountListV3_data": "bendigo:ResponseBankingAccountListV3_data",
+    "accounts": {
+      "@id": "bendigo:accounts",
+      "@container": "@list"
+    },
+    "BankingFeeRange": "bendigo:BankingFeeRange",
+    "feeMinimum": {
+      "@id": "bendigo:feeMinimum",
+      "@type": "xsd:string"
+    },
+    "feeMaximum": {
+      "@id": "bendigo:feeMaximum",
+      "@type": "xsd:string"
+    },
+    "BankingFeeDiscountRange": "bendigo:BankingFeeDiscountRange",
+    "discountMinimum": {
+      "@id": "bendigo:discountMinimum",
+      "@type": "xsd:string"
+    },
+    "discountMaximum": {
+      "@id": "bendigo:discountMaximum",
+      "@type": "xsd:string"
+    },
+    "BankingProductRateConditionV2": "bendigo:BankingProductRateConditionV2",
+    "rateApplicabilityType": {
+      "@id": "bendigo:rateApplicabilityType",
+      "@type": "xsd:string"
+    },
+    "additionalValue": {
+      "@id": "bendigo:additionalValue",
+      "@type": "xsd:string"
+    },
+    "additionalInfo": {
+      "@id": "bendigo:additionalInfo",
+      "@type": "xsd:string"
+    },
+    "additionalInfoUri": {
+      "@id": "bendigo:additionalInfoUri",
+      "@type": "xsd:string"
+    },
+    "BankingLoanAccountV3": "bendigo:BankingLoanAccountV3",
+    "originalStartDate": {
+      "@id": "bendigo:originalStartDate",
+      "@type": "xsd:string"
+    },
+    "originalLoanAmount": {
+      "@id": "bendigo:originalLoanAmount",
+      "@type": "xsd:string"
+    },
+    "originalLoanCurrency": {
+      "@id": "bendigo:originalLoanCurrency",
+      "@type": "xsd:string"
+    },
+    "loanEndDate": {
+      "@id": "bendigo:loanEndDate",
+      "@type": "xsd:string"
+    },
+    "nextInstalmentDate": {
+      "@id": "bendigo:nextInstalmentDate",
+      "@type": "xsd:string"
+    },
+    "minInstalmentAmount": {
+      "@id": "bendigo:minInstalmentAmount",
+      "@type": "xsd:string"
+    },
+    "minInstalmentCurrency": {
+      "@id": "bendigo:minInstalmentCurrency",
+      "@type": "xsd:string"
+    },
+    "maxRedraw": {
+      "@id": "bendigo:maxRedraw",
+      "@type": "xsd:string"
+    },
+    "maxRedrawCurrency": {
+      "@id": "bendigo:maxRedrawCurrency",
+      "@type": "xsd:string"
+    },
+    "minRedraw": {
+      "@id": "bendigo:minRedraw",
+      "@type": "xsd:string"
+    },
+    "minRedrawCurrency": {
+      "@id": "bendigo:minRedrawCurrency",
+      "@type": "xsd:string"
+    },
+    "offsetAccountEnabled": {
+      "@id": "bendigo:offsetAccountEnabled",
+      "@type": "xsd:boolean"
+    },
+    "offsetAccountIds": {
+      "@id": "bendigo:offsetAccountIds",
+      "@container": "@list"
+    },
+    "repaymentType": {
+      "@id": "bendigo:repaymentType",
+      "@type": "xsd:string"
+    },
+    "repaymentFrequency": {
+      "@id": "bendigo:repaymentFrequency",
+      "@type": "xsd:string"
+    },
+    "BankingProductFeatureV4": "bendigo:BankingProductFeatureV4",
+    "featureType": {
+      "@id": "bendigo:featureType",
+      "@type": "xsd:string"
+    },
+    "CommonPAFAddress": "bendigo:CommonPAFAddress",
+    "dpid": {
+      "@id": "bendigo:dpid",
+      "@type": "xsd:string"
+    },
+    "thoroughfareNumber1": {
+      "@id": "bendigo:thoroughfareNumber1",
+      "@type": "xsd:integer"
+    },
+    "thoroughfareNumber1Suffix": {
+      "@id": "bendigo:thoroughfareNumber1Suffix",
+      "@type": "xsd:string"
+    },
+    "thoroughfareNumber2": {
+      "@id": "bendigo:thoroughfareNumber2",
+      "@type": "xsd:integer"
+    },
+    "thoroughfareNumber2Suffix": {
+      "@id": "bendigo:thoroughfareNumber2Suffix",
+      "@type": "xsd:string"
+    },
+    "flatUnitType": {
+      "@id": "bendigo:flatUnitType",
+      "@type": "xsd:string"
+    },
+    "flatUnitNumber": {
+      "@id": "bendigo:flatUnitNumber",
+      "@type": "xsd:string"
+    },
+    "floorLevelType": {
+      "@id": "bendigo:floorLevelType",
+      "@type": "xsd:string"
+    },
+    "floorLevelNumber": {
+      "@id": "bendigo:floorLevelNumber",
+      "@type": "xsd:string"
+    },
+    "lotNumber": {
+      "@id": "bendigo:lotNumber",
+      "@type": "xsd:string"
+    },
+    "buildingName1": {
+      "@id": "bendigo:buildingName1",
+      "@type": "xsd:string"
+    },
+    "buildingName2": {
+      "@id": "bendigo:buildingName2",
+      "@type": "xsd:string"
+    },
+    "streetName": {
+      "@id": "bendigo:streetName",
+      "@type": "xsd:string"
+    },
+    "streetType": {
+      "@id": "bendigo:streetType",
+      "@type": "xsd:string"
+    },
+    "streetSuffix": {
+      "@id": "bendigo:streetSuffix",
+      "@type": "xsd:string"
+    },
+    "postalDeliveryType": {
+      "@id": "bendigo:postalDeliveryType",
+      "@type": "xsd:string"
+    },
+    "postalDeliveryNumber": {
+      "@id": "bendigo:postalDeliveryNumber",
+      "@type": "xsd:integer"
+    },
+    "postalDeliveryNumberPrefix": {
+      "@id": "bendigo:postalDeliveryNumberPrefix",
+      "@type": "xsd:string"
+    },
+    "postalDeliveryNumberSuffix": {
+      "@id": "bendigo:postalDeliveryNumberSuffix",
+      "@type": "xsd:string"
+    },
+    "localityName": {
+      "@id": "bendigo:localityName",
+      "@type": "xsd:string"
+    },
+    "postcode": {
+      "@id": "bendigo:postcode",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "bendigo:state",
+      "@type": "xsd:string"
+    },
+    "BankingProductFeeV2": "bendigo:BankingProductFeeV2",
+    "feeType": {
+      "@id": "bendigo:feeType",
+      "@type": "xsd:string"
+    },
+    "feeMethodUType": {
+      "@id": "bendigo:feeMethodUType",
+      "@type": "xsd:string"
+    },
+    "fixedAmount": {
+      "@id": "bendigo:fixedAmount"
+    },
+    "rateBased": {
+      "@id": "bendigo:rateBased"
+    },
+    "variable": {
+      "@id": "bendigo:variable"
+    },
+    "feeCap": {
+      "@id": "bendigo:feeCap",
+      "@type": "xsd:string"
+    },
+    "feeCapPeriod": {
+      "@id": "bendigo:feeCapPeriod",
+      "@type": "xsd:string"
+    },
+    "discounts": {
+      "@id": "bendigo:discounts",
+      "@container": "@list"
+    },
+    "BankingProductRateTierV4": "bendigo:BankingProductRateTierV4",
+    "unitOfMeasure": {
+      "@id": "bendigo:unitOfMeasure",
+      "@type": "xsd:string"
+    },
+    "minimumValue": {
+      "@id": "bendigo:minimumValue",
+      "@type": "xsd:string"
+    },
+    "maximumValue": {
+      "@id": "bendigo:maximumValue",
+      "@type": "xsd:string"
+    },
+    "rateApplicationMethod": {
+      "@id": "bendigo:rateApplicationMethod",
+      "@type": "xsd:string"
+    },
+    "applicabilityConditions": {
+      "@id": "bendigo:applicabilityConditions",
+      "@container": "@list"
+    },
+    "BankingProductDiscountEligibility": "bendigo:BankingProductDiscountEligibility",
+    "discountEligibilityType": {
+      "@id": "bendigo:discountEligibilityType",
+      "@type": "xsd:string"
+    },
+    "BankingAccountDetailV5_allOf": "bendigo:BankingAccountDetailV5_allOf",
+    "bundleName": {
+      "@id": "bendigo:bundleName",
+      "@type": "xsd:string"
+    },
+    "instalments": {
+      "@id": "bendigo:instalments",
+      "@type": "@id"
+    },
+    "specificAccountUType": {
+      "@id": "bendigo:specificAccountUType",
+      "@type": "xsd:string"
+    },
+    "termDeposit": {
+      "@id": "bendigo:termDeposit",
+      "@container": "@list"
+    },
+    "creditCard": {
+      "@id": "bendigo:creditCard"
+    },
+    "loan": {
+      "@id": "bendigo:loan"
+    },
+    "depositRate": {
+      "@id": "bendigo:depositRate",
+      "@type": "xsd:string"
+    },
+    "lendingRate": {
+      "@id": "bendigo:lendingRate",
+      "@type": "xsd:string"
+    },
+    "depositRates": {
+      "@id": "bendigo:depositRates",
+      "@container": "@list"
+    },
+    "lendingRates": {
+      "@id": "bendigo:lendingRates",
+      "@container": "@list"
+    },
+    "features": {
+      "@id": "bendigo:features",
+      "@container": "@list"
+    },
+    "fees": {
+      "@id": "bendigo:fees",
+      "@container": "@list"
+    },
+    "addresses": {
+      "@id": "bendigo:addresses",
+      "@container": "@list"
+    },
+    "BankingFeeAmount": "bendigo:BankingFeeAmount",
+    "BankingFeeDiscountRate": "bendigo:BankingFeeDiscountRate",
+    "rateType": {
+      "@id": "bendigo:rateType",
+      "@type": "xsd:string"
+    },
+    "rate": {
+      "@id": "bendigo:rate",
+      "@type": "xsd:string"
+    },
+    "amountRange": {
+      "@id": "bendigo:amountRange",
+      "@type": "@id"
+    },
+    "CommonSimpleAddress": "bendigo:CommonSimpleAddress",
+    "mailingName": {
+      "@id": "bendigo:mailingName",
+      "@type": "xsd:string"
+    },
+    "addressLine1": {
+      "@id": "bendigo:addressLine1",
+      "@type": "xsd:string"
+    },
+    "addressLine2": {
+      "@id": "bendigo:addressLine2",
+      "@type": "xsd:string"
+    },
+    "addressLine3": {
+      "@id": "bendigo:addressLine3",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "bendigo:city",
+      "@type": "xsd:string"
+    },
+    "BankingProductDepositRateV2": "bendigo:BankingProductDepositRateV2",
+    "depositRateType": {
+      "@id": "bendigo:depositRateType",
+      "@type": "xsd:string"
+    },
+    "calculationFrequency": {
+      "@id": "bendigo:calculationFrequency",
+      "@type": "xsd:string"
+    },
+    "applicationType": {
+      "@id": "bendigo:applicationType",
+      "@type": "xsd:string"
+    },
+    "applicationFrequency": {
+      "@id": "bendigo:applicationFrequency",
+      "@type": "xsd:string"
+    },
+    "tiers": {
+      "@id": "bendigo:tiers",
+      "@container": "@list"
+    },
+    "BankingProductDiscountV2": "bendigo:BankingProductDiscountV2",
+    "discountType": {
+      "@id": "bendigo:discountType",
+      "@type": "xsd:string"
+    },
+    "discountMethodUType": {
+      "@id": "bendigo:discountMethodUType",
+      "@type": "xsd:string"
+    },
+    "eligibility": {
+      "@id": "bendigo:eligibility",
+      "@container": "@list"
+    },
+    "BankingFeeRate": "bendigo:BankingFeeRate",
+    "accrualFrequency": {
+      "@id": "bendigo:accrualFrequency",
+      "@type": "xsd:string"
+    },
+    "CommonPhysicalAddress": "bendigo:CommonPhysicalAddress",
+    "addressUType": {
+      "@id": "bendigo:addressUType",
+      "@type": "xsd:string"
+    },
+    "simple": {
+      "@id": "bendigo:simple",
+      "@type": "@id"
+    },
+    "paf": {
+      "@id": "bendigo:paf",
+      "@type": "@id"
+    },
+    "BankingCreditCardAccount": "bendigo:BankingCreditCardAccount",
+    "minPaymentAmount": {
+      "@id": "bendigo:minPaymentAmount",
+      "@type": "xsd:string"
+    },
+    "paymentDueAmount": {
+      "@id": "bendigo:paymentDueAmount",
+      "@type": "xsd:string"
+    },
+    "paymentCurrency": {
+      "@id": "bendigo:paymentCurrency",
+      "@type": "xsd:string"
+    },
+    "paymentDueDate": {
+      "@id": "bendigo:paymentDueDate",
+      "@type": "xsd:string"
+    },
+    "BankingProductLendingRateV3": "bendigo:BankingProductLendingRateV3",
+    "lendingRateType": {
+      "@id": "bendigo:lendingRateType",
+      "@type": "xsd:string"
+    },
+    "comparisonRate": {
+      "@id": "bendigo:comparisonRate",
+      "@type": "xsd:string"
+    },
+    "interestPaymentDue": {
+      "@id": "bendigo:interestPaymentDue",
+      "@type": "xsd:string"
+    },
+    "loanPurpose": {
+      "@id": "bendigo:loanPurpose",
+      "@type": "xsd:string"
+    },
+    "BankingPayeeV2": "bendigo:BankingPayeeV2",
+    "ResponseBankingPayeeListV2": "bendigo:ResponseBankingPayeeListV2",
+    "ResponseBankingPayeeByIdV2": "bendigo:ResponseBankingPayeeByIdV2",
+    "BankingPayeeDetailV2_allOf": "bendigo:BankingPayeeDetailV2_allOf",
+    "payeeUType": {
+      "@id": "bendigo:payeeUType",
+      "@type": "xsd:string"
+    },
+    "ResponseBankingPayeeListV2_data": "bendigo:ResponseBankingPayeeListV2_data",
+    "payees": {
+      "@id": "bendigo:payees",
+      "@container": "@list"
+    },
+    "ResponseBankingProductListV4": "bendigo:ResponseBankingProductListV4",
+    "BankingProductBundle": "bendigo:BankingProductBundle",
+    "productIds": {
+      "@id": "bendigo:productIds",
+      "@container": "@list"
+    },
+    "BankingProductDetailV7_allOf": "bendigo:BankingProductDetailV7_allOf",
+    "bundles": {
+      "@id": "bendigo:bundles",
+      "@container": "@list"
+    },
+    "constraints": {
+      "@id": "bendigo:constraints",
+      "@container": "@list"
+    },
+    "ResponseBankingProductListV4_data": "bendigo:ResponseBankingProductListV4_data",
+    "products": {
+      "@id": "bendigo:products",
+      "@container": "@list"
+    },
+    "BankingProductAdditionalInformationV2": "bendigo:BankingProductAdditionalInformationV2",
+    "overviewUri": {
+      "@id": "bendigo:overviewUri",
+      "@type": "xsd:string"
+    },
+    "termsUri": {
+      "@id": "bendigo:termsUri",
+      "@type": "xsd:string"
+    },
+    "eligibilityUri": {
+      "@id": "bendigo:eligibilityUri",
+      "@type": "xsd:string"
+    },
+    "feesAndPricingUri": {
+      "@id": "bendigo:feesAndPricingUri",
+      "@type": "xsd:string"
+    },
+    "bundleUri": {
+      "@id": "bendigo:bundleUri",
+      "@type": "xsd:string"
+    },
+    "additionalOverviewUris": {
+      "@id": "bendigo:additionalOverviewUris",
+      "@container": "@list"
+    },
+    "additionalTermsUris": {
+      "@id": "bendigo:additionalTermsUris",
+      "@container": "@list"
+    },
+    "additionalEligibilityUris": {
+      "@id": "bendigo:additionalEligibilityUris",
+      "@container": "@list"
+    },
+    "additionalFeesAndPricingUris": {
+      "@id": "bendigo:additionalFeesAndPricingUris",
+      "@container": "@list"
+    },
+    "additionalBundleUris": {
+      "@id": "bendigo:additionalBundleUris",
+      "@container": "@list"
+    },
+    "BankingProductCardArt": "bendigo:BankingProductCardArt",
+    "cardScheme": {
+      "@id": "bendigo:cardScheme",
+      "@type": "xsd:string"
+    },
+    "cardType": {
+      "@id": "bendigo:cardType",
+      "@type": "xsd:string"
+    },
+    "imageUri": {
+      "@id": "bendigo:imageUri",
+      "@type": "xsd:string"
+    },
+    "BankingProductEligibilityV2": "bendigo:BankingProductEligibilityV2",
+    "eligibilityType": {
+      "@id": "bendigo:eligibilityType",
+      "@type": "xsd:string"
+    },
+    "BankingProductAdditionalInformationV2_additionalInformationUris": "bendigo:BankingProductAdditionalInformationV2_additionalInformationUris",
+    "ResponseBankingProductByIdV7": "bendigo:ResponseBankingProductByIdV7",
+    "BankingProductV6": "bendigo:BankingProductV6",
+    "productId": {
+      "@id": "bendigo:productId",
+      "@type": "@id"
+    },
+    "effectiveFrom": {
+      "@id": "bendigo:effectiveFrom",
+      "@type": "xsd:string"
+    },
+    "effectiveTo": {
+      "@id": "bendigo:effectiveTo",
+      "@type": "xsd:string"
+    },
+    "lastUpdated": {
+      "@id": "bendigo:lastUpdated",
+      "@type": "xsd:string"
+    },
+    "brand": {
+      "@id": "bendigo:brand",
+      "@type": "xsd:string"
+    },
+    "brandName": {
+      "@id": "bendigo:brandName",
+      "@type": "xsd:string"
+    },
+    "brandGroup": {
+      "@id": "bendigo:brandGroup",
+      "@type": "xsd:string"
+    },
+    "applicationUri": {
+      "@id": "bendigo:applicationUri",
+      "@type": "xsd:string"
+    },
+    "isTailored": {
+      "@id": "bendigo:isTailored",
+      "@type": "xsd:boolean"
+    },
+    "additionalInformation": {
+      "@id": "bendigo:additionalInformation",
+      "@type": "@id"
+    },
+    "cardArt": {
+      "@id": "bendigo:cardArt",
+      "@container": "@list"
+    },
+    "BankingProductConstraintV3": "bendigo:BankingProductConstraintV3",
+    "constraintType": {
+      "@id": "bendigo:constraintType",
+      "@type": "xsd:string"
+    },
+    "CategoryResource": "bendigo:CategoryResource",
+    "GetCategoryResponse": "bendigo:GetCategoryResponse",
+    "UpdateTransactionCategoryRequest": "bendigo:UpdateTransactionCategoryRequest",
+    "CategoryInputResourceIdentifier": "bendigo:CategoryInputResourceIdentifier",
+    "ListCategoriesResponse": "bendigo:ListCategoriesResponse",
+    "TagInputResourceIdentifier": "bendigo:TagInputResourceIdentifier",
+    "UpdateTransactionTagsRequest": "bendigo:UpdateTransactionTagsRequest",
+    "TagResource": "bendigo:TagResource",
+    "ListTagsResponse": "bendigo:ListTagsResponse",
+    "CashbackObject": "bendigo:CashbackObject",
+    "TransactionStatusEnum": "bendigo:TransactionStatusEnum",
+    "GetTransactionResponse": "bendigo:GetTransactionResponse",
+    "NoteObject": "bendigo:NoteObject",
+    "text": {
+      "@id": "bendigo:text",
+      "@type": "xsd:string"
+    },
+    "ListTransactionsResponse": "bendigo:ListTransactionsResponse",
+    "CardPurchaseMethodObject": "bendigo:CardPurchaseMethodObject",
+    "method": {
+      "@id": "bendigo:method"
+    },
+    "cardNumberSuffix": {
+      "@id": "bendigo:cardNumberSuffix",
+      "@type": "xsd:string"
+    },
+    "CustomerObject": "bendigo:CustomerObject"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Bendigo and Adelaide Bank API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Bendigo and Adelaide Bank's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-20) from openapi/bendigo-and-adelaide-bank-accounts-api-openapi.yml, openapi/bendigo-and-adelaide-bank-attachments-api-openapi.yml, openapi/bendigo-and-adelaide-bank-banking-account-balances-api-openapi.yml.",
+  "dcterms:created": "2026-10-20",
+  "dcterms:source": [
+    "openapi/bendigo-and-adelaide-bank-accounts-api-openapi.yml",
+    "openapi/bendigo-and-adelaide-bank-attachments-api-openapi.yml",
+    "openapi/bendigo-and-adelaide-bank-banking-account-balances-api-openapi.yml",
+    "openapi/bendigo-and-adelaide-bank-banking-account-direct-debits-api-openapi.yml",
+    "openapi/bendigo-and-adelaide-bank-banking-account-scheduled-payments-api-openapi.yml"
+  ]
+}

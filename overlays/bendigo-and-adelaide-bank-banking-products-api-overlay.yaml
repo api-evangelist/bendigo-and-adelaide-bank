@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for CDR Banking Banking Products API
+  version: 1.0.0
+extends: openapi/bendigo-and-adelaide-bank-banking-products-api-openapi.yml
+generated: '2026-10-20'
+method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: bendigo-and-adelaide-bank
+    x-apievangelist-brand: Bendigo and Adelaide Bank (CDR data holder)
+- target: $.paths['/banking/products'].get
+  update:
+    x-apievangelist-public: true
+    x-apievangelist-agent-safe: true
+    x-apievangelist-live-host: https://api.cdr.bendigobank.com.au/cds-au/v1
+- target: $.paths['/banking/products/{productId}'].get
+  update:
+    x-apievangelist-public: true
+    x-apievangelist-agent-safe: true
+    x-apievangelist-live-host: https://api.cdr.bendigobank.com.au/cds-au/v1
+- target: $.servers
+  update:
+  - url: https://api.cdr.bendigobank.com.au/cds-au/v1
+    description: Bendigo Bank CDR Product Reference Data (public; requires x-v header)

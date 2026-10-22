@@ -1,0 +1,35 @@
+generated: '2026-10-20'
+method: searched
+source: https://github.com/up-banking/api/issues/31
+api: Up Banking API
+scheme: dated-entries (single API version v1, beta)
+current_version: v1 (beta)
+notes: >-
+  Up publishes its API changelog as comments on GitHub issue #31 in the up-banking/api repo. The
+  CDR Banking surface follows the Consumer Data Standards version cadence (see lifecycle/).
+entries:
+- version: v1
+  date: '2024-07-04'
+  breaking: false
+  highlights: [Add optional attachment relationship to transactions, Retrieve attachment, List attachments]
+  url: https://github.com/up-banking/api/issues/31#issuecomment-2208131606
+- version: v1
+  date: '2024-07-03'
+  breaking: false
+  highlights: [Personal Access Token management in-app, 'New transaction fields: performingCustomer, deepLinkURL']
+  url: https://github.com/up-banking/api/issues/31#issuecomment-2205333032
+- version: v1
+  date: '2022-01-21'
+  breaking: false
+  highlights: ['Fixed a bug where filter[tag] on the transactions API would not return matching payments']
+  url: https://github.com/up-banking/api/issues/31#issuecomment-1018156827
+- version: v1
+  date: '2022-01-13'
+  breaking: false
+  highlights: [Add ability to categorize/de-categorize transactions]
+  url: https://github.com/up-banking/api/issues/31#issuecomment-1011813255
+- version: v1
+  date: '2022-01-09'
+  breaking: false
+  highlights: [2Up accounts included in the API, Add ownershipType to accounts, Filter accounts by accountType and ownershipType]
+  url: https://github.com/up-banking/api/issues/31#issuecomment-1008441619

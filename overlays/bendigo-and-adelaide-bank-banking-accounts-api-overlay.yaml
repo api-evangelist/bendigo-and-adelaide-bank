@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for CDR Banking Banking Accounts API
+  version: 1.0.0
+extends: openapi/bendigo-and-adelaide-bank-banking-accounts-api-openapi.yml
+generated: '2026-10-20'
+method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: bendigo-and-adelaide-bank
+    x-apievangelist-brand: Bendigo and Adelaide Bank (CDR data holder)
+- target: $.paths['/banking/accounts'].get
+  update:
+    x-apievangelist-auth: CDR accredited data recipient (FAPI 1.0 Advanced + MTLS)
+    x-apievangelist-agent-safe: false
+- target: $.paths['/banking/accounts/{accountId}'].get
+  update:
+    x-apievangelist-auth: CDR accredited data recipient (FAPI 1.0 Advanced + MTLS)
+    x-apievangelist-agent-safe: false

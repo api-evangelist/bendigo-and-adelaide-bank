@@ -1,0 +1,56 @@
+name: Bendigo and Adelaide Bank rate limits
+generated: '2026-10-20'
+method: searched
+source: https://consumerdatastandardsaustralia.github.io/standards/
+notes: >-
+  Two surfaces. (1) CDR Banking APIs: Bendigo and Adelaide Bank publishes no bank-specific limits; as a
+  CDR data holder it is bound by the Consumer Data Standards traffic thresholds below, above which calls
+  "will be able to be freely throttled or rejected by a data holder". (2) Up Banking API
+  (https://developer.up.com.au/llms.txt): no numeric limit published; on exhaustion it returns HTTP 429
+  and the X-RateLimit-Remaining response header shows the number remaining.
+headers:
+- name: X-RateLimit-Remaining
+  api: Up Banking API
+  source: https://developer.up.com.au/llms.txt
+exhaustion_status: 429
+limits:
+- name: CDR public (unauthenticated) traffic
+  limit_text: 300 TPS total across all consumers (additive to secure traffic)
+  max: 300
+  window: 1 second
+  scope: per data holder, all consumers
+  endpoint: unauthenticated endpoints (e.g. Product Reference Data)
+- name: CDR customer present - per customer
+  limit_text: 10 TPS per customer
+  max: 10
+  window: 1 second
+  scope: per customer
+- name: CDR customer present - per software product
+  limit_text: 50 TPS per Data Recipient Software Product
+  max: 50
+  window: 1 second
+  scope: per data recipient software product
+- name: CDR unattended - sessions per day (low traffic periods)
+  limit_text: 20 sessions per day, per customer, per Data Recipient Software Product
+  max: 20
+  window: 1 day
+  scope: per customer per data recipient software product
+- name: CDR unattended - calls per session
+  limit_text: 100 total calls per session
+  max: 100
+  scope: per session
+- name: CDR unattended - TPS per session
+  limit_text: 5TPS per session
+  max: 5
+  window: 1 second
+  scope: per session
+- name: CDR secure traffic peak TPS (smallest tier)
+  limit_text: For Data Holders with 0 to 10,000 active authorisations, 150 peak TPS total across all consumers.
+  max: 150
+  window: 1 second
+  scope: per data holder, tiered by active authorisations
+- name: CDR secure traffic peak TPS (largest tier)
+  limit_text: For Data Holders with more than 60,000 active authorisations, 450 peak TPS total across all consumers.
+  max: 450
+  window: 1 second
+  scope: per data holder, tiered by active authorisations

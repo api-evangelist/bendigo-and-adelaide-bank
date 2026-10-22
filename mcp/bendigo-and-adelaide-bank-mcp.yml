@@ -1,28 +1,166 @@
-generated: '2026-07-20'
+name: Bendigo and Adelaide Bank MCP (candidate)
+generated: '2026-10-20'
 method: derived
 status: candidate
-source: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
-notes: No official hosted/remote MCP server was found for Bendigo/Adelaide/Up. This is a CANDIDATE tool
-  list derived from the two PUBLIC, unauthenticated CDR Product Reference Data operations — the surface
-  an agent can safely call without CDR accreditation. Authenticated CDR data-sharing operations are intentionally
-  excluded (they require FAPI/MTLS + accredited-data-recipient status).
-server:
-  name: bendigo-and-adelaide-bank-products
-  transport: http
-  base_url: https://api.cdr.bendigobank.com.au/cds-au/v1
-tools:
-- name: list_banking_products
-  description: List published retail and business banking products (CDR Product Reference Data). Supports
-    effective/updated-since/brand/product-category filters and page/page-size pagination. Requires x-v
-    header.
-  source_operation: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml#listBankingProducts
-- name: get_banking_product_detail
-  description: Get full detail for a single product by productId, including fees, rates, features, eligibility
-    and constraints. Requires x-v header.
-  source_operation: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml#getBankingProductDetail
+source:
+- openapi/bendigo-and-adelaide-bank-banking-products-api-openapi.yml
+- openapi/ (Up Banking API files)
+notes: No official hosted or packaged MCP server from Bendigo and Adelaide Bank or its Up brand was found (search 2026-10-20;
+  developer.up.com.au/mcp -> 404; developer.up.com.au/llms.txt contains no MCP mention). Several COMMUNITY, unofficial stdio
+  servers wrap the Up API (alex1092/up-bank-mcp-server, edkranz/up-mcp, stuliston up-bank-mcp, a Cloudflare Workers up-bank-mcp)
+  and each needs the user's own Up personal access token; they are recorded under community_servers and are not provider surfaces.
+  This tool list is DERIVED from the public CDR Product Reference Data operations and the Up Banking API operations; authenticated
+  CDR data-sharing operations are excluded (they require accredited-data-recipient status, FAPI + MTLS).
 deployment:
   mode: none
-  verified: derived
-  tools: 2
-  checked: '2026-08-12'
-  source: catalog MCP census
+  auth: unknown
+  verified: searched
+  checked: '2026-10-20'
+community_servers:
+- name: up-bank-mcp-server (alex1092)
+  url: https://glama.ai/mcp/servers/@alex1092/up-bank-mcp-server
+  official: false
+  transport: stdio
+- name: up-mcp (edkranz)
+  url: https://glama.ai/mcp/servers/@edkranz/up-mcp
+  official: false
+- name: up-bank-mcp
+  url: https://mcp.so/servers/up-bank-mcp
+  official: false
+  note: Cloudflare Workers; self-deploy required per its README
+- name: up-bank-mcp (stuliston)
+  url: https://www.getdrio.com/mcp/up-bank-mcp-stuliston
+  official: false
+tools:
+- name: list_banking_products
+  description: Get Products
+  source_operation: openapi/bendigo-and-adelaide-bank-banking-products-api-openapi.yml#listBankingProducts
+  method: GET
+  path: /banking/products
+  surface: CDR PRD (public)
+- name: get_banking_product_detail
+  description: Get Product Detail
+  source_operation: openapi/bendigo-and-adelaide-bank-banking-products-api-openapi.yml#getBankingProductDetail
+  method: GET
+  path: /banking/products/{productId}
+  surface: CDR PRD (public)
+- name: get_accounts
+  description: List accounts
+  source_operation: openapi/bendigo-and-adelaide-bank-accounts-api-openapi.yml#getAccounts
+  method: GET
+  path: /accounts
+  surface: Up Banking API (personal access token)
+- name: get_accounts_by_id
+  description: Retrieve account
+  source_operation: openapi/bendigo-and-adelaide-bank-accounts-api-openapi.yml#getAccountsById
+  method: GET
+  path: /accounts/{id}
+  surface: Up Banking API (personal access token)
+- name: get_attachments
+  description: List attachments
+  source_operation: openapi/bendigo-and-adelaide-bank-attachments-api-openapi.yml#getAttachments
+  method: GET
+  path: /attachments
+  surface: Up Banking API (personal access token)
+- name: get_attachments_by_id
+  description: Retrieve attachment
+  source_operation: openapi/bendigo-and-adelaide-bank-attachments-api-openapi.yml#getAttachmentsById
+  method: GET
+  path: /attachments/{id}
+  surface: Up Banking API (personal access token)
+- name: get_categories
+  description: List categories
+  source_operation: openapi/bendigo-and-adelaide-bank-categories-api-openapi.yml#getCategories
+  method: GET
+  path: /categories
+  surface: Up Banking API (personal access token)
+- name: get_categories_by_id
+  description: Retrieve category
+  source_operation: openapi/bendigo-and-adelaide-bank-categories-api-openapi.yml#getCategoriesById
+  method: GET
+  path: /categories/{id}
+  surface: Up Banking API (personal access token)
+- name: patch_transactions_by_transaction_id_relationships_category
+  description: Categorize transaction
+  source_operation: openapi/bendigo-and-adelaide-bank-categories-api-openapi.yml#patchTransactionsByTransactionIdRelationshipsCategory
+  method: PATCH
+  path: /transactions/{transactionId}/relationships/category
+  surface: Up Banking API (personal access token)
+- name: get_tags
+  description: List tags
+  source_operation: openapi/bendigo-and-adelaide-bank-tags-api-openapi.yml#getTags
+  method: GET
+  path: /tags
+  surface: Up Banking API (personal access token)
+- name: post_transactions_by_transaction_id_relationships_tags
+  description: Add tags to transaction
+  source_operation: openapi/bendigo-and-adelaide-bank-tags-api-openapi.yml#postTransactionsByTransactionIdRelationshipsTags
+  method: POST
+  path: /transactions/{transactionId}/relationships/tags
+  surface: Up Banking API (personal access token)
+- name: delete_transactions_by_transaction_id_relationships_tags
+  description: Remove tags from transaction
+  source_operation: openapi/bendigo-and-adelaide-bank-tags-api-openapi.yml#deleteTransactionsByTransactionIdRelationshipsTags
+  method: DELETE
+  path: /transactions/{transactionId}/relationships/tags
+  surface: Up Banking API (personal access token)
+- name: get_transactions
+  description: List transactions
+  source_operation: openapi/bendigo-and-adelaide-bank-transactions-api-openapi.yml#getTransactions
+  method: GET
+  path: /transactions
+  surface: Up Banking API (personal access token)
+- name: get_transactions_by_id
+  description: Retrieve transaction
+  source_operation: openapi/bendigo-and-adelaide-bank-transactions-api-openapi.yml#getTransactionsById
+  method: GET
+  path: /transactions/{id}
+  surface: Up Banking API (personal access token)
+- name: get_accounts_by_account_id_transactions
+  description: List transactions by account
+  source_operation: openapi/bendigo-and-adelaide-bank-transactions-api-openapi.yml#getAccountsByAccountIdTransactions
+  method: GET
+  path: /accounts/{accountId}/transactions
+  surface: Up Banking API (personal access token)
+- name: get_util_ping
+  description: Ping
+  source_operation: openapi/bendigo-and-adelaide-bank-utility-endpoints-api-openapi.yml#getUtilPing
+  method: GET
+  path: /util/ping
+  surface: Up Banking API (personal access token)
+- name: get_webhooks
+  description: List webhooks
+  source_operation: openapi/bendigo-and-adelaide-bank-webhooks-api-openapi.yml#getWebhooks
+  method: GET
+  path: /webhooks
+  surface: Up Banking API (personal access token)
+- name: post_webhooks
+  description: Create webhook
+  source_operation: openapi/bendigo-and-adelaide-bank-webhooks-api-openapi.yml#postWebhooks
+  method: POST
+  path: /webhooks
+  surface: Up Banking API (personal access token)
+- name: get_webhooks_by_id
+  description: Retrieve webhook
+  source_operation: openapi/bendigo-and-adelaide-bank-webhooks-api-openapi.yml#getWebhooksById
+  method: GET
+  path: /webhooks/{id}
+  surface: Up Banking API (personal access token)
+- name: delete_webhooks_by_id
+  description: Delete webhook
+  source_operation: openapi/bendigo-and-adelaide-bank-webhooks-api-openapi.yml#deleteWebhooksById
+  method: DELETE
+  path: /webhooks/{id}
+  surface: Up Banking API (personal access token)
+- name: post_webhooks_by_webhook_id_ping
+  description: Ping webhook
+  source_operation: openapi/bendigo-and-adelaide-bank-webhooks-api-openapi.yml#postWebhooksByWebhookIdPing
+  method: POST
+  path: /webhooks/{webhookId}/ping
+  surface: Up Banking API (personal access token)
+- name: get_webhooks_by_webhook_id_logs
+  description: List webhook logs
+  source_operation: openapi/bendigo-and-adelaide-bank-webhooks-api-openapi.yml#getWebhooksByWebhookIdLogs
+  method: GET
+  path: /webhooks/{webhookId}/logs
+  surface: Up Banking API (personal access token)

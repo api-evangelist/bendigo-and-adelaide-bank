@@ -1,0 +1,39 @@
+generated: '2026-10-20'
+method: searched
+source: https://developer.up.com.au/llms.txt
+docs: https://developer.up.com.au/
+api: Up Banking API (v1, beta) - Up is the Bendigo and Adelaide Bank neobank brand
+format: json-api-errors
+notes: >-
+  Up Banking API error reference. When a response is in the 4xx or 5xx range the body carries an
+  errors[] array. Not RFC 9457. The CDR Banking API error catalog is in
+  errors/bendigo-and-adelaide-bank-problem-types.yml.
+envelope:
+  media_type: application/json
+  fields:
+    errors[]:
+      status: The HTTP status code associated with this error (string)
+      title: A short description of this error, stable across occurrences
+      detail: A detailed description of this occurrence; subject to change
+      source: optional; parameter (query parameter name) or pointer (JSON pointer into request body)
+problems:
+- status: 400
+  title: Bad request
+  description: Typically a problem with the query string or an encoding error.
+- status: 401
+  title: Not authorized
+  description: The request was not authenticated.
+- status: 404
+  title: Not found
+  description: Either the endpoint does not exist, or the requested resource does not exist.
+- status: 422
+  title: Invalid request
+  description: The request contains invalid data and was not processed.
+- status: 429
+  title: Too many requests
+  description: You have been rate limited.
+  remediation: Try later, ideally with exponential backoff. The X-RateLimit-Remaining response header shows the number remaining.
+- status: 500
+  title: Server-side error
+  description: Server-side errors (500 502 503 504).
+  remediation: Try again later.

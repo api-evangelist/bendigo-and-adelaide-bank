@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Up Utility endpoints API
+  version: 1.0.0
+extends: openapi/bendigo-and-adelaide-bank-utility-endpoints-api-openapi.yml
+generated: '2026-10-20'
+method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: bendigo-and-adelaide-bank
+    x-apievangelist-brand: Up (Bendigo and Adelaide Bank)
+- target: $.paths['/util/ping'].get
+  update:
+    x-apievangelist-auth: Up personal access token (Bearer)
+    x-apievangelist-agent-safe: true

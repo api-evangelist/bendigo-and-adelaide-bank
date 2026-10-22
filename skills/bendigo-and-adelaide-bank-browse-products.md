@@ -1,7 +1,7 @@
 ---
-name: Browse Bendigo/Up banking products (CDR PRD)
+name: browse-banking-products
 description: List and compare Bendigo and Adelaide Bank retail and business banking products via the public, unauthenticated CDR Product Reference Data API, then fetch full detail for a chosen product.
-api: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
+api: openapi/bendigo-and-adelaide-bank-banking-products-api-openapi.yml
 operations: [listBankingProducts, getBankingProductDetail]
 ---
 
@@ -15,15 +15,15 @@ OAuth, or CDR accreditation are required for these two operations.
 - Up: `https://api.up.com.au/cds-au/v1`
 
 ## Required conventions
-- Always send the version header **`x-v: 4`** (positive integer). The server echoes the served
-  version in the `x-v` response header. An unsupported version returns **406**
-  (`urn:au-cds:error:cds:header:unsupported-version`).
+- Always send the version header **`x-v`** (positive integer). Probed 2026-10-20 against the Bendigo
+  host: `x-v: 5` returned 200; `x-v` 3, 4 and 6 returned **406** with code
+  `urn:au-cds:error:cds-all:Header/UnsupportedVersion`. Send `x-min-v` too if you can accept a range.
 - Optionally send `x-fapi-interaction-id` (a UUID) for request correlation.
 
 ## Steps
 
 1. **List products** — call `listBankingProducts`:
-   `GET /banking/products` with `x-v: 4`.
+   `GET /banking/products` with `x-v: 5`.
    Useful filters: `product-category` (e.g. `TRANS_AND_SAVINGS_ACCOUNTS`, `TERM_DEPOSITS`,
    `RESIDENTIAL_MORTGAGES`, `CRED_AND_CHRG_CARDS`), `brand`, `effective` (`CURRENT`/`FUTURE`/`ALL`),
    `updated-since` (ISO date-time). Paginate with `page` and `page-size` (default 25, max 1000);
@@ -34,7 +34,7 @@ OAuth, or CDR accreditation are required for these two operations.
 2. **Pick a product** — take a `productId` from the `data.products[]` array.
 
 3. **Get product detail** — call `getBankingProductDetail`:
-   `GET /banking/products/{productId}` with `x-v: 4`.
+   `GET /banking/products/{productId}` with `x-v: 5`.
    The response includes `fees`, `depositRates`, `lendingRates`, `features`, `eligibility`,
    `constraints`, and `bundles`. A missing/withdrawn product returns **404**
    (`urn:au-cds:error:cds:resource:unavailable` or `...resource:invalid`).

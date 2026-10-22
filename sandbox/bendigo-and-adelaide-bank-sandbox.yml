@@ -1,0 +1,18 @@
+generated: '2026-10-20'
+method: none
+source: https://developer.up.com.au/llms.txt
+description: >-
+  No sandbox or test environment is published. The Up Developer API is called with a personal access
+  token (Authorization: Bearer up:yak:...) against the holder's own live Up account; no test keys, test
+  accounts or test mode are documented. The CDR Banking Product Reference Data endpoints
+  (api.cdr.bendigobank.com.au) are public, unauthenticated production endpoints, and no sandbox is
+  published for them either.
+docs: https://developer.up.com.au/
+testing_tooling:
+  - name: Ping
+    operation: GET /util/ping
+    description: Documented as an endpoint that exists "to test the API itself"; verifies the access token.
+  - name: Ping webhook
+    operation: POST /webhooks/{webhookId}/ping
+    description: Sends a PING event to a webhook; documented as "useful for testing and debugging purposes".
+note: These are verification utilities on the live API, not a sandbox environment.

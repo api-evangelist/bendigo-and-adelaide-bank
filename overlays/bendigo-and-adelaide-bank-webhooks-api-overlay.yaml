@@ -1,0 +1,36 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Up Webhooks API
+  version: 1.0.0
+extends: openapi/bendigo-and-adelaide-bank-webhooks-api-openapi.yml
+generated: '2026-10-20'
+method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: bendigo-and-adelaide-bank
+    x-apievangelist-brand: Up (Bendigo and Adelaide Bank)
+- target: $.paths['/webhooks'].get
+  update:
+    x-apievangelist-auth: Up personal access token (Bearer)
+    x-apievangelist-agent-safe: true
+- target: $.paths['/webhooks'].post
+  update:
+    x-apievangelist-auth: Up personal access token (Bearer)
+    x-apievangelist-agent-safe: false
+- target: $.paths['/webhooks/{id}'].get
+  update:
+    x-apievangelist-auth: Up personal access token (Bearer)
+    x-apievangelist-agent-safe: true
+- target: $.paths['/webhooks/{id}'].delete
+  update:
+    x-apievangelist-auth: Up personal access token (Bearer)
+    x-apievangelist-agent-safe: false
+- target: $.paths['/webhooks/{webhookId}/ping'].post
+  update:
+    x-apievangelist-auth: Up personal access token (Bearer)
+    x-apievangelist-agent-safe: false
+- target: $.paths['/webhooks/{webhookId}/logs'].get
+  update:
+    x-apievangelist-auth: Up personal access token (Bearer)
+    x-apievangelist-agent-safe: true

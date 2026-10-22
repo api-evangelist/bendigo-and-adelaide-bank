@@ -1,0 +1,16 @@
+name: Bendigo and Adelaide Bank pricing
+generated: '2026-10-20'
+method: none
+source: https://developer.up.com.au/llms.txt
+audience: unclear
+pricing_basis: none
+published: false
+plan_count: 0
+plans: []
+delivery:
+  model: managed
+note: >-
+  No API pricing or plans are published. CDR Product Reference Data endpoints are public and
+  unauthenticated under the Consumer Data Right; the Up Banking API is accessed with a customer's
+  personal access token and its docs state no price. Bank product fees/rates are consumer pricing,
+  not API pricing, and are not recorded here.

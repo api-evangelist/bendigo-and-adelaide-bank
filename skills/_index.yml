@@ -1,7 +1,57 @@
-generated: '2026-07-20'
+name: Bendigo and Adelaide Bank agent skills
+generated: '2026-10-20'
 method: generated
+source: openapi/
 skills:
 - file: bendigo-and-adelaide-bank-browse-products.md
-  name: Browse Bendigo/Up banking products (CDR PRD)
-  api: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml
-  operations: [listBankingProducts, getBankingProductDetail]
+  name: browse-banking-products
+  api: openapi/bendigo-and-adelaide-bank-banking-products-api-openapi.yml
+  operations:
+  - listBankingProducts
+  - getBankingProductDetail
+- file: bendigo-and-adelaide-bank-up-review-and-categorize-transactions.md
+  name: up-review-and-categorize-transactions
+  api: openapi/bendigo-and-adelaide-bank-transactions-api-openapi.yml
+  operations:
+  - getUtilPing
+  - getAccounts
+  - getAccountsByAccountIdTransactions
+  - getTransactions
+  - getTransactionsById
+  - getCategories
+  - patchTransactionsByTransactionIdRelationshipsCategory
+  - getTags
+  - postTransactionsByTransactionIdRelationshipsTags
+  - deleteTransactionsByTransactionIdRelationshipsTags
+- file: bendigo-and-adelaide-bank-up-manage-webhooks.md
+  name: up-manage-webhooks
+  api: openapi/bendigo-and-adelaide-bank-webhooks-api-openapi.yml
+  operations:
+  - postWebhooks
+  - getWebhooks
+  - getWebhooksById
+  - postWebhooksByWebhookIdPing
+  - getWebhooksByWebhookIdLogs
+  - deleteWebhooksById
+  - getTransactionsById
+- file: bendigo-and-adelaide-bank-cdr-read-account-data.md
+  name: cdr-read-account-data
+  api: openapi/bendigo-and-adelaide-bank-banking-accounts-api-openapi.yml
+  operations:
+  - listBankingAccounts
+  - getBankingAccountDetail
+  - listBankingBalancesBulk
+  - listBankingBalancesSpecificAccounts
+  - getBankingBalance
+  - listBankingTransactions
+  - getBankingTransactionDetail
+  - listDirectDebits
+  - listDirectDebitsBulk
+  - listDirectDebitsSpecificAccounts
+  - listScheduledPayments
+  - listScheduledPaymentsBulk
+  - listScheduledPaymentsSpecificAccounts
+  - listInstalmentPlans
+  - listInstalmentPlansBulk
+  - listBankingPayees
+  - getBankingPayeeDetail

@@ -1,14 +1,9 @@
 generated: '2026-07-20'
 method: searched
-source: >-
-  openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml +
-  https://api.up.com.au/.well-known/openid-configuration +
-  https://consumerdatastandardsaustralia.github.io/standards/
-notes: >-
-  Standards conformance for the CDR Banking API surface. Evidence is drawn from the harvested
-  OpenAPI (CDR Banking API v1.36.0, authored by the Data Standards Body) and the live Up CDR
-  OIDC discovery document. The public PRD endpoints implement the CDR Product Reference Data
-  standard; the authenticated surface implements the CDR FAPI 1.0 Advanced security profile.
+source: openapi/bendigo-and-adelaide-bank-cds-banking-products-openapi.yml + https://api.up.com.au/.well-known/openid-configuration + https://consumerdatastandardsaustralia.github.io/standards/
+notes: Standards conformance for the CDR Banking API surface. Evidence is drawn from the harvested OpenAPI (CDR Banking API v1.36.0, authored
+  by the Data Standards Body) and the live Up CDR OIDC discovery document. The public PRD endpoints implement the CDR Product Reference Data standard;
+  the authenticated surface implements the CDR FAPI 1.0 Advanced security profile.
 standards:
 - id: cdr-banking
   name: Australian Consumer Data Right — Banking (Consumer Data Standards)
@@ -50,3 +45,12 @@ standards:
   name: Offset pagination (CDR standard)
   conforms: true
   evidence: page / page-size query params with meta.totalRecords/totalPages and links.first/last/prev/next.
+- id: openapi-3.2
+  conforms: true
+  evidence: the document declares 3.2.0
+- id: rfc9457
+  conforms: false
+  evidence: no response declares application/problem+json
+- id: idempotency
+  conforms: false
+  evidence: no idempotency key parameter on mutating operations
